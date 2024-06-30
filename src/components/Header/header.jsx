@@ -1,16 +1,15 @@
 import React from "react";
-import Button from "../Button/button";
-import {useTelegram} from "../../hooks/useTelegram";
+import button from "../Button/button";
+import { useTelegram } from "../../hooks/useTelegram";
 
 const Header = () => {
-    const {} = useTelegram()
+    const { onClose, tg } = useTelegram();
     return (
-        <div className={'header'}>
-            <Button onClick={onClose}>Закрыть</Button>
-            <span className={'username'}>
-                {tg.initDataUnsafe?.user?.username}
+        <div className="header">
+            <button onClick={onClose}>Закрыть</button>
+            <span className="username">
+                {tg?.initDataUnsafe?.user?.username}
             </span>
-            
         </div>
     );
 };
