@@ -9,7 +9,7 @@ const Form = () => {
     // const [street, setStreet] = React.useState([]);
     // const [house, setHouse] = React.useState([]);
     // const [flat, setFlat] = React.useState([]);
-    const [address, setAddress] = useState({});
+    const [loc, setLoc] = useState([]);
     const [phone, setPhone] = React.useState([]);
 
     const [subject, setSubject] = React.useState([]);
@@ -25,14 +25,14 @@ const Form = () => {
 
     useEffect(() => {
         // if( !country || !city || !street || !house || !flat || !phone ) {
-        if( !address|| !phone ) {
+        if( !loc || !phone ) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
         }
 
     // }, [country, city, street, house, flat, phone]);
-    }, [address, phone]);
+    }, [loc, phone]);
 
 
     // const onChangeCountry = (e) => {
@@ -59,15 +59,14 @@ const Form = () => {
         setPhone(e.target.value);
     }
 
-    const onChangeAddress = (e) => {
-        setAddress(e.target.value);
+    const onChangeLoc = (e) => {
+        setLoc(e.target.value);
     }
 
     const onChangeSubject = (e) => {
         setSubject(e.target.value);
     }
 
-    c
 
     return (
         <div className={"form"}>
@@ -106,8 +105,8 @@ const Form = () => {
             <input className={"input"}
             type="text"
             placeholder={"Адрес"}
-            value={address}
-            onChange={onChangeAddress}
+            value={loc}
+            onChange={onChangeLoc}
             />
 
             <input className={"input"}
