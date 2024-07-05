@@ -23,9 +23,9 @@ const Form = () => {
 
 
     useEffect(() => {
-        if(!country || !city || !street || !house || !flat || !phone ){
+        if(!country || !city || !street || !house || !flat || !phone) {
             tg.MainButton.hide();
-        }else {
+        } else {
             tg.MainButton.show();
         }
 
