@@ -23,13 +23,13 @@ const Form = () => {
 
 
     useEffect(() => {
-        if(!country || !city || !street || !house || !flat || !phone) {
+        if( !country || !city || !street || !house || !flat || !phone ) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
         }
 
-    }, [country, city, street, house, phone]);
+    }, [country, city, street, house,flat, phone]);
 
 
     const onChangeCountry = (e) => {
