@@ -1,6 +1,9 @@
 button {
     padding: 10px 15px;
     background: var(--tg-theme-button-color);
+    /*background: red;*/
     color: var(--tg-theme-button-text-color);
     cursor: pointer;
+    border: none;
+    border-radius: 15px;
 }
