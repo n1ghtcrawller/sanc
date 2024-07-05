@@ -1,14 +1,15 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import "./Form.css"
 import {useTelegram} from "../../hooks/useTelegram";
 
 
 const Form = () => {
-    const [country, setCountry] = React.useState([]);
-    const [city, setCity] = React.useState([]);
-    const [street, setStreet] = React.useState([]);
-    const [house, setHouse] = React.useState([]);
-    const [flat, setFlat] = React.useState([]);
+    // const [country, setCountry] = React.useState([]);
+    // const [city, setCity] = React.useState([]);
+    // const [street, setStreet] = React.useState([]);
+    // const [house, setHouse] = React.useState([]);
+    // const [flat, setFlat] = React.useState([]);
+    const [address, setAddress] = useState({});
     const [phone, setPhone] = React.useState([]);
 
     const [subject, setSubject] = React.useState([]);
@@ -23,76 +24,92 @@ const Form = () => {
 
 
     useEffect(() => {
-        if( !country || !city || !street || !house || !flat || !phone ) {
+        // if( !country || !city || !street || !house || !flat || !phone ) {
+        if( !address|| !phone ) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
         }
 
-    }, [country, city, street, house,flat, phone]);
+    // }, [country, city, street, house, flat, phone]);
+    }, [address, phone]);
 
 
-    const onChangeCountry = (e) => {
-        setCountry(e.target.value);
-    }
-
-    const onChangeCity = (e) => {
-        setCity(e.target.value);
-    }
-
-    const onChangeStreet = (e) => {
-        setStreet(e.target.value);
-    }
-
-    const onChangeHouse = (e) => {
-        setHouse(e.target.value);
-    }
-
-    const onChangeFlat = (e) => {
-        setFlat(e.target.value);
-    }
-
+    // const onChangeCountry = (e) => {
+    //     setCountry(e.target.value);
+    // }
+    //
+    // const onChangeCity = (e) => {
+    //     setCity(e.target.value);
+    // }
+    //
+    // const onChangeStreet = (e) => {
+    //     setStreet(e.target.value);
+    // }
+    //
+    // const onChangeHouse = (e) => {
+    //     setHouse(e.target.value);
+    // }
+    //
+    // const onChangeFlat = (e) => {
+    //     setFlat(e.target.value);
+    // }
+    //
     const onChangePhone = (e) => {
         setPhone(e.target.value);
+    }
+
+    const onChangeAddress = (e) => {
+        setAddress(e.target.value);
     }
 
     const onChangeSubject = (e) => {
         setSubject(e.target.value);
     }
 
+    c
+
     return (
         <div className={"form"}>
             <h3>Введите ваши данные</h3>
+            {/*<input className={"input"}*/}
+            {/*       type={"text"}*/}
+            {/*       placeholder={"Страна"}*/}
+            {/*       value={country}*/}
+            {/*       onChange={onChangeCountry}*/}
+            {/*/>*/}
+            {/*<input className={"input"}*/}
+            {/*       type={"text"}*/}
+            {/*       placeholder={"Город"}*/}
+            {/*       value={city}*/}
+            {/*       onChange={onChangeCity}*/}
+            {/*/>*/}
+            {/*<input className={"input"}*/}
+            {/*       type={"text"}*/}
+            {/*       placeholder={"Улица"}*/}
+            {/*       value={street}*/}
+            {/*       onChange={onChangeStreet}*/}
+            {/*/>*/}
+            {/*<input className={"input"}*/}
+            {/*       type={"text"}*/}
+            {/*       placeholder={"Дом"}*/}
+            {/*       value={house}*/}
+            {/*       onChange={onChangeHouse}*/}
+            {/*/>*/}
+            {/*<input className={"input"}*/}
+            {/*       type={"text"}*/}
+            {/*       placeholder={"Квартира"}*/}
+            {/*       value={flat}*/}
+            {/*       onChange={onChangeFlat}*/}
+            {/*/>*/}
+
             <input className={"input"}
-                   type={"text"}
-                   placeholder={"Страна"}
-                   value={country}
-                   onChange={onChangeCountry}
+            type="text"
+            placeholder={"Адрес"}
+            value={address}
+            onChange={onChangeAddress}
             />
-            <input className={"input"}
-                   type={"text"}
-                   placeholder={"Город"}
-                   value={city}
-                   onChange={onChangeCity}
-            />
-            <input className={"input"}
-                   type={"text"}
-                   placeholder={"Улица"}
-                   value={street}
-                   onChange={onChangeStreet}
-            />
-            <input className={"input"}
-                   type={"text"}
-                   placeholder={"Дом"}
-                   value={house}
-                   onChange={onChangeHouse}
-            />
-            <input className={"input"}
-                   type={"text"}
-                   placeholder={"Квартира"}
-                   value={flat}
-                   onChange={onChangeFlat}
-            />
+
             <input className={"input"}
                    type={"text"}
                    placeholder={"Телефон"}
