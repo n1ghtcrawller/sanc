@@ -1,4 +1,4 @@
-product {
+.product {
     display: flex;
     flex-direction: column;
     border: 1px solid var(--tg-theme-button-color);
@@ -7,11 +7,12 @@ product {
 }
 
 .img {
-    width: 100%;
+    width: 90%;
     background: lightgray;
     height: 100px;
-    margin: 0 auto;
+    margin: 0px;
     background: var(--tg-theme-button-color);
+    /*background: red;*/
 }
 
 .description {
