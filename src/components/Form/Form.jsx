@@ -9,7 +9,6 @@ const Form = () => {
     const [street, setStreet] = React.useState('');
     const [house, setHouse] = React.useState('');
     const [flat, setFlat] = React.useState('');
-
     const [phone, setPhone] = React.useState('');
 
     const [subject, setSubject] = React.useState('physical');
@@ -30,9 +29,9 @@ const Form = () => {
     }, [country, city, street, house, flat, phone, subject]);
 
     useEffect(() => {
-        tg.WebApp.onEvent('mainButtonClicked', onSendData())
+        tg.onEvent('mainButtonClicked', onSendData)
         return () => {
-            tg.WebApp.offEvent('mainButtonClicked');
+            tg.offEvent('mainButtonClicked', onSendData)
         }
     }, []);
 
