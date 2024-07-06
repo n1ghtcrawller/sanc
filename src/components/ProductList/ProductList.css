@@ -2,11 +2,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    border: 2px solid darkgray;
+    border-radius: 20px;
     /*margin-left: 10px;*/
 }
 
 .item {
     margin-right: 10px;
     margin-bottom: 10px;
-    background: coral;
+    /*background: coral;*/
 }

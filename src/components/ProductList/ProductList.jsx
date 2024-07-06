@@ -9,7 +9,7 @@ const products = [
     {id: 2, title: 'Худи чёрное', price: 3500,description: 'Плотное оверсайз худи', img: "/assets/black-hoodie-100.png"},
     {id: 3, title: 'Футболка светло серая', price: 1500,description: 'Плотная оверсайз футболка', img: "/assets/gray-t-shirt.png"},
     {id: 4, title: 'Чёрная футболка', price: 1500,description: 'Плотная оверсайз футболка', img: "/assets/black-t-shirt.png"},
-    {id: 5, title: 'Белая футболка', price: 1500,description: 'Плотная оверсайз футболка', img: "/assets/white-t-shirt.png"},
+    {id: 5, title: 'Белая футболка', price: 1500,description: 'Плотная оверсайз футболка', img: "/assets/white-t-shirt-100.png"},
     {id: 6, title: 'Темно серые брюки', price: 2500,description: 'Лайфстайл брюки', img: "/assets/gray-trousers-100.png"},
     {id: 7, title: 'Черные брюки', price: 2500,description: 'Лайфстайл брюки', img: "/assets/black-trousers-100.png"},
 ]
