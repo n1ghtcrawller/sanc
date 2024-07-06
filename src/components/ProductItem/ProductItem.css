@@ -22,6 +22,16 @@
     font-size: 0.8em;
 }
 
+.title {
+    display: flex;
+    height: 37px;
+    align-items: center;
+}
+
+.price {
+    margin-top: 5   px;
+}
+
 .add-btn {
     width: 90%;
     background: var(--tg-theme-button-color);
