@@ -3,15 +3,18 @@
     flex-direction: column;
     border: 2px solid var(--tg-theme-button-color);
     padding: 15px;
-    width: 170px;
+    width: 100px;
+    text-align: center;
+    align-items: center;
+
 }
 
 .img {
-    width: 90%;
+    width: 100%;
     background: lightgray;
     height: 100px;
-    margin: 0px;
-    background: var(--tg-theme-bg-color);
+    margin: 0;
+    background: var(--tg-theme-button-color);
     /*background: red;*/
 }
 
@@ -19,6 +22,12 @@
     font-size: 0.8em;
 }
 
-.add-btm {
-    width: 100%;
+.add-btn {
+    width: 90%;
+    background: var(--tg-theme-button-color);
+    /*background: coral;*/
+    color: var(--tg-theme-button-text-color);
+    cursor: pointer;
+    border: none;
+    border-radius: 15px;
 }
