@@ -5,6 +5,7 @@
     border: 2px solid darkgray;
     border-radius: 20px;
     /*margin-left: 10px;*/
+    width: 100%;
 }
 
 .item {
