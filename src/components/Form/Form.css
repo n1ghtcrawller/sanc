@@ -1,7 +1,7 @@
 .form {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 85vw;
     padding: 20px;
     justify-content: center;
     align-items: center;
@@ -11,6 +11,9 @@
     width: 65vw;
     padding: 10px;
     margin-top: 15px;
+    background: var(--tg-theme-bg-color);
+    color: var(--tg-theme-button-text-color);
+    border: 1px solid var(--tg-theme-button-text-color);;
 }
 
 .select {
