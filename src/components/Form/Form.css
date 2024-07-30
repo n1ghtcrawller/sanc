@@ -22,8 +22,9 @@
     padding: 10px;
     margin-top: 15px;
     width: 67vw;
+    height: 2.5vw;
     background: var(--tg-theme-bg-color);
     color: var(--tg-theme-button-text-color);
-    border: 1px solid var(--tg-theme-button-text-color);;
+    border: 1px solid var(--tg-theme-button-color);
     border-radius: 10px;
 }
