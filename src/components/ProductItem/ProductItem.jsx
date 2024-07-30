@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './ProductItem.css';
 import Button from "../Button/Button"; // Если он вам нужен, иначе можно удалить
 
-const ProductItem = ({ product, className, onAdd }) => {
-    const [count, setCount] = useState(0); // Состояние для отслеживания количества товаров
+const ProductItem = ({ product, className, onAdd, onRemove }) => {
+    const [count, setCount] = useState(0);
 
     const handleAdd = () => {
         setCount(count + 1);
@@ -13,11 +13,12 @@ const ProductItem = ({ product, className, onAdd }) => {
     const handleRemove = () => {
         if (count > 0) {
             setCount(count - 1);
+            onRemove(product); // Вызываем функцию удаления
         }
     };
 
     return (
-        <div className={"product"}>
+        <div className={`product ${className}`}>
             <img className={"img"} src={product.img} alt={product.title} />
             <div className={"title"}>{product.title}</div>
             <div className={"price"}>

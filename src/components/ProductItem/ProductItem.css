@@ -36,21 +36,24 @@
 .add-btn, .minus-btn  {
 
     /*background: #7fc7ff;*/
-    background: var(--tg-theme-button-color);
-    /*background-color: #4CAF50;*/
+    /*background: var(--tg-theme-button-color);*/
+    background-color: #4CAF50;
     color: var(--tg-theme-button-text-color);
     cursor: pointer;
     border: none;
     border-radius: 10px;
-    margin-top: 10px;
     padding: 2px;
-    height: 3vw;
-    width: 3vw;
+    height: 30px;
+    width: 30px;
+    margin: 5px;
 }
 
 .counter {
+    margin-top: 4px;
     display: flex;
     align-items: center;
+    border: 1px solid #4CAF50;
+    border-radius: 10px;
 }
 
 .count {
