@@ -14,7 +14,7 @@ const products = [
     {id: 7, title: 'Черные брюки', price: 2500,description: 'Лайфстайл брюки', img: "/assets/black-trousers-100.png"},
 ]
 
-const getTotalPrice = (items = []) => {
+export const getTotalPrice = (items = []) => {
     return items.reduce((acc, item) => {
         return acc += item.price
     }, 0)
@@ -22,7 +22,9 @@ const getTotalPrice = (items = []) => {
 
 const ProductList = () => {
     const [addedItems, setAddedItems] = React.useState([])
+
     const {tg} = useTelegram();
+    
     const onAdd = (product) => {
         const alreadyAdded = addedItems.find(item => item.id === product.id)
         let newItems = [];
@@ -42,6 +44,7 @@ const ProductList = () => {
             tg.MainButton.show()
             tg.MainButton.setParams({
                 text: `Перейти к оплате ${getTotalPrice(newItems)}`
+
             })
         }
     }

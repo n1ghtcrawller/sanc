@@ -4,7 +4,9 @@ import {useTelegram} from "./hooks/useTelegram";
 import Header from "./components/Header/Header";
 import {Route, Routes} from "react-router-dom";
 import ProductList from "./components/ProductList/ProductList";
+import Order from "./components/Order/Order";
 import Form from "./components/Form/Form";
+
 
 
 function App() {
@@ -21,6 +23,7 @@ function App() {
         <Routes>
           <Route index element={<ProductList />}/>
           <Route path={"form"} element={<Form />}/>
+          <Route path={"order"} element={<Order />}/>
         </Routes>
     </div>
 

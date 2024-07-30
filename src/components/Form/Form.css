@@ -12,7 +12,7 @@
     width: 65vw;
     padding: 10px;
     margin-top: 15px;
-    background: var(--tg-theme-bg-color);
+    background: papayawhip;
     color: var(--tg-theme-button-text-color);
     border: 1px solid var(--tg-theme-button-text-color);
     border-radius: 10px;
