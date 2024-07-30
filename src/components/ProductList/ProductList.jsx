@@ -15,7 +15,7 @@ const products = [
 
 export const getTotalPrice = (items = []) => {
     return items.reduce((acc, item) => {
-        return acc += item.product.price * item.count; // Учитываем количество товара
+        return acc + item.product.price * item.count; // Учитываем количество товара
     }, 0);
 }
 
@@ -50,9 +50,9 @@ const ProductList = () => {
         if (alreadyAdded) {
             const newItems = addedItems.map(item => {
                 if (item.product.id === product.id) {
-
+                    if (item.count > 1) {
                         return { ...item, count: item.count - 1 }; // Уменьшаем количество
-
+                    }
                 }
                 return item;
             }).filter(item => item.count > 0); // Удаляем товары с количеством 0
