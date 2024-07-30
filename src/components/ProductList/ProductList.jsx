@@ -15,7 +15,7 @@ const products = [
 
 export const getTotalPrice = (items = []) => {
     return items.reduce((acc, item) => {
-        return item.product.price += item.product.price * item.count; // Учитываем количество товара
+        return acc += item.product.price * item.count; // Учитываем количество товара
     }, 0);
 }
 
