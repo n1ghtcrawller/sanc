@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import './ProductList.css'
 import ProductItem from "../ProductItem/ProductItem";
 import {useTelegram} from "../../hooks/useTelegram";
@@ -54,8 +54,11 @@ const ProductList = () => {
 
     const onRemove = (product) => {
         const alreadyAdded = addedItems.find(item => item.product.id === product.id);
-        
-        if (alreadyAdded) {
+
+        if
+
+
+        (alreadyAdded) {
             const newItems = addedItems.map(item => {
                 if (item.product.id === product.id) {
                     if (item.count > 1) {
@@ -67,6 +70,7 @@ const ProductList = () => {
 
             setAddedItems(newItems);
 
+            // Обновляем состояние кнопки
             if (newItems.length === 0) {
                 tg.MainButton.hide();
             } else {
@@ -78,8 +82,7 @@ const ProductList = () => {
         }
     };
 
-
-return (
+    return (
         <div className="list">
             {products.map(item => (
                 <ProductItem
@@ -95,5 +98,3 @@ return (
 };
 
 export default ProductList;
-
-
