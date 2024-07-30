@@ -12,10 +12,10 @@
 
 .img {
     width: 100%;
-    background: lightgray;
+    /*background: lightgray;*/
     height: 100px;
     margin: 0;
-    background: var(--tg-theme-bg-color);
+    background: white;
     /*background: red;*/
 }
 
@@ -33,15 +33,27 @@
     margin-top: 5px;
 }
 
-.add-btn {
-    width: 156%;
+.add-btn, .minus-btn  {
+
     /*background: #7fc7ff;*/
     background: var(--tg-theme-button-color);
+    /*background-color: #4CAF50;*/
     color: var(--tg-theme-button-text-color);
     cursor: pointer;
     border: none;
     border-radius: 10px;
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 2px;
-    height: 50px;
+    height: 3vw;
+    width: 3vw;
+}
+
+.counter {
+    display: flex;
+    align-items: center;
+}
+
+.count {
+    margin: 0 10px; /* Отступы вокруг счетчика */
+    font-size: 18px; /* Размер шрифта для счетчика */
 }
