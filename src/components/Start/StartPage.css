@@ -1,0 +1,29 @@
+.start-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Заполнение всей высоты экрана */
+    background-color:#EDE9E3; /* Цвет фона */
+
+}
+
+.logo {
+    width: 300px; /* Ширина логотипа */
+    height: 300px; /* Автоматическая высота */
+    margin-bottom: 20px; /* Отступ снизу */
+}
+
+.shop-button {
+    background-color: #071E57;
+    color: #EDE9E3;
+    cursor: pointer;
+    border: none;
+    border-radius: 30px;
+    padding: 2px;
+    height: 50px;
+    width: 200px;
+    margin: 5px;
+    font-size: 1.23em;
+}
+
