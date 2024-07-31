@@ -24,9 +24,9 @@ const ProductList = () => {
 
     const onSendData = useCallback(() => {
         const data = {
-           products: addedItems,
-           totalPrice: getTotalPrice(addedItems),
-           queryId,
+            products: addedItems,
+            totalPrice: getTotalPrice(addedItems),
+            queryId,
         }
         fetch('http://localhost:8000',{
             method: 'POST',
@@ -73,7 +73,7 @@ const ProductList = () => {
             const newItems = addedItems.map(item => {
                 if (item.product.id === product.id) {
 
-                        return { ...item, count: item.count - 1 }; // Уменьшаем количество
+                    return { ...item, count: item.count - 1 }; // Уменьшаем количество
 
                 }
                 return item;

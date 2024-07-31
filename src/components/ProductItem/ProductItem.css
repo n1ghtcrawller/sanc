@@ -1,7 +1,7 @@
 .product {
     display: flex;
     flex-direction: column;
-    /*border: 2px solid var(--tg-theme-button-color);*/
+    /*border: 1px solid lightyellow;*/
     padding: 14px;
     width: 100px;
     text-align: center;
@@ -15,7 +15,7 @@
     /*background: lightgray;*/
     height: 100px;
     margin: 0;
-    background: white;
+    background: #EDE9E3;
     /*background: red;*/
 }
 
@@ -37,8 +37,8 @@
 
     /*background: #7fc7ff;*/
     /*background: var(--tg-theme-button-color);*/
-    background-color: #4CAF50;
-    color: var(--tg-theme-button-text-color);
+    background-color: #071E57;
+    color: #EDE9E3;
     cursor: pointer;
     border: none;
     border-radius: 10px;
@@ -52,7 +52,7 @@
     margin-top: 4px;
     display: flex;
     align-items: center;
-    border: 1px solid #4CAF50;
+    border: 1px solid #071E57;
     border-radius: 10px;
 }
 

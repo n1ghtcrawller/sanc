@@ -5,16 +5,16 @@
     padding: 20px;
     justify-content: center;
     align-items: center;
-    color: var(--tg-theme-button-text-color);
+    color: #EDE9E3;
 }
 
 .input {
     width: 65vw;
     padding: 10px;
     margin-top: 15px;
-    background: white;
-    color:  var(--tg-theme-button-color);
-    border: 1px solid var(--tg-theme-button-color);
+    background: #EDE9E3;
+    color:  #071E57;
+    border: 1px solid #071E57;
     border-radius: 10px;
 }
 
