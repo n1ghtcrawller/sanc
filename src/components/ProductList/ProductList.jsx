@@ -20,87 +20,62 @@ export const getTotalPrice = (items = []) => {
 }
 
 const ProductList = () => {
-    const [addedItems, setAddedItems] = React.useState([]);
-    const { tg, queryId } = useTelegram();
+    const [addedItems, setAddedItems] = useState([]);
+    const {tg, queryId} = useTelegram();
 
     const onSendData = useCallback(() => {
         const data = {
-            addedItems,
-            queryId
+            products: addedItems,
+            totalPrice: getTotalPrice(addedItems),
+            queryId,
         }
-        tg.sendData(JSON.stringify(data));
-    }, [addedItems, queryId]);
+        fetch('http://77.222.42.151:9000/web-data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+    }, [addedItems])
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
         return () => {
             tg.offEvent('mainButtonClicked', onSendData)
         }
-    }, [onSendData]);
+    }, [onSendData])
 
     const onAdd = (product) => {
-        const alreadyAdded = addedItems.find(item => item.product.id === product.id);
-        let newItems;
+        const alreadyAdded = addedItems.find(item => item.id === product.id);
+        let newItems = [];
 
-        if (alreadyAdded) {
-            // Если товар уже добавлен, увеличиваем его количество
-            newItems = addedItems.map(item => {
-                if (item.product.id === product.id) {
-                    return { ...item, count: item.count + 1 }; // Увеличиваем количество
-                }
-                return item;
-            });
+        if(alreadyAdded) {
+            newItems = addedItems.filter(item => item.id !== product.id);
         } else {
-            // Если товар не добавлен, добавляем его с количеством 1
-            newItems = [...addedItems, { product, count: 1 }];
+            newItems = [...addedItems, product];
         }
 
-        setAddedItems(newItems);
-        updateMainButton(newItems);
-    };
+        setAddedItems(newItems)
 
-    const onRemove = (product) => {
-        const alreadyAdded = addedItems.find(item => item.product.id === product.id);
-
-        if (alreadyAdded) {
-            const newItems = addedItems.map(item => {
-                if (item.product.id === product.id) {
-
-                    return { ...item, count: item.count - 1 }; // Уменьшаем количество
-
-                }
-                return item;
-            }).filter(item => item.count > 0); // Удаляем товары с количеством 0
-
-            setAddedItems(newItems);
-            updateMainButton(newItems);
-        }
-    };
-
-    const updateMainButton = (items) => {
-        if (items.length === 0) {
+        if(newItems.length === 0) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
             tg.MainButton.setParams({
-                text: `Перейти к оплате ${getTotalPrice(items)} ₽`
-            });
+                text: `Купить ${getTotalPrice(newItems)}`
+            })
         }
-    };
+    }
 
     return (
-        <div className="list">
+        <div className={'list'}>
             {products.map(item => (
                 <ProductItem
-                    key={item.id}
                     product={item}
                     onAdd={onAdd}
-                    onRemove={onRemove}
                     className={'item'}
                 />
-
             ))}
-
         </div>
     );
 };
