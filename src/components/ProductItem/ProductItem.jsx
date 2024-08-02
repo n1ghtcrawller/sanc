@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import './ProductItem.css';
+// import {useNavigate} from "react-router-dom";
 
 const ProductItem = ({ product, onAdd, onRemove, className }) => {
     const [count, setCount] = useState(0);
+    // const navigate = useNavigate();
 
     const handleAdd = () => {
         setCount(count + 1);
         onAdd(product);
-    };
+        // navigate('/ProductPage/${product.id});');
 
+    };
     const handleRemove = () => {
         if (count > 0) {
             setCount(count - 1);

@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
 import './ProductList.css';
 import ProductItem from "../ProductItem/ProductItem";
+import ProductPage from "../ProductPage/ProductPage";
 import { useTelegram } from "../../hooks/useTelegram";
 
 const products = [
@@ -28,7 +29,7 @@ const ProductList = () => {
             totalPrice: getTotalPrice(addedItems),
             queryId,
         }
-        fetch('http://localhost:8000',{
+        fetch('http://77.222.42.151:8000/web-data',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -102,10 +103,22 @@ const ProductList = () => {
                     key={item.id}
                     product={item}
                     onAdd={onAdd}
+                    onRemove={onRemove}
+                    className={'item'}
+                />
+
+            ))}
+            {products.map(item => (
+                <ProductItem
+                    key={item.id}
+                    product={item}
+                    onAdd={onAdd}
                     onRemove={onRemove} // Передаем функцию удаления
                     className={'item'}
                 />
+
             ))}
+
         </div>
     );
 };
