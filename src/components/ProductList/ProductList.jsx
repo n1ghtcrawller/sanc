@@ -25,8 +25,7 @@ const ProductList = () => {
 
     const onSendData = useCallback(() => {
         const data = {
-            products: addedItems,
-            totalPrice: getTotalPrice(addedItems),
+            addedItems,
             queryId
         }
         tg.sendData(JSON.stringify(data));
@@ -97,16 +96,6 @@ const ProductList = () => {
                     product={item}
                     onAdd={onAdd}
                     onRemove={onRemove}
-                    className={'item'}
-                />
-
-            ))}
-            {products.map(item => (
-                <ProductItem
-                    key={item.id}
-                    product={item}
-                    onAdd={onAdd}
-                    onRemove={onRemove} // Передаем функцию удаления
                     className={'item'}
                 />
 
