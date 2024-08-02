@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import './ProductList.css';
 import ProductItem from "../ProductItem/ProductItem";
 import ProductPage from "../ProductPage/ProductPage";
@@ -20,8 +20,8 @@ export const getTotalPrice = (items = []) => {
 }
 
 const ProductList = () => {
-    const [addedItems, setAddedItems] = useState([]);
-    const {tg, queryId} = useTelegram();
+    const [addedItems, setAddedItems] = React.useState([]);
+    const { tg, queryId } = useTelegram();
 
     const onSendData = useCallback(() => {
         const data = {
@@ -29,53 +29,96 @@ const ProductList = () => {
             totalPrice: getTotalPrice(addedItems),
             queryId,
         }
-        fetch('http://77.222.42.151:9000/web-data', {
+        fetch('http://77.222.42.151:9000/web-data',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
         })
-    }, [addedItems])
+        tg.sendData(JSON.stringify(data));
+    }, []);
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
         return () => {
             tg.offEvent('mainButtonClicked', onSendData)
         }
-    }, [onSendData])
+    }, [onSendData]);
 
     const onAdd = (product) => {
-        const alreadyAdded = addedItems.find(item => item.id === product.id);
-        let newItems = [];
+        const alreadyAdded = addedItems.find(item => item.product.id === product.id);
+        let newItems;
 
-        if(alreadyAdded) {
-            newItems = addedItems.filter(item => item.id !== product.id);
+        if (alreadyAdded) {
+            // Если товар уже добавлен, увеличиваем его количество
+            newItems = addedItems.map(item => {
+                if (item.product.id === product.id) {
+                    return { ...item, count: item.count + 1 }; // Увеличиваем количество
+                }
+                return item;
+            });
         } else {
-            newItems = [...addedItems, product];
+            // Если товар не добавлен, добавляем его с количеством 1
+            newItems = [...addedItems, { product, count: 1 }];
         }
 
-        setAddedItems(newItems)
+        setAddedItems(newItems);
+        updateMainButton(newItems);
+    };
 
-        if(newItems.length === 0) {
+    const onRemove = (product) => {
+        const alreadyAdded = addedItems.find(item => item.product.id === product.id);
+
+        if (alreadyAdded) {
+            const newItems = addedItems.map(item => {
+                if (item.product.id === product.id) {
+
+                    return { ...item, count: item.count - 1 }; // Уменьшаем количество
+
+                }
+                return item;
+            }).filter(item => item.count > 0); // Удаляем товары с количеством 0
+
+            setAddedItems(newItems);
+            updateMainButton(newItems);
+        }
+    };
+
+    const updateMainButton = (items) => {
+        if (items.length === 0) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
             tg.MainButton.setParams({
-                text: `Купить ${getTotalPrice(newItems)}`
-            })
+                text: `Перейти к оплате ${getTotalPrice(items)} ₽`
+            });
         }
-    }
+    };
 
     return (
-        <div className={'list'}>
+        <div className="list">
             {products.map(item => (
                 <ProductItem
+                    key={item.id}
                     product={item}
                     onAdd={onAdd}
+                    onRemove={onRemove}
                     className={'item'}
                 />
+
             ))}
+            {products.map(item => (
+                <ProductItem
+                    key={item.id}
+                    product={item}
+                    onAdd={onAdd}
+                    onRemove={onRemove} // Передаем функцию удаления
+                    className={'item'}
+                />
+
+            ))}
+
         </div>
     );
 };
