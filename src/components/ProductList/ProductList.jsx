@@ -4,6 +4,7 @@ import ProductItem from "../ProductItem/ProductItem";
 import ProductPage from "../ProductPage/ProductPage";
 import { useTelegram } from "../../hooks/useTelegram";
 
+
 const products = [
     { id: 1, title: 'Худи темно-синее', price: 3500, description: 'Плотное оверсайз худи', img: "" },
     { id: 2, title: 'Худи чёрное', price: 3500, description: 'Плотное оверсайз худи', img: "" },
@@ -29,7 +30,7 @@ const ProductList = () => {
             totalPrice: getTotalPrice(addedItems),
             queryId,
         }
-        fetch('http://77.222.42.151:9000/web-data',{
+        fetch('http://94.26.236.100:8000/web-data',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
