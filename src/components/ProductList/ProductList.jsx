@@ -27,7 +27,7 @@ const ProductList = () => {
 
         };
 
-        fetch('http://keybasicsneutral.online/web-data', {
+        fetch('https://keybasicsneutral.ru/web-data', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
