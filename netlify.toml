@@ -1,5 +1,4 @@
 [[redirects]]
-  from = "/api/*"
-  to = "http:/77.222.42.151:8000/web-data"
+  from = "/*"
+  to = "/index.html"
   status = 200
-  force = true
