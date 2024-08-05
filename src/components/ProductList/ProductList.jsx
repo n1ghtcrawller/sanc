@@ -100,8 +100,9 @@ const ProductList = () => {
                     className={'item'}
                 />
             ))}
+            <br/>
             <button className="send-button" onClick={onSendData}>
-                Отправить данные
+                >send data!(test stage)
             </button>
         </div>
     );
