@@ -22,9 +22,9 @@ const ProductList = () => {
 
     const onSendData = useCallback(() => {
         const data = {
-            item: addedItems,
-            price: getTotalPrice(addedItems)
-
+            products: addedItems,
+            totalPrice: getTotalPrice(addedItems),
+            queryId,
         };
 
         fetch('https://keybasicsneutral.ru/web-data', {
@@ -34,16 +34,16 @@ const ProductList = () => {
             },
             body: JSON.stringify(data)
         })
-            .then(response => {
-                if (!response.ok) {
-                    return response.text().then(text => { throw new Error(`HTTP error! status: ${response.status}, message: ${text}`); });
-                }
-                return response.json();
-            })
-            .then(data => console.log(data))
-            .catch(error => console.error('There was a problem with the fetch operation:', error));
+            // .then(response => {
+            //     if (!response.ok) {
+            //         return response.text().then(text => { throw new Error(`HTTP error! status: ${response.status}, message: ${text}`); });
+            //     }
+            //     return response.json();
+            // })
+            // .then(data => console.log(data))
+            // .catch(error => console.error('There was a problem with the fetch operation:', error));
 
-        tg.sendData(JSON.stringify(data));
+        // tg.sendData(JSON.stringify(data));
     }, [addedItems]);
 
     useEffect(() => {
