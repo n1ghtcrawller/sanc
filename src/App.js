@@ -21,7 +21,7 @@ function App() {
         <Header />
         <Routes>
           <Route index element={<StartPage />} /> {/* Стартовая страница */}
-          <Route path={"products"} element={<ProductList />} /> {/* Измените путь на "products" */}
+          <Route path={"/products"} element={<ProductList />} /> {/* Измените путь на "products" */}
           {/*<Route path={"form"} element={<Form />} />*/}
           {/*<Route path={"order"} element={<Order />} />*/}
             <Route path={"ProductPage/:id"} element={<ProductPage />} />

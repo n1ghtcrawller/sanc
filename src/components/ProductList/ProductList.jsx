@@ -1,23 +1,19 @@
-import React, {useCallback, useEffect} from 'react';
+import React, { useCallback, useEffect } from 'react';
 import './ProductList.css';
 import ProductItem from "../ProductItem/ProductItem";
-import ProductPage from "../ProductPage/ProductPage";
 import { useTelegram } from "../../hooks/useTelegram";
 
-
 const products = [
-    { id: 1, title: 'Худи темно-синее', price: 3500, description: 'Плотное оверсайз худи', img: "" },
-    { id: 2, title: 'Худи чёрное', price: 3500, description: 'Плотное оверсайз худи', img: "" },
-    { id: 3, title: 'Футболка молочного цвета', price: 1500, description: 'Плотная оверсайз футболка', img: "" },
-    { id: 4, title: 'Чёрная футболка', price: 1500, description: 'Плотная оверсайз футболка', img: "" },
-    { id: 5, title: 'Синяя футболка', price: 1500, description: 'Плотная оверсайз футболка', img: "" },
-    { id: 6, title: 'Худи серое', price: 2500, description: 'Плотное оверсайз худи', img: "" },
+    { id: 1, title: 'Худи Deep-blue', price: 3500, description: 'Плотное оверсайз худи', img: "" },
+    { id: 2, title: 'Худи Space', price: 3500, description: 'Плотное оверсайз худи', img: "" },
+    { id: 3, title: 'Футболка milk', price: 1500, description: 'Плотная оверсайз футболка', img: "" },
+    { id: 4, title: 'Футболка Space', price: 1500, description: 'Плотная оверсайз футболка', img: "" },
+    { id: 5, title: 'Футболка KBN', price: 1500, description: 'Плотная оверсайз футболка', img: "" },
+    { id: 6, title: 'Худи Stone', price: 2500, description: 'Плотное оверсайз худи', img: "" },
 ];
 
 export const getTotalPrice = (items = []) => {
-    return items.reduce((acc, item) => {
-        return acc + item.product.price * item.count;// Учитываем количество товара
-    }, 0);
+    return items.reduce((acc, item) => acc + item.product.price * item.count, 0);
 }
 
 const ProductList = () => {
@@ -26,65 +22,61 @@ const ProductList = () => {
 
     const onSendData = useCallback(() => {
         const data = {
-            products: addedItems,
-            totalPrice: getTotalPrice(addedItems),
-            queryId,
-        }
-        fetch('http://94.26.236.100:8000/web-data',{
+            item: addedItems,
+            price: getTotalPrice(addedItems)
+
+        };
+
+        fetch('http://keybasicsneutral.online/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(data)
         })
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => { throw new Error(`HTTP error! status: ${response.status}, message: ${text}`); });
+                }
+                return response.json();
+            })
+            .then(data => console.log(data))
+            .catch(error => console.error('There was a problem with the fetch operation:', error));
+
         tg.sendData(JSON.stringify(data));
     }, [addedItems]);
 
     useEffect(() => {
-        tg.onEvent('mainButtonClicked', onSendData)
+        tg.onEvent('mainButtonClicked', onSendData);
         return () => {
-            tg.offEvent('mainButtonClicked', onSendData)
+            tg.offEvent('mainButtonClicked', onSendData);
         }
     }, [onSendData]);
 
-    const onAdd = (product) => {
+    const updateItems = (product, delta) => {
         const alreadyAdded = addedItems.find(item => item.product.id === product.id);
         let newItems;
 
         if (alreadyAdded) {
-            // Если товар уже добавлен, увеличиваем его количество
             newItems = addedItems.map(item => {
                 if (item.product.id === product.id) {
-                    return { ...item, count: item.count + 1 }; // Увеличиваем количество
+                    const newCount = item.count + delta;
+                    return { ...item, count: Math.max(newCount, 0) };
                 }
                 return item;
-            });
-        } else {
-            // Если товар не добавлен, добавляем его с количеством 1
+            }).filter(item => item.count > 0);
+        } else if (delta > 0) {
             newItems = [...addedItems, { product, count: 1 }];
+        } else {
+            newItems = addedItems;
         }
 
         setAddedItems(newItems);
         updateMainButton(newItems);
     };
 
-    const onRemove = (product) => {
-        const alreadyAdded = addedItems.find(item => item.product.id === product.id);
-
-        if (alreadyAdded) {
-            const newItems = addedItems.map(item => {
-                if (item.product.id === product.id) {
-
-                    return { ...item, count: item.count - 1 }; // Уменьшаем количество
-
-                }
-                return item;
-            }).filter(item => item.count > 0); // Удаляем товары с количеством 0
-
-            setAddedItems(newItems);
-            updateMainButton(newItems);
-        }
-    };
+    const onAdd = (product) => updateItems(product, 1);
+    const onRemove = (product) => updateItems(product, -1);
 
     const updateMainButton = (items) => {
         if (items.length === 0) {
@@ -107,19 +99,10 @@ const ProductList = () => {
                     onRemove={onRemove}
                     className={'item'}
                 />
-
             ))}
-            {products.map(item => (
-                <ProductItem
-                    key={item.id}
-                    product={item}
-                    onAdd={onAdd}
-                    onRemove={onRemove} // Передаем функцию удаления
-                    className={'item'}
-                />
-
-            ))}
-
+            <button className="send-button" onClick={onSendData}>
+                Отправить данные
+            </button>
         </div>
     );
 };
