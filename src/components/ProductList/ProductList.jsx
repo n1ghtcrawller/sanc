@@ -34,14 +34,14 @@ const ProductList = () => {
             },
             body: JSON.stringify(data)
         })
-            // .then(response => {
-            //     if (!response.ok) {
-            //         return response.text().then(text => { throw new Error(`HTTP error! status: ${response.status}, message: ${text}`); });
-            //     }
-            //     return response.json();
-            // })
-            // .then(data => console.log(data))
-            // .catch(error => console.error('There was a problem with the fetch operation:', error));
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => { throw new Error(`HTTP error! status: ${response.status}, message: ${text}`); });
+                }
+                return response.json();
+            })
+            .then(data => console.log(data))
+            .catch(error => console.error('There was a problem with the fetch operation:', error));
 
         // tg.sendData(JSON.stringify(data));
     }, [addedItems]);
