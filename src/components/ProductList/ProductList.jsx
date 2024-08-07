@@ -21,8 +21,16 @@ const ProductList = () => {
     const { tg, queryId } = useTelegram();
 
     const onSendData = useCallback(() => {
+        // Формируем массив с продуктами
+        const productsToSend = addedItems.map(item => ({
+            id: item.product.id,
+            title: item.product.title,
+            count: item.count,
+            price: item.product.price
+        }));
+
         const data = {
-            products: addedItems,
+            products: productsToSend,
             totalPrice: getTotalPrice(addedItems),
             queryId,
         };
@@ -83,7 +91,10 @@ const ProductList = () => {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
-            tg.MainButton.setParams({
+            tg.MainButton.setParams
+
+
+            ({
                 text: `Перейти к оплате ${getTotalPrice(items)} ₽`
             });
         }
@@ -100,10 +111,6 @@ const ProductList = () => {
                     className={'item'}
                 />
             ))}
-            <br/>
-            <button className="send-button" onClick={onSendData}>
-                >send data!(test stage)
-            </button>
         </div>
     );
 };
