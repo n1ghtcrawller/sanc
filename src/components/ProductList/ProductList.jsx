@@ -18,7 +18,7 @@ export const getTotalPrice = (items = []) => {
 
 const ProductList = () => {
     const [addedItems, setAddedItems] = React.useState([]);
-    const { tg, queryId, user } = useTelegram();
+    const { tg, queryId, chatId } = useTelegram();
 
     const onSendData = useCallback(() => {
         // Формируем массив с продуктами
@@ -33,7 +33,7 @@ const ProductList = () => {
             products: productsToSend,
             totalPrice: getTotalPrice(addedItems),
             queryId,
-            user, // Добавляем chatId в данные
+            chatId, // Добавляем chatId в данные
         };
 
         fetch('https://keybasicsneutral.ru/web-data', {
