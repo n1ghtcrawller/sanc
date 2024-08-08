@@ -1,0 +1,87 @@
+.product {
+    display: flex;
+    flex-direction: column;
+    /*border: 1px solid lightyellow;*/
+    padding: 14px;
+    width: 110px;
+    height: 280px;
+    text-align: center;
+    align-items: center;
+    margin: 5vw;
+    background: #f7f5f2;
+    box-shadow: 10px 5px 5px gray;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.img {
+    width: 100%;
+    /*background: lightgray;*/
+    height: 100px;
+    margin: 0;
+    /*background: red;*/
+}
+
+.description {
+    font-size: 1em;
+    margin-top: 60px;
+}
+
+.title {
+    display: flex;
+    height: 37px;
+    align-items: center;
+    font-size: 1em;
+    margin-top: 60px;
+}
+
+.price {
+    margin-top: 5px;
+    font-size: 0.8em;
+}
+
+.add-btn, .minus-btn  {
+
+    /*background: #7fc7ff;*/
+    /*background: var(--tg-theme-button-color);*/
+    background-color: #071E57;
+    color: #EDE9E3;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    padding: 2px;
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+    box-shadow: 4px 1px 2px gray;
+
+}
+
+.add-to-cart-btn {
+    background-color: #071E57;
+    color: #EDE9E3;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    padding: 2px;
+    height: 30px;
+    width: 100px;
+    margin: 5px;
+    box-shadow: 4px 1px 2px gray;
+
+}
+
+.counter {
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    /*border: 1px solid #071E57;*/
+    border-radius: 10px;
+}
+
+.count {
+    margin:  10px; /* Отступы вокруг счетчика */
+    font-size: 18px; /* Размер шрифта для счетчика */
+
+
+}

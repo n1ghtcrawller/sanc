@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import './ProductItem.css';
-// import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const ProductItem = ({ product, onAdd, onRemove, className }) => {
+export const ProductItem = ({ product, onAdd, onRemove, className }) => {
     const [count, setCount] = useState(0);
-    // const navigate = useNavigate();
+    const navigate = useNavigate(); // Используем useNavigate
 
     const handleAdd = () => {
         setCount(count + 1);
         onAdd(product);
-        // navigate('/ProductPage/${product.id});');
-
     };
+
     const handleRemove = () => {
         if (count > 0) {
             setCount(count - 1);
@@ -19,8 +18,12 @@ const ProductItem = ({ product, onAdd, onRemove, className }) => {
         }
     };
 
+    const handleProductClick = () => {
+        navigate(`/ProductPage/${product.id}`); // Переход к странице товара
+    };
+
     return (
-        <div className={"product"}>
+        <div className={"product"} onClick={handleProductClick}> {/* Добавляем обработчик клика на весь компонент */}
             <img className={"img"} src={product.img} alt={product.title} />
             <div className={"title"}>{product.title}</div>
             <div className={"price"}>

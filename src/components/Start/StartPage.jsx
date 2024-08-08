@@ -5,7 +5,6 @@ import logo from './KBN.jpg'; // Импортируйте изображение
 
 const StartPage = () => {
     const navigate = useNavigate();
-
     const handleButtonClick = () => {
         navigate('/products'); // Переход к списку продуктов
     };

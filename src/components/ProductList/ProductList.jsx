@@ -3,7 +3,7 @@ import './ProductList.css';
 import ProductItem from "../ProductItem/ProductItem";
 import { useTelegram } from "../../hooks/useTelegram";
 
-const products = [
+export const products = [
     { id: 1, title: 'Худи Deep-blue', price: 3500, description: 'Плотное оверсайз худи', img: "" },
     { id: 2, title: 'Худи Space', price: 3500, description: 'Плотное оверсайз худи', img: "" },
     { id: 3, title: 'Футболка milk', price: 1500, description: 'Плотная оверсайз футболка', img: "" },
