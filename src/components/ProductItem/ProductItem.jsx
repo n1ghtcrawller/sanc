@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './ProductItem.css';
 import { useNavigate } from "react-router-dom";
+import ProductList from "../ProductList/ProductList";
 
 
 export const ProductItem = ({ product, onAdd, onRemove }) => {
@@ -10,6 +11,7 @@ export const ProductItem = ({ product, onAdd, onRemove }) => {
         setCount(count + 1);
         onAdd(product);
     };
+
 
     const handleRemove = () => {
         if (count > 0) {

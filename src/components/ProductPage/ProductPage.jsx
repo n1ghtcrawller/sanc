@@ -1,97 +1,79 @@
-import React, {useState} from 'react';
-import { useParams, Link } from 'react-router-dom';
-import {getTotalPrice, products} from '../ProductList/ProductList';
-import "./ProductPage.css";
-import ProductItem from "../ProductItem/ProductItem";
-import {useTelegram} from "../../hooks/useTelegram";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { products } from '../ProductList/ProductList';
+import { useTelegram } from '../../hooks/useTelegram';
+import './ProductPage.css';
 
+const ProductPage = () => {
+    const { tg } = useTelegram();
+    const [count, setCount] = useState(0);
+    const [size, setSize] = useState('');
+    const [addedItems, setAddedItems] = useState([]);
 
-
-const ProductPage = ({ onAdd, onRemove }) => {
-
-    const { tg, queryId, user } = useTelegram();
-
-
-
-    const updateMainButton = (items) => {
-        if (items.length === 0) {
+    const updateMainButton = () => {
+        if (addedItems.length === 0) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
-            tg.MainButton.setParams
-
-
-            ({
-                text: `Перейти к оплате ${getTotalPrice(items)} ₽`
+            tg.MainButton.setParams({
+                text: (`Перейти к оплате ${getTotalPrice(addedItems)} ₽`),
             });
         }
     };
-    const [addedItems, setAddedItems] = React.useState([]);
-    const updatedItems = (product, delta) => {
-        const alreadyAdded = addedItems.find(item => item.product.id === product.id);
-        let newItems;
 
-        if (alreadyAdded) {
-            newItems = addedItems.map(item => {
-                if (item.product.id === product.id) {
-                    const newCount = item.count + delta;
-                    return { ...item, count: Math.max(newCount, 0) };
-                }
-                return item;
-            }).filter(item => item.count > 0);
-        } else if (delta > 0) {
-            newItems = [...addedItems, { product, count: 1 }];
-        } else {
-            newItems = addedItems;
+    const handleAddItem = (product) => {
+        if (size) {
+            const alreadyAdded = addedItems.find(item => item.product.id === product.id);
+            let newItems;
+
+            if (alreadyAdded) {
+                newItems = addedItems.map(item => {
+                    if (item.product.id === product.id) {
+                        return { ...item, count: item.count + count };
+                    }
+                    return item;
+                });
+            } else {
+                newItems = [...addedItems, { product, count }];
+            }
+
+            setAddedItems(newItems);
+            updateMainButton();
         }
-
-        setAddedItems(newItems);
-        updateMainButton(newItems);
     };
 
-    const onAddItem = (product) => updatedItems(product, 1);
-    const onRemoveItem = (product) => updatedItems(product, -1);
-    const [count, setCount] = useState(0);
-    const { id } = useParams();
-    const product = products.find(item => item.id === parseInt(id));
-
-
-    if (!product) {
-        return <h2>Товар не найден</h2>;
-    }
-
-    const handleAddItem = () => {
-        setCount(count + 1);
-        onAddItem(product);
-    };
-
-    const handleRemoveItem = () => {
+    const handleSizeChange = (e) => {
+        setSize(e.target.value);
         if (count > 0) {
-            setCount(count - 1);
-            onRemoveItem(product); // Вызываем функцию удаления
+            tg.MainButton.show();
         }
     };
 
     return (
         <div>
             <Link to="/products" className="back-button">Назад</Link>
-
-                <img className={"img"} src={product.img} alt={product.title}/>
-                <div className={"title"}>{product.title}</div>
-                <div className={"price"}>
-                    <span>₽<b>{product.price}</b></span>
-                </div>
-                <div className="counter">
-                    {count === 0 ? (
-                        <button className={'add-to-cart-btn'} onClick={handleAddItem}>В корзину</button>
-                    ) : (
-                        <>
-                            <button className={'minus-btn'} onClick={handleRemoveItem}>-</button>
-                            <span className="count">{count}</span>
-                            <button className={'add-btn'} onClick={handleAddItem}>+</button>
-                        </>
-                    )}
-                </div>
+            <div className="product-list">
+                {products.map(product => (
+                    <div key={product.id} className="product-item">
+                        <img src={product.img} alt={product.title} />
+                        <div className="title">{product.title}</div>
+                        <div className="price">₽<b>{product.price}</b></div>
+                        <div className="counter">
+                            <button onClick={() => setCount(count + 1)}>+</button>
+                            <span>{count}</span>
+                            <button onClick={() => setCount(Math.max(count - 1, 0))}>-</button>
+                        </div>
+                        <select onChange={handleSizeChange} value={size}>
+                            <option value="">Выберите размер</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                        <button onClick={() => handleAddItem(product)}>Добавить в корзину</button>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
