@@ -3,10 +3,9 @@ import './ProductItem.css';
 import { useNavigate } from "react-router-dom";
 
 
-export const ProductItem = ({ product, onAdd, onRemove, className }) => {
+export const ProductItem = ({ product, onAdd, onRemove }) => {
     const [count, setCount] = useState(0);
     const navigate = useNavigate(); // Используем useNavigate
-
     const handleAdd = () => {
         setCount(count + 1);
         onAdd(product);
