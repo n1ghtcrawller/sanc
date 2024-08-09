@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './ProductItem.css';
 import { useNavigate } from "react-router-dom";
 
+
 export const ProductItem = ({ product, onAdd, onRemove, className }) => {
     const [count, setCount] = useState(0);
     const navigate = useNavigate(); // Используем useNavigate

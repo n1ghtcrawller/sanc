@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { products } from '../ProductList/ProductList';
-import "./ProductPage.css"
+import "./ProductPage.css";
 import ProductItem from "../ProductItem/ProductItem";
 
 const ProductPage = () => {
@@ -12,7 +12,13 @@ const ProductPage = () => {
         return <h2>Товар не найден</h2>;
     }
 
+    const handleAddToCart = (product) => {
+        console.log(`Добавлено в корзину: ${product.title}`);
+    };
 
+    const handleRemoveFromCart = (product) => {
+        console.log(`Удалено из корзины: ${product.title}`);
+    };
 
     return (
         <div>
@@ -21,6 +27,13 @@ const ProductPage = () => {
             <p>{product.description}</p>
             <p>Цена: {product.price}₽</p>
             <button>Купить</button>
+
+            {/* Используем ProductItem для отображения товара */}
+            <ProductItem
+                product={product}
+                onAdd={handleAddToCart}
+                onRemove={handleRemoveFromCart}
+            />
         </div>
     );
 };
