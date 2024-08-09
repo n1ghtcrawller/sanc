@@ -107,6 +107,8 @@ const ProductList = () => {
                 <ProductItem
                     key={item.id}
                     product={item}
+                    onAdd={onAdd}
+                    onRemove={onRemove}
                     className={'item'}
                 />
             ))}
