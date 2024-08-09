@@ -29,17 +29,17 @@ export const ProductItem = ({ product, onAdd, onRemove }) => {
             <div className={"price"}>
                 <span>₽<b>{product.price}</b></span>
             </div>
-            <div className="counter">
-                {count === 0 ? (
-                    <button className={'add-to-cart-btn'} onClick={handleAdd}>В корзину</button>
-                ) : (
-                    <>
-                        <button className={'minus-btn'} onClick={handleRemove}>-</button>
-                        <span className="count">{count}</span>
-                        <button className={'add-btn'} onClick={handleAdd}>+</button>
-                    </>
-                )}
-            </div>
+            {/*<div className="counter">*/}
+            {/*    {count === 0 ? (*/}
+            {/*        <button className={'add-to-cart-btn'} onClick={handleAdd}>В корзину</button>*/}
+            {/*    ) : (*/}
+            {/*        <>*/}
+            {/*            <button className={'minus-btn'} onClick={handleRemove}>-</button>*/}
+            {/*            <span className="count">{count}</span>*/}
+            {/*            <button className={'add-btn'} onClick={handleAdd}>+</button>*/}
+            {/*        </>*/}
+            {/*    )}*/}
+            {/*</div>*/}
         </div>
     );
 };
