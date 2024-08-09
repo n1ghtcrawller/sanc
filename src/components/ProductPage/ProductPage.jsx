@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { products } from '../ProductList/ProductList';
 import "./ProductPage.css";
 import ProductItem from "../ProductItem/ProductItem";
@@ -22,6 +22,7 @@ const ProductPage = () => {
 
     return (
         <div>
+            <Link to="/products" className="back-button">Назад</Link>
             <h1>{product.title}</h1>
             <img src={product.image} alt={product.title} />
             <p>{product.description}</p>
