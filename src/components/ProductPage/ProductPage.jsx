@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { products } from '../ProductList/ProductList';
 import "./ProductPage.css";
 
-const ProductPage = ({ onAdd, onRemove }) => {
+const ProductPage = ({ onAdd, onRemove, totalPrice }) => {
     const { id } = useParams();
     const product = products.find(item => item.id === parseInt(id));
     const [count, setCount] = useState(0);
@@ -16,8 +16,6 @@ const ProductPage = ({ onAdd, onRemove }) => {
         setCount(count + 1);
         if (typeof onAdd === 'function') {
             onAdd(product);
-        } else {
-            console.error('onAdd is not a function');
         }
     };
 
@@ -26,14 +24,13 @@ const ProductPage = ({ onAdd, onRemove }) => {
             setCount(count - 1);
             if (typeof onRemove === 'function') {
                 onRemove(product);
-            } else {
-                console.error('onRemove is not a function');
             }
         }
     };
 
     return (
         <div>
+            <Link to="/products" className="back-button">Назад</Link>
             <h1>{product.title}</h1>
             <img src={product.image} alt={product.title} />
             <p>{product.description}</p>
@@ -49,6 +46,7 @@ const ProductPage = ({ onAdd, onRemove }) => {
                     </>
                 )}
             </div>
+            <h3>Общая стоимость: {totalPrice}₽</h3>
         </div>
     );
 };
