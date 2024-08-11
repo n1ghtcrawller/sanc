@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useTelegram } from '../../hooks/useTelegram';
 
 const Order = () => {
-    const { tg } = useTelegram();
+    const { tg, queryId, user } = useTelegram();
     const { cartItems } = useCart();
 
     // Функция для расчета общей стоимости
@@ -26,6 +26,8 @@ const Order = () => {
         const data = {
             products: productsToSend,
             totalPrice: totalPrice,
+            queryId: queryId,
+            chatId: user.id
         };
 
         fetch('https://keybasicsneutral.ru/web-data', {
