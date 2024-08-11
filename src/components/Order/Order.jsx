@@ -43,7 +43,10 @@ const Order = () => {
                 }
                 return response.json();
             })
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data);
+                tg.close(); // Закрываем окно после успешной отправки
+            })
             .catch(error => console.error('There was a problem with the fetch operation:', error));
 
         tg.sendData(JSON.stringify(data));
