@@ -1,65 +1,36 @@
 import React, { useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { products, getTotalPrice } from '../ProductList/ProductList';
+import { products } from '../ProductList/ProductList';
 import { useTelegram } from '../../hooks/useTelegram';
+import { useCart } from '../CartProvider/CartContext';
 import './ProductPage.css';
 
 const ProductPage = () => {
     const { tg } = useTelegram();
     const { id } = useParams();
-    const navigate = useNavigate(); // Используем хук navigate
+    const navigate = useNavigate();
     const product = products.find(p => p.id === parseInt(id));
     const [count, setCount] = useState(0);
     const [size, setSize] = useState('');
-    const [addedItems, setAddedItems] = useState([]);
-
-    const updateMainButton = () => {
-        if (addedItems.length === 0 || !size) {
-            tg.MainButton.hide();
-        } else {
-            tg.MainButton.show();
-            tg.MainButton.setParams({
-                text: (`Перейти к оплате ${getTotalPrice(addedItems)} ₽`),
-                callback: () => handleGoToOrder() // Добавляем обработчик
-            });
-        }
-    };
-
-    const handleGoToOrder = () => {
-        // Передаем данные через URL-параметры или сохраняем в localStorage
-        localStorage.setItem('addedItems', JSON.stringify(addedItems)); // Сохраняем данные
-        navigate('/order'); // Перенаправляем на страницу заказа
-    };
+    const { addToCart } = useCart(); // используем хук для доступа к функции добавления
 
     const handleSizeChange = (e) => {
         setSize(e.target.value);
-        updateMainButton();
-    };
-
-    const handleAddItem = () => {
-        if (size) {
-            const alreadyAdded = addedItems.find(item => item.product.id === product.id);
-            let newItems;
-
-            if (alreadyAdded) {
-                newItems = addedItems.map(item => {
-                    if (item.product.id === product.id) {
-                        return { ...item, count: item.count + count };
-                    }
-                    return item;
-                });
-            } else {
-                newItems = [...addedItems, { product, count }];
-            }
-
-            setAddedItems(newItems);
-            updateMainButton();
-        }
-    };
+    }
 
     if (!product) {
         return <div>Товар не найден</div>;
     }
+
+    const isButtonDisabled = count === 0 || !size;
+
+    // Расчет общей стоимости
+    const totalPrice = product.price * count;
+
+    const handleAddToCart = () => {
+        addToCart(product, count, size, totalPrice); // добавляем товар в корзину
+        navigate('/order'); // перенаправляем на страницу заказа
+    };
 
     return (
         <div>
@@ -80,7 +51,15 @@ const ProductPage = () => {
                     <option value="L">L</option>
                     <option value="XL">XL</option>
                 </select>
-                <button onClick={handleAddItem}>Добавить в корзину</button> {/* Кнопка для добавления */}
+                <div>
+                    <button disabled={isButtonDisabled} onClick={handleAddToCart}>Добавить в корзину</button>
+                </div>
+                {/* Отображение общей стоимости */}
+                {count > 0 && (
+                    <div className="total-price">
+                        Общая стоимость: <b>{totalPrice}</b>₽
+                    </div>
+                )}
             </div>
         </div>
     );
