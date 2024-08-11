@@ -17,88 +17,26 @@ export const getTotalPrice = (items = []) => {
 }
 
 const ProductList = () => {
-    const [addedItems, setAddedItems] = React.useState([]);
-    const { tg, queryId, user } = useTelegram();
-
-    const onSendData = useCallback(() => {
-        // Формируем массив с продуктами
-        const productsToSend = addedItems.map(item => ({
-            id: item.product.id,
-            title: item.product.title,
-            count: item.count,
-            price: item.product.price
-        }));
-
-        const data = {
-            products: productsToSend,
-            totalPrice: getTotalPrice(addedItems),
-            queryId,
-            chatId: user.id // Добавляем chatId в данные
-        };
-
-        fetch('https://keybasicsneutral.ru/web-data', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-            .then(response => {
-                if (!response.ok) {
-                    return response.text().then(text => { throw new Error(`HTTP error! status: ${response.status}, message: ${text}`); });
-                }
-                return response.json();
-            })
-            .then(data => console.log(data))
-            .catch(error => console.error('There was a problem with the fetch operation:', error));
-        tg.sendData(JSON.stringify(data));
-    }, [addedItems]);
+    const { tg } = useTelegram();
 
     useEffect(() => {
-        tg.onEvent('mainButtonClicked', onSendData);
+        // Показать кнопку сразу при загрузке компонента
+        tg.MainButton.show();
+        tg.MainButton.setParams({
+            text: 'Перейти в корзину'
+        });
+
+        // Обработчик для нажатия кнопки
+        const onMainButtonClick = () => {
+            window.location.href = '/order'; // Перенаправление на страницу заказа
+        };
+
+        tg.onEvent('mainButtonClicked', onMainButtonClick);
+
         return () => {
-            tg.offEvent('mainButtonClicked', onSendData);
-        }
-    }, [onSendData]);
-
-    const updateItems = (product, delta) => {
-        const alreadyAdded = addedItems.find(item => item.product.id === product.id);
-        let newItems;
-
-        if (alreadyAdded) {
-            newItems = addedItems.map(item => {
-                if (item.product.id === product.id) {
-                    const newCount = item.count + delta;
-                    return { ...item, count: Math.max(newCount, 0) };
-                }
-                return item;
-            }).filter(item => item.count > 0);
-        } else if (delta > 0) {
-            newItems = [...addedItems, { product, count: 1 }];
-        } else {
-            newItems = addedItems;
-        }
-
-        setAddedItems(newItems);
-        updateMainButton(newItems);
-    };
-
-    const onAdd = (product) => updateItems(product, 1);
-    const onRemove = (product) => updateItems(product, -1);
-
-    const updateMainButton = (items) => {
-        if (items.length === 0) {
-            tg.MainButton.hide();
-        } else {
-            tg.MainButton.show();
-            tg.MainButton.setParams
-
-
-            ({
-                text: `Перейти к оплате ${getTotalPrice(items)} ₽`
-            });
-        }
-    };
+            tg.offEvent('mainButtonClicked', onMainButtonClick);
+        };
+    }, [tg]);
 
     return (
         <div className="list">
@@ -106,8 +44,6 @@ const ProductList = () => {
                 <ProductItem
                     key={item.id}
                     product={item}
-                    onAdd={onAdd}
-                    onRemove={onRemove}
                     className={'item'}
                 />
             ))}

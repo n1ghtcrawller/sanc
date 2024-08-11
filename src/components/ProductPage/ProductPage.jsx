@@ -29,7 +29,7 @@ const ProductPage = () => {
 
     const handleAddToCart = () => {
         addToCart(product, count, size, totalPrice); // добавляем товар в корзину
-        navigate('/order'); // перенаправляем на страницу заказа
+        navigate('/products'); // перенаправляем на страницу заказа
     };
 
     return (
