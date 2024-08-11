@@ -2,6 +2,8 @@ import React, { useCallback, useEffect } from 'react';
 import './ProductList.css';
 import ProductItem from "../ProductItem/ProductItem";
 import { useTelegram } from "../../hooks/useTelegram";
+import {useNavigate} from "react-router-dom";
+const navigate = useNavigate();
 
 export const products = [
     { id: 1, title: 'Худи Deep-blue', price: 3500, description: 'Плотное оверсайз худи', img: "" },
@@ -28,7 +30,7 @@ const ProductList = () => {
 
         // Обработчик для нажатия кнопки
         const onMainButtonClick = () => {
-            window.location.href = '/order'; // Перенаправление на страницу заказа
+            navigate('/order');
         };
 
         tg.onEvent('mainButtonClicked', onMainButtonClick);
