@@ -1,26 +1,39 @@
 import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { products, getTotalPrice } from '../ProductList/ProductList';
 import { useTelegram } from '../../hooks/useTelegram';
 import './ProductPage.css';
 
 const ProductPage = () => {
     const { tg } = useTelegram();
-    const { id } = useParams(); // Получаем id из параметров маршрута
-    const product = products.find(p => p.id === parseInt(id)); // Находим продукт по id
+    const { id } = useParams();
+    const navigate = useNavigate(); // Используем хук navigate
+    const product = products.find(p => p.id === parseInt(id));
     const [count, setCount] = useState(0);
     const [size, setSize] = useState('');
     const [addedItems, setAddedItems] = useState([]);
 
     const updateMainButton = () => {
-        if (addedItems.length === 0) {
+        if (addedItems.length === 0 || !size) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
             tg.MainButton.setParams({
                 text: (`Перейти к оплате ${getTotalPrice(addedItems)} ₽`),
-        });
+                callback: () => handleGoToOrder() // Добавляем обработчик
+            });
         }
+    };
+
+    const handleGoToOrder = () => {
+        // Передаем данные через URL-параметры или сохраняем в localStorage
+        localStorage.setItem('addedItems', JSON.stringify(addedItems)); // Сохраняем данные
+        navigate('/order'); // Перенаправляем на страницу заказа
+    };
+
+    const handleSizeChange = (e) => {
+        setSize(e.target.value);
+        updateMainButton();
     };
 
     const handleAddItem = () => {
@@ -44,15 +57,8 @@ const ProductPage = () => {
         }
     };
 
-    const handleSizeChange = (e) => {
-        setSize(e.target.value);
-        if (count > 0) {
-            tg.MainButton.show();
-        }
-    };
-
     if (!product) {
-        return <div>Товар не найден</div>; // Обработка случая, если товар не найден
+        return <div>Товар не найден</div>;
     }
 
     return (
@@ -74,7 +80,7 @@ const ProductPage = () => {
                     <option value="L">L</option>
                     <option value="XL">XL</option>
                 </select>
-                <button onClick={handleAddItem}>Добавить в корзину</button>
+                <button onClick={handleAddItem}>Добавить в корзину</button> {/* Кнопка для добавления */}
             </div>
         </div>
     );
