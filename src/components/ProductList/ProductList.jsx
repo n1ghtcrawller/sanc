@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './ProductList.css';
 import ProductItem from "../ProductItem/ProductItem";
 import { useTelegram } from "../../hooks/useTelegram";
 import {useNavigate} from "react-router-dom";
-const navigate = useNavigate();
+
 
 export const products = [
     { id: 1, title: 'Худи Deep-blue', price: 3500, description: 'Плотное оверсайз худи', img: "" },
@@ -20,6 +20,7 @@ export const getTotalPrice = (items = []) => {
 
 const ProductList = () => {
     const { tg } = useTelegram();
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Показать кнопку сразу при загрузке компонента
