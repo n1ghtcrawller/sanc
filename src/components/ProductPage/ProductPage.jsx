@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { products } from '../ProductList/ProductList';
 import { useTelegram } from '../../hooks/useTelegram';
@@ -9,6 +9,24 @@ const ProductPage = () => {
     const { tg } = useTelegram();
     const { id } = useParams();
     const navigate = useNavigate();
+    useEffect(() => {
+        // Показать кнопку сразу при загрузке компонента
+        tg.MainButton.show();
+        tg.MainButton.setParams({
+            text: 'Перейти в корзину'
+        });
+
+        // Обработчик для нажатия кнопки
+        const onMainButtonClick = () => {
+            navigate('/order');
+        };
+
+        tg.onEvent('mainButtonClicked', onMainButtonClick);
+
+        return () => {
+            tg.offEvent('mainButtonClicked', onMainButtonClick);
+        };
+    }, [tg]);
     const product = products.find(p => p.id === parseInt(id));
     const [count, setCount] = useState(0);
     const [size, setSize] = useState('');
@@ -17,6 +35,7 @@ const ProductPage = () => {
     const handleSizeChange = (e) => {
         setSize(e.target.value);
     }
+
 
     if (!product) {
         return <div>Товар не найден</div>;
@@ -31,6 +50,7 @@ const ProductPage = () => {
         addToCart(product, count, size, totalPrice); // добавляем товар в корзину
         navigate('/order');// перенаправляем на страницу заказа
     };
+
 
     return (
         <div>
