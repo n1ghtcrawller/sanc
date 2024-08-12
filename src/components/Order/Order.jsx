@@ -66,7 +66,9 @@ const Order = () => {
 
     return (
         <div>
-            <Link to="/products" className="back-button">Назад</Link>
+            <button className={'back-button'}>
+                <Link to="/products" className={'text-on-back-button'}>Назад</Link>
+            </button>
             <h1>Ваш заказ</h1>
             {cartItems.map((item, index) => (
                 <div key={index}>

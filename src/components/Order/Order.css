@@ -1,0 +1,18 @@
+
+.back-button {
+    background-color: #071E57;
+    color: #EDE9E3;
+    cursor: pointer;
+    border: none;
+    border-radius: 15px;
+    height: 37px;
+    width: 15%;
+    margin-left: 5%;
+    box-shadow: 4px 1px 2px gray;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.text-on-back-button{
+    color: #EDE9E3;
+    text-decoration: none;
+}
