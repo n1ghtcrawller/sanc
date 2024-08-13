@@ -19,6 +19,7 @@ const Order = () => {
             id: item.product.id,
             title: item.product.title,
             count: item.count,
+            size: item.size,
             price: item.product.price
         }));
 

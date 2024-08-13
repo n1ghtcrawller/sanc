@@ -9,6 +9,7 @@ import Order from "./components/Order/Order";
 import StartPage from "./components/Start/StartPage";
 import ProductPage from "./components/ProductPage/ProductPage";
 import { CartProvider } from "./components/CartProvider/CartContext";
+import Form from "./components/Form/Form";
 
 function App() {
     const { tg } = useTelegram();
@@ -39,8 +40,8 @@ function App() {
             <CartProvider>
                 <Routes>
                     <Route index element={<StartPage />} /> {/* Стартовая страница */}
-                    <Route path={"/products"} element={<ProductList />} /> {/* Измените путь на "products" */}
-                    {/* <Route path={"form"} element={<Form />} /> */}
+                    <Route path={"products"} element={<ProductList />} /> {/* Измените путь на "products" */}
+                    <Route path={"form"} element={<Form />} />
                     <Route path={"order"} element={<Order />} />
                     <Route path={"ProductPage/:id"} element={<ProductPage />} />
                 </Routes>
