@@ -43,7 +43,7 @@ const ProductList = () => {
             {products.map(item => (
                 <Link to={`/ProductPage/${item.id}`} key={item.id} className="item">
                     {item.img && <img src={item.img} alt={item.title} />}
-                    <h3>{item.title}</h3>
+                    <h3 className={'item-title'}>{item.title}</h3>
                     <p>{item.description}</p>
                     <p className="price">Цена: ₽{item.price}</p>
                 </Link>
