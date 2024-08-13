@@ -5,7 +5,7 @@ import { useTelegram } from "../../hooks/useTelegram";
 import { useNavigate } from "react-router-dom";
 
 export const products = [
-    { id: 1, title: 'Худи Deep-blue', price: 3500, description: 'Плотное оверсайз худи', img: "" },
+    { id: 1, title: 'Худи Deep', price: 3500, description: 'Плотное оверсайз худи', img: "" },
     { id: 2, title: 'Худи Space', price: 3500, description: 'Плотное оверсайз худи', img: "" },
     { id: 3, title: 'Футболка milk', price: 1500, description: 'Плотная оверсайз футболка', img: "" },
     { id: 4, title: 'Футболка Space', price: 1500, description: 'Плотная оверсайз футболка', img: "" },
@@ -43,7 +43,7 @@ const ProductList = () => {
             {products.map(item => (
                 <Link to={`/ProductPage/${item.id}`} key={item.id} className="item">
                     {item.img && <img src={item.img} alt={item.title} />}
-                    <h3 className={'item-title'}>{item.title}</h3>
+                    <h2>{item.title}</h2>
                     <p>{item.description}</p>
                     <p className="price">Цена: ₽{item.price}</p>
                 </Link>

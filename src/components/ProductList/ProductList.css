@@ -26,6 +26,10 @@
     width: calc(33.33% - 20px); /* Для 3 элементов в строке */
     transition: transform 0.3s ease;
     text-decoration: none;
+    height: 75vw;
+    display: flex;
+    align-content: flex-end;
+    flex-wrap: wrap;
 }
 
 .item:hover {
