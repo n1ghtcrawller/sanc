@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import './ProductList.css';
-import ProductItem from "../ProductItem/ProductItem";
+import { Link } from "react-router-dom"; // Импортируем Link
 import { useTelegram } from "../../hooks/useTelegram";
-import {useNavigate} from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 export const products = [
     { id: 1, title: 'Худи Deep-blue', price: 3500, description: 'Плотное оверсайз худи', img: "" },
@@ -23,13 +22,11 @@ const ProductList = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Показать кнопку сразу при загрузке компонента
         tg.MainButton.show();
         tg.MainButton.setParams({
             text: 'Перейти в корзину'
         });
 
-        // Обработчик для нажатия кнопки
         const onMainButtonClick = () => {
             navigate('/order');
         };
@@ -44,11 +41,12 @@ const ProductList = () => {
     return (
         <div className="list">
             {products.map(item => (
-                <ProductItem
-                    key={item.id}
-                    product={item}
-                    className={'item'}
-                />
+                <Link to={`/ProductPage/${item.id}`} key={item.id} className="item">
+                    {item.img && <img src={item.img} alt={item.title} />}
+                    <h2>{item.title}</h2>
+                    <p>{item.description}</p>
+                    <p className="price">Цена: ₽{item.price}</p>
+                </Link>
             ))}
         </div>
     );

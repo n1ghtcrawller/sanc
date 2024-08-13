@@ -1,18 +1,80 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.order-container {
+    max-width: 600px;
+    margin: auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+h1 {
+    font-size: 28px;
+    color: #333333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.product-item {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-item h2 {
+    font-size: 20px;
+    color: #071E57;
+}
+
+.product-item p {
+    margin: 5px 0;
+    color: #555555;
+}
 
 .back-button {
     background-color: #071E57;
     color: #EDE9E3;
     cursor: pointer;
     border: none;
-    border-radius: 15px;
-    height: 37px;
-    width: 15%;
-    margin-left: 5%;
-    box-shadow: 4px 1px 2px gray;
-    font-family: 'Montserrat', sans-serif;
+    border-radius: 25px;
+    height: 45px;
+    width: 135px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
-.text-on-back-button{
+.back-button:hover {
+    background-color: #0a2a8d; /* Темнее при наведении */
+}
+
+.total-price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #071E57;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.remove-button {
+    background-color: #071E57;
     color: #EDE9E3;
-    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 25px;
+    height: 45px;
+    width: 135px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 50px;
 }
