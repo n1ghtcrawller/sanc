@@ -1,4 +1,5 @@
-import React, {useCallback, useEffect, useState} from 'react';
+
+import React, { useCallback, useEffect } from 'react';
 import { useCart } from '../CartProvider/CartContext';
 import { Link } from "react-router-dom";
 import { useTelegram } from '../../hooks/useTelegram';
@@ -6,15 +7,13 @@ import './Order.css'; // Импортируем стили
 
 const Order = () => {
     const { tg, queryId, user } = useTelegram();
-    const { cartItems, removeFromCart } = useCart(); // Добавляем функцию удаления из корзины
+    const { cartItems, removeFromCart, updateItemCount } = useCart(); // Добавляем функцию обновления количества
 
     const getTotalPrice = (items) => {
         return items.reduce((total, item) => total + item.product.price * item.count, 0);
     };
 
     const totalPrice = getTotalPrice(cartItems);
-    const [count, setCount] = useState(0);
-    const [inCart, setInCart] = useState(false);
 
     const onSendData = useCallback(() => {
         const productsToSend = cartItems.map(item => ({
@@ -58,8 +57,8 @@ const Order = () => {
         tg.onEvent('mainButtonClicked', onSendData);
         tg.MainButton.setParams({
             text: `Отправить заказ на сумму ₽${totalPrice}`,
-        is_visible: true,
-    });
+            is_visible: true,
+        });
 
         return () => {
             tg.offEvent('mainButtonClicked', onSendData);
@@ -69,18 +68,18 @@ const Order = () => {
     const handleRemoveFromCart = (productId) => {
         removeFromCart(productId); // Вызов функции удаления из корзины
     };
-    const handleDecrement = () => {
-        if (count > 1) {
-            setCount(count - 1);
+
+    const handleDecrement = (item) => {
+        if (item.count > 1) {
+            updateItemCount(item.product.id, item.count - 1); // Обновляем количество
         } else {
-            setCount(0);
-            setInCart(false);
+            handleRemoveFromCart(item.product.id); // Удаляем товар, если количество <= 1
         }
     };
-    const handleIncrement = () => {
-        setCount(count + 1);
-    };
 
+    const handleIncrement = (item) => {
+        updateItemCount(item.product.id, item.count + 1); // Обновляем количество
+    };
 
     return (
         <div className="order-container">
@@ -95,12 +94,13 @@ const Order = () => {
                     <p>Цена за товар: ₽<b>{item.product.price * item.count}</b></p>
                     <p>Количество: </p>
                     <div className="counter">
-                        <button className="minus-btn" onClick={handleDecrement}>-</button>
-                        <span>{count}</span>
-                        <button className="add-btn" onClick={handleIncrement}>+</button>
+                        <button className="minus-btn" onClick={() => handleDecrement(item)}>-</button>
+
+
+                        <span>{item.count}</span>
+                        <button className="add-btn" onClick={() => handleIncrement(item)}>+</button>
                     </div>
-                    <button onClick={() => handleRemoveFromCart(item.product.id)} className="remove-button">Удалить
-                    </button>
+                    <button onClick={() => handleRemoveFromCart(item.product.id)} className="remove-button">Удалить</button>
                 </div>
             ))}
             <h2 className="total-price">Общая стоимость заказа: ₽<b>{totalPrice}</b></h2>
