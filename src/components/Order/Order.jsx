@@ -1,4 +1,3 @@
-
 import React, { useCallback, useEffect } from 'react';
 import { useCart } from '../CartProvider/CartContext';
 import { Link } from "react-router-dom";
@@ -78,6 +77,7 @@ const Order = () => {
     };
 
     const handleIncrement = (item) => {
+        console.log(`Incrementing item with ID: ${item.product.id}, current count: ${item.count}`); // Для отладки
         updateItemCount(item.product.id, item.count + 1); // Обновляем количество
     };
 
@@ -87,25 +87,30 @@ const Order = () => {
                 <Link to="/products" className='text-on-back-button'>Назад</Link>
             </button>
             <h1>Ваш заказ</h1>
-            {cartItems.map((item, index) => (
-                <div key={index} className="product-item">
-                    <h2>{item.product.title}</h2>
-                    <p>Размер: <b>{item.size}</b></p>
-                    <p>Цена за товар: ₽<b>{item.product.price * item.count}</b></p>
-                    <p>Количество: </p>
-                    <div className="counter">
-                        <button className="minus-btn" onClick={() => handleDecrement(item)}>-</button>
+            {cartItems.length === 0 ? (
+                <p>Корзина пуста</p>
+            ) : (
+                cartItems.map((item, index) => (
+                    <div key={index} className="product-item">
+                        <h2>{item.product.title}</h2>
+                        <p>Размер: <b>{item.size}</b></p>
+                        <p>Цена за товар: ₽<b>{item.product.price * item.count}</b></p>
+                        <p>Количество: </p>
+                        <div className="counter">
+                            <button className="minus-btn" onClick={() => handleDecrement(item)}>-</button>
+                            <span>{item.count}</span>
+                            <button className="add-btn" onClick={(
 
 
-                        <span>{item.count}</span>
-                        <button className="add-btn" onClick={() => handleIncrement(item)}>+</button>
+                            ) => handleIncrement(item)}>+</button>
+                        </div>
+                        <button onClick={() => handleRemoveFromCart(item.product.id)} className="remove-button">Удалить</button>
                     </div>
-                    <button onClick={() => handleRemoveFromCart(item.product.id)} className="remove-button">Удалить</button>
-                </div>
-            ))}
+                ))
+            )}
             <h2 className="total-price">Общая стоимость заказа: ₽<b>{totalPrice}</b></h2>
         </div>
     );
 };
 
-export default Order;
+export default Order
