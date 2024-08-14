@@ -47,7 +47,8 @@ const ProductPage = () => {
 
     const handleAddToCartButton = () => {
         addToCart(product, count, size, totalPrice);
-        navigate('/order');
+        // navigate('/order');
+        alert('Товар добавлен в корзину!'); // Сообщение о добавлении
     };
 
     const handleIncrement = () => {

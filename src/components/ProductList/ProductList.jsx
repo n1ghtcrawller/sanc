@@ -3,6 +3,8 @@ import './ProductList.css';
 import { Link } from "react-router-dom"; // Импортируем Link
 import { useTelegram } from "../../hooks/useTelegram";
 import { useNavigate } from "react-router-dom";
+import { useContext} from "react";
+import { CartContext } from "../CartProvider/CartContext"
 
 export const products = [
     { id: 1, title: 'Худи Deep', price: 3500, description: 'Плотное оверсайз худи', img: "" },
@@ -20,11 +22,16 @@ export const getTotalPrice = (items = []) => {
 const ProductList = () => {
     const { tg } = useTelegram();
     const navigate = useNavigate();
+    const { cartItems } = useContext(CartContext); // получаем товары из корзины
 
     useEffect(() => {
         tg.MainButton.show();
+
+        // Получаем количество товаров в корзине
+        const totalCount = cartItems.reduce((acc, item) => acc + item.count, 0);
+
         tg.MainButton.setParams({
-            text: 'Перейти в корзину'
+            text: `Перейти в корзину (${totalCount})`
         });
 
         const onMainButtonClick = () => {
@@ -36,7 +43,7 @@ const ProductList = () => {
         return () => {
             tg.offEvent('mainButtonClicked', onMainButtonClick);
         };
-    }, [tg]);
+    }, [tg, cartItems]); // добавляем cartItems в зависимости
 
     return (
         <div className="list">
