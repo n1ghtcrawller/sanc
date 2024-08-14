@@ -5,7 +5,6 @@ import { useTelegram } from '../../hooks/useTelegram';
 import { useCart } from '../CartProvider/CartContext';
 import './ProductPage.css';
 
-
 const ProductPage = () => {
     const { tg } = useTelegram();
     const { id } = useParams();
@@ -13,12 +12,11 @@ const ProductPage = () => {
     const [inCart, setInCart] = useState(false);
     const [count, setCount] = useState(0);
     const [size, setSize] = useState('');
-    const { addToCart, cartItems } = useCart(); // получаем товары из корзины
+    const { addToCart, cartItems } = useCart();
 
     useEffect(() => {
         tg.MainButton.show();
 
-        // Получаем количество товаров в корзине
         const totalCount = cartItems.reduce((acc, item) => acc + item.count, 0);
 
         tg.MainButton.setParams({
@@ -34,7 +32,7 @@ const ProductPage = () => {
         return () => {
             tg.offEvent('mainButtonClicked', onMainButtonClick);
         };
-    }, [tg, cartItems]); // добавляем cartItems в зависимости
+    }, [tg, cartItems]);
 
     const product = products.find(p => p.id === parseInt(id));
     if (!product) {
@@ -42,17 +40,16 @@ const ProductPage = () => {
     }
 
     const isButtonDisabled = !size;
-    const totalPrice = product.price * count; // Считаем стоимость
-
-    const handleAddToCart = () => {
-        setInCart(true);
-        setCount(count + 1);
-    };
 
     const handleAddToCartButton = () => {
-        handleAddToCart()
-        addToCart(product, count, size, totalPrice);
-        alert('Товар добавлен в корзину!'); // Сообщение о добавлении
+        if (size) {
+            const newCount = count + 1; // Увеличиваем количество
+            setCount(newCount); // Обновляем локальное состояние
+            addToCart(product, newCount, size, product.price); // Передаем актуальное количество и цену
+            alert('Товар добавлен в корзину!');
+        } else {
+            alert('Пожалуйста, выберите размер!');
+        }
     };
 
     return (
@@ -65,20 +62,18 @@ const ProductPage = () => {
                 <div className="title">{product.title}</div>
                 <div className="price"><h2>₽<b>{product.price}</b></h2></div>
 
-                <>
-                    <select className="changeSize" onChange={(e) => setSize(e.target.value)} value={size}>
-                        <option value="">Выберите размер</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                    </select>
-                    <div className="buttons">
-                        <button disabled={isButtonDisabled} className="add-to-cart-btn" onClick={handleAddToCartButton}>
-                            Добавить в корзину
-                        </button>
-                    </div>
-                </>
+                <select className="changeSize" onChange={(e) => setSize(e.target.value)} value={size}>
+                    <option value="">Выберите размер</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                </select>
+                <div className="buttons">
+                    <button disabled={isButtonDisabled} className="add-to-cart-btn" onClick={handleAddToCartButton}>
+                        Добавить в корзину
+                    </button>
+                </div>
 
                 <div className="description"></div>
             </div>
