@@ -77,3 +77,21 @@ h1 {
     transition: background-color 0.3s ease;
     margin-top: 50px;
 }
+
+
+.add-btn, .minus-btn {
+
+    /*background: #7fc7ff;*/
+    /*background: var(--tg-theme-button-color);*/
+    background-color: #071E57;
+    color: #EDE9E3;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    padding: 2px;
+    height: 30px;
+    width: 30px;
+    margin: 15px;
+    box-shadow: 4px 1px 2px gray;
+    font-family: 'Montserrat', sans-serif;
+}

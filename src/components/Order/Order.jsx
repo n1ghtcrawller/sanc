@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import { useCart } from '../CartProvider/CartContext';
 import { Link } from "react-router-dom";
 import { useTelegram } from '../../hooks/useTelegram';
@@ -13,6 +13,8 @@ const Order = () => {
     };
 
     const totalPrice = getTotalPrice(cartItems);
+    const [count, setCount] = useState(0);
+    const [inCart, setInCart] = useState(false);
 
     const onSendData = useCallback(() => {
         const productsToSend = cartItems.map(item => ({
@@ -67,6 +69,18 @@ const Order = () => {
     const handleRemoveFromCart = (productId) => {
         removeFromCart(productId); // Вызов функции удаления из корзины
     };
+    const handleDecrement = () => {
+        if (count > 1) {
+            setCount(count - 1);
+        } else {
+            setCount(0);
+            setInCart(false);
+        }
+    };
+    const handleIncrement = () => {
+        setCount(count + 1);
+    };
+
 
     return (
         <div className="order-container">
@@ -77,10 +91,16 @@ const Order = () => {
             {cartItems.map((item, index) => (
                 <div key={index} className="product-item">
                     <h2>{item.product.title}</h2>
-                    <p>Количество: <b>{item.count}</b></p>
                     <p>Размер: <b>{item.size}</b></p>
                     <p>Цена за товар: ₽<b>{item.product.price * item.count}</b></p>
-                    <button onClick={() => handleRemoveFromCart(item.product.id)} className="remove-button">Удалить</button>
+                    <p>Количество: </p>
+                    <div className="counter">
+                        <button className="minus-btn" onClick={handleDecrement}>-</button>
+                        <span>{count}</span>
+                        <button className="add-btn" onClick={handleIncrement}>+</button>
+                    </div>
+                    <button onClick={() => handleRemoveFromCart(item.product.id)} className="remove-button">Удалить
+                    </button>
                 </div>
             ))}
             <h2 className="total-price">Общая стоимость заказа: ₽<b>{totalPrice}</b></h2>
