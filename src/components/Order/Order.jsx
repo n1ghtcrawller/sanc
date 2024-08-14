@@ -6,7 +6,7 @@ import './Order.css'; // Импортируем стили
 
 const Order = () => {
     const { tg, queryId, user } = useTelegram();
-    const { cartItems, removeFromCart, updateItemCount } = useCart(); // Добавляем функцию обновления количества
+    const { cartItems, removeFromCart, updateItemCount } = useCart();
 
     const getTotalPrice = (items) => {
         return items.reduce((total, item) => total + item.product.price * item.count, 0);
@@ -55,7 +55,7 @@ const Order = () => {
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
         tg.MainButton.setParams({
-            text: `Отправить заказ на сумму ₽${totalPrice}`, // Исправлено: добавлены кавычки
+            text: `Отправить заказ на сумму ₽${totalPrice}`,
             is_visible: true,
         });
 
@@ -65,20 +65,19 @@ const Order = () => {
     }, [onSendData, tg, totalPrice]);
 
     const handleRemoveFromCart = (productId) => {
-        removeFromCart(productId); // Вызов функции удаления из корзины
+        removeFromCart(productId);
     };
 
     const handleDecrement = (item) => {
         if (item.count > 1) {
-            updateItemCount(item.product.id, item.count - 1); // Обновляем количество
+            updateItemCount(item.product.id, item.count - 1);
         } else {
-            handleRemoveFromCart(item.product.id); // Удаляем товар, если количество <= 1
+            handleRemoveFromCart(item.product.id);
         }
     };
 
     const handleIncrement = (item) => {
-        console.log(`Incrementing item with ID: ${item.product.id}, current count: ${item.count}`); // Для отладки
-        updateItemCount(item.product.id, item.count + 1); // Обновляем количество
+        updateItemCount(item.product.id, item.count + 1); // Убедитесь, что эта функция работает
     };
 
     return (
@@ -104,6 +103,8 @@ const Order = () => {
                         <button onClick={() => handleRemoveFromCart(item.product.id)} className="remove-button">Удалить</button>
                     </div>
                 ))
+
+
             )}
             <h2 className="total-price">Общая стоимость заказа: ₽<b>{totalPrice}</b></h2>
         </div>
