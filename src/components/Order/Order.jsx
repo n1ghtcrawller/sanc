@@ -55,7 +55,7 @@ const Order = () => {
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
         tg.MainButton.setParams({
-            text: `Отправить заказ на сумму ₽${totalPrice}`,
+            text: `Отправить заказ на сумму ₽${totalPrice}`, // Исправлено: добавлены кавычки
             is_visible: true,
         });
 
@@ -99,10 +99,7 @@ const Order = () => {
                         <div className="counter">
                             <button className="minus-btn" onClick={() => handleDecrement(item)}>-</button>
                             <span>{item.count}</span>
-                            <button className="add-btn" onClick={(
-
-
-                            ) => handleIncrement(item)}>+</button>
+                            <button className="add-btn" onClick={() => handleIncrement(item)}>+</button>
                         </div>
                         <button onClick={() => handleRemoveFromCart(item.product.id)} className="remove-button">Удалить</button>
                     </div>
@@ -113,4 +110,4 @@ const Order = () => {
     );
 };
 
-export default Order
+export default Order;
