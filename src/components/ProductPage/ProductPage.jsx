@@ -43,10 +43,11 @@ const ProductPage = () => {
 
     const handleAddToCartButton = () => {
         if (size) {
-            const newCount = count + 2; // Увеличиваем количество
+            const newCount = count + 1; // Увеличиваем количество
             setCount(newCount); // Обновляем локальное состояние
             addToCart(product, newCount, size, product.price); // Передаем актуальное количество и цену
             alert('Товар добавлен в корзину!');
+            navigate('/products');
         } else {
             alert('Пожалуйста, выберите размер!');
         }
