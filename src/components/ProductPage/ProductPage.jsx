@@ -45,11 +45,12 @@ const ProductPage = () => {
     const totalPrice = product.price * count; // Считаем стоимость
 
     const handleAddToCart = () => {
+        setInCart(true);
+        setCount(count + 1);
     };
 
     const handleAddToCartButton = () => {
-        setInCart(true);
-        setCount(count + 1);
+        handleAddToCart()
         addToCart(product, count, size, totalPrice);
         alert('Товар добавлен в корзину!'); // Сообщение о добавлении
     };
