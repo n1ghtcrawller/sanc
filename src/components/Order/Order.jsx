@@ -96,9 +96,9 @@ const Order = () => {
                         <p>Цена за товар: ₽<b>{item.product.price * item.count}</b></p>
                         <p>Количество: </p>
                         <div className="counter">
-                            <button className="minus-btn" onClick={() => handleDecrement(item.count)}>-</button>
+                            <button onClick={() => handleDecrement(item)}>-</button>
                             <span>{item.count}</span>
-                            <button className="add-btn" onClick={() => handleIncrement(item.count)}>+</button>
+                            <button onClick={() => handleIncrement(item)}>+</button>
                         </div>
                         <button onClick={() => handleRemoveFromCart(item.product.id)} className="remove-button">Удалить</button>
 
