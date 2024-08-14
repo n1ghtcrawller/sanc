@@ -77,7 +77,7 @@ const Order = () => {
     };
 
     const handleIncrement = (item) => {
-        updateItemCount(item.product.id, item.count + 1); // Убедитесь, что эта функция работает
+        updateItemCount(item.product.id, item.count + 1);
     };
 
     return (
@@ -88,27 +88,25 @@ const Order = () => {
             <h1>Ваш заказ</h1>
             {cartItems.length === 0 ? (
                 <p>Корзина пуста</p>
-            ) : (
+                ) : (
                 cartItems.map((item, index) => (
-                    <div key={index} className="product-item">
-                        <h2>{item.product.title}</h2>
-                        <p>Размер: <b>{item.size}</b></p>
-                        <p>Цена за товар: ₽<b>{item.product.price * item.count}</b></p>
-                        <p>Количество: </p>
-                        <div className="counter">
-                            <button className="minus-btn" onClick={() => handleDecrement(item)}>-</button>
-                            <span>{item.count}</span>
-                            <button className="add-btn" onClick={() => handleIncrement(item)}>+</button>
-                        </div>
-                        <button onClick={() => handleRemoveFromCart(item.product.id)} className="remove-button">Удалить</button>
-                    </div>
-                ))
-
-
-            )}
-            <h2 className="total-price">Общая стоимость заказа: ₽<b>{totalPrice}</b></h2>
+                <div key={index} className="product-item">
+            <h2>{item.product.title}</h2>
+            <p>Размер: <b>{item.size}</b></p>
+            <p>Цена за товар: ₽<b>{item.product.price * item.count}</b></p>
+            <p>Количество: </p>
+            <div className="counter">
+                <button className="minus-btn" onClick={() => handleDecrement(item)}>-</button>
+                <span>{item.count}</span>
+                <button className="add-btn" onClick={() => handleIncrement(item)}>+</button>
+            </div>
+            <button onClick={() => handleRemoveFromCart(item.product.id)} className="remove-button">Удалить</button>
         </div>
-    );
+    ))
+)}
+    <h2 className="total-price">Общая стоимость заказа: ₽<b>{totalPrice}</b></h2>
+</div>
+);
 };
 
 export default Order;
