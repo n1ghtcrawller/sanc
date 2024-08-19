@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useState } from "react";
 import './App.css';
 import { useTelegram } from "./hooks/useTelegram";
 import Header from "./components/Header/Header";
@@ -10,26 +9,11 @@ import StartPage from "./components/Start/StartPage";
 import ProductPage from "./components/ProductPage/ProductPage";
 import { CartProvider } from "./components/CartProvider/CartContext";
 import Form from "./components/Form/Form";
+import Confirm from "./components/Confirm/Confirm";
+import { FormProvider } from "./components/FormProvider/FormContext";
 
 function App() {
     const { tg } = useTelegram();
-    const [cartItems, setCartItems] = useState([]);
-
-    const addItemToCart = (item) => {
-        setCartItems((prevItems) => {
-            const alreadyAdded = prevItems.find(i => i.product.id === item.product.id);
-            if (alreadyAdded) {
-                return prevItems.map(i =>
-                    i.product.id === item.product.id
-                        ? { ...i, count: i.count + item.count }
-                        : i
-                );
-            } else {
-                return [...prevItems, item];
-            }
-        });
-    };
-
     useEffect(() => {
         tg.ready();
     }, [tg]);
@@ -38,13 +22,16 @@ function App() {
         <div className="App">
             <Header />
             <CartProvider>
+                <FormProvider>
                 <Routes>
-                    <Route index element={<StartPage />} /> {/* Стартовая страница */}
-                    <Route path={"products"} element={<ProductList />} /> {/* Измените путь на "products" */}
-                    <Route path={"form"} element={<Form />} />
+                    <Route index element={<StartPage />} />
+                    <Route path={"products"} element={<ProductList />} />
                     <Route path={"order"} element={<Order />} />
                     <Route path={"ProductPage/:id"} element={<ProductPage />} />
+                    <Route path={"form"} element={<Form />} />
+                    <Route path={"confirm"} element={<Confirm />} />
                 </Routes>
+            </FormProvider>
             </CartProvider>
         </div>
     );

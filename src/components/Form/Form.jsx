@@ -1,9 +1,11 @@
 import React, {useCallback, useEffect} from 'react';
 import "./Form.css"
 import {useTelegram} from "../../hooks/useTelegram";
-
+import { useFormContext} from "../FormProvider/FormContext";
+import { useNavigate } from "react-router-dom";
 
 const Form = () => {
+    const { setFormData } = useFormContext();
     const [country, setCountry] = React.useState('');
     const [city, setCity] = React.useState('');
     const [street, setStreet] = React.useState('');
@@ -13,7 +15,7 @@ const Form = () => {
     const [subject, setSubject] = React.useState('physical');
 
     const {tg} = useTelegram();
-
+    const navigate = useNavigate();
     const onSendData = useCallback(() => {
         const data = {
             country,
@@ -24,8 +26,9 @@ const Form = () => {
             phone,
             subject
         }
+        setFormData(data); // устанавливаем данные в контексте
         tg.sendData(JSON.stringify(data));
-    }, [country, city, street, house, flat, phone, subject]);
+    }, [country, city, street, house, flat, phone, subject, setFormData]);
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
@@ -72,18 +75,24 @@ const Form = () => {
     const onChangeFlat = (e) => {
         setFlat(e.target.value);
     }
-
     const onChangePhone = (e) => {
         setPhone(e.target.value);
+    }
+    const redirectToConfirm = () => {
+        navigate('/Confirm');
     }
 
 
     const onChangeSubject = (e) => {
         setSubject(e.target.value);
     }
+    const goBack = () => {
+        navigate('/order');
+    }
 
     return (
         <div className={"form"}>
+            <button className="back-button" onClick={goBack}>Назад</button>
             <h3>Введите ваши данные</h3>
             <input className={"input"}
                    type={"text"}
@@ -122,11 +131,12 @@ const Form = () => {
                    onChange={onChangePhone}
             />
 
-            <select value={subject} onChange={onChangeSubject} className={"select"}>
-                <option value={"physical"}>Физ. Лицо</option>
-                <option value={"legal"}>Юр. Лицо</option>
-
+            <select value={subject} onChange={onChangeSubject} className={"select-delivery "}>
+                <option value={"Выберите способ доставки"}>Выберите способ доставки</option>
+                <option value={"sdek"}>СДЕК</option>
+                <option value={"boxberry"}>BoxBerry</option>
             </select>
+            <button onClick={redirectToConfirm}>Отправить</button>
         </div>
     );
 };

@@ -1,18 +1,25 @@
 import React, { useCallback, useEffect } from 'react';
 import { useCart } from '../CartProvider/CartContext';
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { useTelegram } from '../../hooks/useTelegram';
 import './Order.css'; // Импортируем стили
+
 
 const Order = () => {
     const { tg, queryId, user } = useTelegram();
     const { cartItems, removeFromCart, updateItemCount } = useCart();
+    const navigate = useNavigate();
+    const redirectToForm = () => {
+        navigate('/form')
+    };
 
     const getTotalPrice = (items) => {
         return items.reduce((total, item) => total + item.product.price * item.count, 0);
     };
 
     const totalPrice = getTotalPrice(cartItems);
+
+
 
     const onSendData = useCallback(() => {
         const productsToSend = cartItems.map(item => ({
@@ -55,12 +62,12 @@ const Order = () => {
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
         tg.MainButton.setParams({
-            text: `Отправить заказ на сумму ₽${totalPrice}`,
+            text: `Продолжить`,
             is_visible: true,
         });
 
         return () => {
-            tg.offEvent('mainButtonClicked', onSendData);
+            tg.offEvent('mainButtonClicked', redirectToForm);
         };
     }, [onSendData, tg, totalPrice]);
 
@@ -79,11 +86,14 @@ const Order = () => {
     const handleIncrement = (item) => {
         updateItemCount(item.product.id, item.count + 1);
     };
+    const goBack = () => {
+        navigate('/products')
+    }
 
     return (
         <div className="order-container">
-            <button className='back-button'>
-                <Link to="/products" className='text-on-back-button'>Назад</Link>
+            <button className='back-button' onClick={goBack}>
+                Назад
             </button>
             <h1>Ваш заказ</h1>
             {cartItems.length === 0 ? (
@@ -105,6 +115,7 @@ const Order = () => {
                 ))
             )}
             <h2 className="total-price">Общая стоимость заказа: ₽<b>{totalPrice}</b></h2>
+            <button onClick={redirectToForm}>Продолжить</button>
         </div>
     );
 };

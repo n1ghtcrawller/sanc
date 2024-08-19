@@ -11,6 +11,7 @@ const StartPage = () => {
 
     return (
         <div className="start-page">
+            <span className={"information"}>Сервис находится в режиме опытной эксплуатации. По всем вопросам, просьба обращаться к менеджеру</span>
             <img src={logo} alt="Логотип" className="logo"/>
             <button onClick={handleButtonClick} className="shop-button">
                 В магазин

@@ -26,9 +26,6 @@
     color: #071E57;
 }
 
-.back-button {
-    margin-bottom: 20px;
-}
 
 .changeSize {
     margin: 10px 0;
@@ -84,6 +81,13 @@
     margin-left: 5%;
     box-shadow: 4px 1px 2px gray;
     font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: center;
+    margin-right: 70%;
+
+
 }
 
 .text-on-back-button{

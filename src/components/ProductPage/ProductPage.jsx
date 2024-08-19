@@ -26,7 +26,6 @@ const ProductPage = () => {
         const onMainButtonClick = () => {
             navigate('/order');
         };
-
         tg.onEvent('mainButtonClicked', onMainButtonClick);
 
         return () => {
@@ -40,6 +39,10 @@ const ProductPage = () => {
     }
 
     const isButtonDisabled = !size;
+    const goBack = () => {
+        navigate('/products');
+    }
+
 
     const handleAddToCartButton = () => {
         if (size) {
@@ -55,11 +58,9 @@ const ProductPage = () => {
 
     return (
         <div className="product-page">
-            <button className="back-button">
-                <Link to="/products" className="text-on-back-button">Назад</Link>
-            </button>
             <div className="product-item">
-                <img src={product.img} alt={product.title} />
+                <button className="back-button" onClick={goBack}>Назад</button>
+                <img src={product.img} alt={product.title}/>
                 <div className="title">{product.title}</div>
                 <div className="price"><h2>₽<b>{product.price}</b></h2></div>
 
