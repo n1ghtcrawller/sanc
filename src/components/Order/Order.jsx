@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import { useCart } from '../CartProvider/CartContext';
-import {Link, useNavigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { useTelegram } from '../../hooks/useTelegram';
 import './Order.css'; // Импортируем стили
 
 
 const Order = () => {
-    const { tg, queryId, user } = useTelegram();
+    const { tg } = useTelegram();
     const { cartItems, removeFromCart, updateItemCount } = useCart();
     const navigate = useNavigate();
     const redirectToForm = () => {
@@ -20,47 +20,8 @@ const Order = () => {
     const totalPrice = getTotalPrice(cartItems);
 
 
-
-    const onSendData = useCallback(() => {
-        const productsToSend = cartItems.map(item => ({
-            id: item.product.id,
-            title: item.product.title,
-            count: item.count,
-            size: item.size,
-            price: item.product.price
-        }));
-
-        const data = {
-            products: productsToSend,
-            totalPrice: totalPrice,
-            queryId: queryId,
-            chatId: user.id
-        };
-
-        fetch('https://keybasicsneutral.ru/web-data', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-            .then(response => {
-                if (!response.ok) {
-                    return response.text().then(text => { throw new Error(`HTTP error! status: ${response.status}, message: ${text}`); });
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-                tg.close();
-            })
-            .catch(error => console.error('There was a problem with the fetch operation:', error));
-
-        tg.sendData(JSON.stringify(data));
-    }, [cartItems, totalPrice, tg]);
-
     useEffect(() => {
-        tg.onEvent('mainButtonClicked', onSendData);
+        tg.onEvent('mainButtonClicked', redirectToForm);
         tg.MainButton.setParams({
             text: `Продолжить`,
             is_visible: true,
@@ -69,7 +30,7 @@ const Order = () => {
         return () => {
             tg.offEvent('mainButtonClicked', redirectToForm);
         };
-    }, [onSendData, tg, totalPrice]);
+    }, [redirectToForm, tg, totalPrice]);
 
     const handleRemoveFromCart = (productId) => {
         removeFromCart(productId);

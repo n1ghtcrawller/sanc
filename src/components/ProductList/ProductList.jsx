@@ -15,9 +15,6 @@ export const products = [
     { id: 6, title: 'Худи Stone', price: 2500, description: 'Плотное оверсайз худи', img: "" },
 ];
 
-export const getTotalPrice = (items = []) => {
-    return items.reduce((acc, item) => acc + item.product.price * item.count, 0);
-}
 
 const ProductList = () => {
     const { tg } = useTelegram();

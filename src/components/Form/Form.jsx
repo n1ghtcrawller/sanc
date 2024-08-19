@@ -12,6 +12,7 @@ const Form = () => {
     const [house, setHouse] = React.useState('');
     const [flat, setFlat] = React.useState('');
     const [phone, setPhone] = React.useState('');
+    const [email, setEmail] = React.useState('');
     const [subject, setSubject] = React.useState('physical');
 
     const {tg} = useTelegram();
@@ -24,11 +25,12 @@ const Form = () => {
             house,
             flat,
             phone,
+            email,
             subject
         }
         setFormData(data); // устанавливаем данные в контексте
         tg.sendData(JSON.stringify(data));
-    }, [country, city, street, house, flat, phone, subject, setFormData]);
+    }, [country, city, street, house, flat, email, phone, subject, setFormData]);
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
@@ -74,6 +76,9 @@ const Form = () => {
 
     const onChangeFlat = (e) => {
         setFlat(e.target.value);
+    }
+    const onChangeEmail = (e) => {
+        setEmail(e.target.value);
     }
     const onChangePhone = (e) => {
         setPhone(e.target.value);
@@ -124,6 +129,14 @@ const Form = () => {
                    value={flat}
                    onChange={onChangeFlat}
             />
+
+            <input className={"input"}
+                   type={"text"}
+                   placeholder={"Эл.почта"}
+                   value={email}
+                   onChange={onChangeEmail}
+            />
+
             <input className={"input"}
                    type={"text"}
                    placeholder={"Телефон"}
