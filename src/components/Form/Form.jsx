@@ -87,8 +87,9 @@ const Form = () => {
             <input className={"input-info"} type={"text"} placeholder={"Телефон"} value={phone} onChange={onChangePhone} />
             <select className={"select-delivery"} value={subject} onChange={onChangeSubject}>
                 <option value={"Выберите способ доставки"}>Выберите способ доставки</option>
-                <option value={"sdek"}>СДЕК</option>
-                <option value={"boxberry"}>BoxBerry</option>
+                <option value={"СДЭК"}>СДЭК</option>
+                <option value={"BoxBerry"}>BoxBerry</option>
+                <option value={"Yandex"}>Яндекс</option>
             </select>
             {/*<button onClick={onSendData}>Отправить</button>*/}
         </div>
