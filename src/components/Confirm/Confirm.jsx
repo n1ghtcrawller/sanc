@@ -30,12 +30,13 @@ const Confirm = () => {
             queryId: queryId,
             chatId: user.id,
             deliveryInfo: {
-                country: formData.country,
+                // country: formData.country,
                 city: formData.city,
                 street: formData.street,
                 house: formData.house,
-                flat: formData.flat,
+                // flat: formData.flat,
                 phone: formData.phone,
+                email: formData.email,
                 subject: formData.subject
             }
         };
