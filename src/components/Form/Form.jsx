@@ -19,21 +19,29 @@ const Form = () => {
     const navigate = useNavigate();
 
     const onSendData = useCallback(() => {
-        const data = {
-            country,
-            city,
-            street,
-            house,
-            flat,
-            phone,
-            email,
-            subject
-        };
-        setFormData(data); // Устанавливаем данные в контексте
-        // Перенаправляем на страницу Confirm
-        navigate('/Confirm');
-    }, [country, city, street, house, flat, email, phone, subject, setFormData, navigate]);
+        try {
+            const data = {
+                country,
+                city,
+                street,
+                house,
+                flat,
+                phone,
+                email,
+                subject
+            };
 
+            // Проверка на пустые поля (можете изменить логику валидации по необходимости)
+            if (!country || !city || !street || !house || !flat || !phone || !email || subject === 'Выберите способ доставки') {
+                alert('Пожалуйста, заполните все поля!');
+                return;
+            }
+            setFormData(data); // Устанавливаем данные в контексте
+            navigate('/Confirm'); // Перенаправляем на страницу Confirm
+        } catch (error) {
+            console.error("Ошибка при отправке данных:", error);
+        }
+    }, [country, city, street, house, flat, email, phone, subject, setFormData, navigate]);
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
         return () => {
@@ -84,6 +92,7 @@ const Form = () => {
                 <option value={"sdek"}>СДЕК</option>
                 <option value={"boxberry"}>BoxBerry</option>
             </select>
+            <button onClick={onSendData}>Отправить</button>
         </div>
     );
 };

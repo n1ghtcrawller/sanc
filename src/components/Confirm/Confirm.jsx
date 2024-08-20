@@ -1,10 +1,8 @@
-import React, {useCallback, useEffect} from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useFormContext } from '../FormProvider/FormContext';
 import { useCart } from '../CartProvider/CartContext';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTelegram } from '../../hooks/useTelegram';
-
-
 
 const Confirm = () => {
     const getTotalPrice = (items) => {
@@ -17,9 +15,7 @@ const Confirm = () => {
     const navigate = useNavigate();
     const totalPrice = getTotalPrice(cartItems);
 
-
     const onSendData = useCallback(() => {
-
         const productsToSend = cartItems.map(item => ({
             id: item.product.id,
             title: item.product.title,
@@ -32,7 +28,16 @@ const Confirm = () => {
             products: productsToSend,
             totalPrice: totalPrice,
             queryId: queryId,
-            chatId: user.id
+            chatId: user.id,
+            deliveryInfo: {
+                country: formData.country,
+                city: formData.city,
+                street: formData.street,
+                house: formData.house,
+                flat: formData.flat,
+                phone: formData.phone,
+                subject: formData.subject
+            }
         };
 
         fetch('https://keybasicsneutral.ru/web-data', {
@@ -55,28 +60,29 @@ const Confirm = () => {
             .catch(error => console.error('There was a problem with the fetch operation:', error));
 
         tg.sendData(JSON.stringify(data));
-    }, [cartItems, totalPrice, tg]);
-
+    }, [cartItems, totalPrice, tg, queryId, user.id, formData]);
 
     useEffect(() => {
-        tg.onEvent('mainButtonClicked', onSendData);
+        tg.MainButton.show();
         tg.MainButton.setParams({
-            text: `Продолжить`,
-            is_visible: true,
+            text: "Подтвердить заказ"
         });
 
-        return () => {
-            tg.offEvent('mainButtonClicked', onSendData);
-        };
-    }, [onSendData, tg, totalPrice]);
+        tg.MainButton.onClick(onSendData);
 
+        return () => {
+            tg.MainButton.offClick(onSendData);
+        };
+    }, [onSendData, tg]);
 
     if (!formData) {
         return null; // или можно вернуть какое-то сообщение
     }
+
     const goBack = () => {
-        navigate('/form')
-    }
+        navigate('/form');
+    };
+
     return (
         <div>
             <button className="back-button" onClick={goBack}>
@@ -94,22 +100,21 @@ const Confirm = () => {
                     </div>
                 ))
             )}
-            {formData.length === 0 ? (
+
+            {/* Проверка на тип formData */}
+            {typeof formData !== 'object' || Array.isArray(formData) ? (
                 <p>Данные не заполнены</p>
             ) : (
-                formData.map((data, index) => (
-                    <div key={index}>
-                            <p>Страна: {data.country}</p>
-                            <p>Город: {data.city}</p>
-                            <p>Улица: {data.street}</p>
-                            <p>Дом: {data.house}</p>
-                            <p>Квартира: {data.flat}</p>
-                            <p>Телефон: {data.phone}</p>
-                            <p>Тип: {data.subject}</p>
-
+                <div>
+                    <p>Страна: {formData.country}</p>
+                    <p>Город: {formData.city}</p>
+                    <p>Улица: {formData.street}</p>
+                    <p>Дом: {formData.house}</p>
+                    <p>Квартира: {formData.flat}</p>
+                    <p>Телефон: {formData.phone}</p>
+                    <p>Тип: {formData.subject}</p>
                 </div>
-                    ))
-                )}
+            )}
         </div>
     );
 };
