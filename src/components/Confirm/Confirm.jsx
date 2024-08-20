@@ -107,11 +107,11 @@ const Confirm = () => {
                 <p>Данные не заполнены</p>
             ) : (
                 <div>
-                    <p>Страна: {formData.country}</p>
+                    {/*<p>Страна: {formData.country}</p>*/}
                     <p>Город: {formData.city}</p>
                     <p>Улица: {formData.street}</p>
                     <p>Дом: {formData.house}</p>
-                    <p>Квартира: {formData.flat}</p>
+                    {/*<p>Квартира: {formData.flat}</p>*/}
                     <p>Телефон: {formData.phone}</p>
                     <p>Тип: {formData.subject}</p>
                 </div>
