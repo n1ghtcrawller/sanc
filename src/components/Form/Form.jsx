@@ -56,7 +56,7 @@ const Form = () => {
     }, [tg]);
 
     useEffect(() => {
-        if (!country || !city || !street || !house || !flat || !phone || !email || subject === 'Выберите способ доставки') {
+        if (!country && !city && !street && !house && !flat || !phone || !email ) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
@@ -92,6 +92,7 @@ const Form = () => {
                 <option value={"sdek"}>СДЕК</option>
                 <option value={"boxberry"}>BoxBerry</option>
             </select>
+            <button onClick={onSendData}>Отправить</button>
         </div>
     );
 };
