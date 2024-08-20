@@ -22,12 +22,13 @@
 }
 
 .select-delivery {
-    padding: 10px;
-    margin-top: 15px;
-    width: 67vw;
-    height: 2.5vw;
-    background: #EDE9E3;
-    color: #071E57;
-    border: 1px solid #071E57;;
+    width: 70vw;
+    display: flex;
+    height: 37px;
     border-radius: 10px;
+    border: 2px solid #071E57;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 15px;
+    background: #EDE9E3;
+
 }

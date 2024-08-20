@@ -76,7 +76,6 @@ const Order = () => {
                 ))
             )}
             <h2 className="total-price">Общая стоимость заказа: ₽<b>{totalPrice}</b></h2>
-            <button onClick={redirectToForm}>Продолжить</button>
         </div>
     );
 };

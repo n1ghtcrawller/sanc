@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import {  useParams, useNavigate } from 'react-router-dom';
 import { products } from '../ProductList/ProductList';
 import { useTelegram } from '../../hooks/useTelegram';
 import { useCart } from '../CartProvider/CartContext';
@@ -76,7 +76,6 @@ const ProductPage = () => {
                         Добавить в корзину
                     </button>
                 </div>
-
                 <div className="description"></div>
             </div>
         </div>
