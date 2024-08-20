@@ -51,12 +51,12 @@ const Form = () => {
 
     useEffect(() => {
         tg.MainButton.setParams({
-            'text': 'Отправить данные'
+            'text': 'Подтвердить данные'
         });
     }, [tg]);
 
     useEffect(() => {
-        if (!country && !city && !street && !house && !flat || !phone) {
+        if (!country || !city || !street || !house || !flat || !phone || !email || subject === 'Выберите способ доставки') {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
@@ -92,7 +92,6 @@ const Form = () => {
                 <option value={"sdek"}>СДЕК</option>
                 <option value={"boxberry"}>BoxBerry</option>
             </select>
-            <button onClick={onSendData}>Отправить</button>
         </div>
     );
 };
