@@ -21,18 +21,16 @@ const Form = () => {
     const onSendData = useCallback(() => {
         try {
             const data = {
-                country,
                 city,
                 street,
                 house,
-                flat,
                 phone,
                 email,
                 subject
             };
 
             // Проверка на пустые поля (можете изменить логику валидации по необходимости)
-            if (!country || !city || !street || !house || !flat || !phone || !email || subject === 'Выберите способ доставки') {
+            if ( !city || !street || !house  || !phone || !email || subject === 'Выберите способ доставки') {
                 alert('Пожалуйста, заполните все поля!');
                 return;
             }
