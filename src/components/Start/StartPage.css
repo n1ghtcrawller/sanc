@@ -1,14 +1,60 @@
+/* Основные стили для body */
 .body {
-    background-color: #EDE9E3;
+    transition: background-color 10s, color 10s; /* Плавный переход при смене темы */
 }
+.start-page {
+    transition: background-color 0.5s, color 0.5s; /* Плавный переход при смене темы */
+}
+.logo {
+    border-radius: 300px;
+    transition: opacity 0.5s ease;
+    opacity: 1;
+}
+
+.logo.fade-out {
+    opacity: 0;
+}
+
+.logo.fade-in {
+    opacity: 1;
+}
+/* Стили для светлой темы */
+.start-page.light {
+    background-color: #EDE9E3; /* Цвет фона */
+    color: #071E57; /* Цвет текста */
+}
+
+.start-page.light .shop-button {
+    background-color: #071E57; /* Цвет кнопки */
+    color: #EDE9E3; /* Цвет текста кнопки */
+}
+
+.start-page.light .information {
+    color: #071E57; /* Цвет текста информации */
+}
+
+/* Стили для темной темы */
+.start-page.dark {
+    background-color: #071E57; /* Цвет фона */
+    color: #EDE9E3; /* Цвет текста */
+}
+
+.start-page.dark .shop-button {
+    background-color: #EDE9E3; /* Цвет кнопки в темной теме */
+    color: #071E57; /* Цвет текста кнопки в темной теме */
+}
+
+.start-page.dark .information {
+    color: #EDE9E3; /* Цвет текста информации в темной теме */
+}
+
+/* Общие стили для компонента */
 .start-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 71vh; /* Заполнение всей высоты экрана */
-    background-color:#EDE9E3; /* Цвет фона */
-
 }
 
 .logo {
@@ -18,8 +64,6 @@
 }
 
 .shop-button {
-    background-color: #071E57;
-    color: #EDE9E3;
     cursor: pointer;
     border: none;
     border-radius: 30px;
@@ -32,5 +76,4 @@
 
 .information {
     text-align: center;
-
 }

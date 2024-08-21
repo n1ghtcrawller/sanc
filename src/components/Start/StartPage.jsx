@@ -1,21 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './StartPage.css'; // Добавьте стили по необходимости
-import logo from './KBN.jpg'; // Импортируйте изображение
+import { useTheme } from '../ThemeProvider/ThemeContext';
+import './StartPage.css';
+import logo from './KBN.jpg';
+import logo2 from './туту.png';
 
 const StartPage = () => {
     const navigate = useNavigate();
+    const { theme, toggleTheme } = useTheme();
+    const [currentLogo, setCurrentLogo] = useState(logo);
+    const [fadeOut, setFadeOut] = useState(false);
+    const [fadeIn, setFadeIn] = useState(true);
+
     const handleButtonClick = () => {
-        navigate('/products'); // Переход к списку продуктов
+        navigate('/products');
     };
 
+    const handleLogoClick = () => {
+        setFadeOut(true);
+        setFadeIn(false);
+
+        setTimeout(() => {
+            toggleTheme();
+            setCurrentLogo(prevLogo => (prevLogo === logo ? logo2 : logo));
+            setFadeOut(false);
+            setFadeIn(true);
+        }, 500);
+    };
+
+    useEffect(() => {
+        document.body.className = theme;
+    }, [theme]);
+
     return (
-        <div className="start-page">
-            <span className={"information"}>Сервис находится в режиме опытной эксплуатации. По всем вопросам, просьба обращаться к менеджеру</span>
-            <img src={logo} alt="Логотип" className="logo"/>
+        <div className={`start-page ${theme}`}>
+            <span className="information">
+                Сервис находится в режиме опытной эксплуатации. По всем вопросам, просьба обращаться к менеджеру
+            </span>
+            <img
+                src={currentLogo}
+                alt="Логотип"
+                className={`logo ${fadeOut ? 'fade-out' : ''} ${fadeIn ? 'fade-in' : ''}`}
+                onClick={handleLogoClick} // Добавлен обработчик клика на логотип
+            />
             <button onClick={handleButtonClick} className="shop-button">
                 В магазин
             </button>
+            <span className="information">
+                Нажмите на логотип для переключения темы
+            </span>
         </div>
     );
 };

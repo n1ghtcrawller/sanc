@@ -11,6 +11,7 @@ import { CartProvider } from "./components/CartProvider/CartContext";
 import Form from "./components/Form/Form";
 import Confirm from "./components/Confirm/Confirm";
 import { FormProvider } from "./components/FormProvider/FormContext";
+import {ThemeProvider} from "./components/ThemeProvider/ThemeContext";
 
 function App() {
     const { tg } = useTelegram();
@@ -18,9 +19,11 @@ function App() {
         tg.ready();
     }, [tg]);
 
+
     return (
         <div className="App">
             <Header />
+            <ThemeProvider>
             <CartProvider>
                 <FormProvider>
                 <Routes>
@@ -33,6 +36,7 @@ function App() {
                 </Routes>
             </FormProvider>
             </CartProvider>
+            </ThemeProvider>
         </div>
     );
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {  useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { products } from '../ProductList/ProductList';
 import { useTelegram } from '../../hooks/useTelegram';
 import { useCart } from '../CartProvider/CartContext';
@@ -9,10 +9,22 @@ const ProductPage = () => {
     const { tg } = useTelegram();
     const { id } = useParams();
     const navigate = useNavigate();
-    const [inCart, setInCart] = useState(false);
     const [count, setCount] = useState(0);
     const [size, setSize] = useState('');
     const { addToCart, cartItems } = useCart();
+    function toggleDescription() {
+        const description = document.querySelector('.product-description');
+        const button = document.querySelector('.toggle-button');
+
+        description.classList.toggle('visible');
+
+        // Изменение текста кнопки в зависимости от состояния
+        if (description.classList.contains('visible')) {
+            button.textContent = '▴ Скрыть описание';
+        } else {
+            button.textContent = '▾ Показать описание';
+        }
+    }
 
     useEffect(() => {
         tg.MainButton.show();
@@ -42,7 +54,6 @@ const ProductPage = () => {
     const goBack = () => {
         navigate('/products');
     }
-
 
     const handleAddToCartButton = () => {
         if (size) {
@@ -76,7 +87,13 @@ const ProductPage = () => {
                         Добавить в корзину
                     </button>
                 </div>
-                <div className="description"></div>
+
+                <div className="product-container">
+                    <button className="toggle-button" onClick={toggleDescription}>▾ Показать описание</button>
+                    <div className="product-description hidden">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                </div>
             </div>
         </div>
     );

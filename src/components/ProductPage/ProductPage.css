@@ -123,4 +123,40 @@
 
 .description {
     margin-top: 20px;
+    font-size: 10px;
+}
+
+.product-container {
+    margin-top: 20px;
+    width: 60.5vw;
+}
+
+.toggle-button {
+    background-color: #071E57;
+    color: #EDE9E3;
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    height: 37px;
+    width: 60.5vw;
+    box-shadow: 4px 1px 2px gray;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.product-description {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #071E57;
+    border-radius: 10px;
+    text-align: center;
+    overflow: hidden; /* Скрываем содержимое при сворачивании */
+    max-height: 0; /* Начальная высота (скрыто) */
+    opacity: 0; /* Начальная прозрачность (скрыто) */
+    transition: max-height 0.5s ease, opacity 0.5s ease; /* Анимация */
+}
+
+.product-description.visible {
+    max-height: 600px; /* Максимальная высота при открытии (можно изменить) */
+    opacity: 1; /* Полная видимость */
+    color: #071E57;
 }

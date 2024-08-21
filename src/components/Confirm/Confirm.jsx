@@ -101,7 +101,6 @@ const Confirm = () => {
                     </div>
                 ))
             )}
-
             {/* Проверка на тип formData */}
             {typeof formData !== 'object' || Array.isArray(formData) ? (
                 <p>Данные не заполнены</p>

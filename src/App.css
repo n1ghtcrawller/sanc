@@ -1,7 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {
+  transition: background-color 0.5s, color 0.5s;
+  font-family: "Montserrat", sans-serif;
+}
+
+.light {
   background: #EDE9E3;
   color: #071E57;
-  font-family: "Montserrat", sans-serif;
+}
+
+.dark {
+  background-color: #071E57;
+  color: #EDE9E3;
 }
