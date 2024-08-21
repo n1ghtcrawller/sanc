@@ -85,7 +85,7 @@ const Confirm = () => {
     };
 
     return (
-        <div>
+        <div className="confirm-container">
             <button className="back-button" onClick={goBack}>
                 Назад
             </button>

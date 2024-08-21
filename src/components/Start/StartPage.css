@@ -70,10 +70,11 @@
     padding: 2px;
     height: 50px;
     width: 200px;
-    margin: 5px;
     font-size: 1.23em;
+    margin-top:10px;
 }
 
 .information {
+    margin-bottom: 20px;
     text-align: center;
 }

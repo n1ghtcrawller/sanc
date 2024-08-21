@@ -43,12 +43,12 @@ const StartPage = () => {
                 className={`logo ${fadeOut ? 'fade-out' : ''} ${fadeIn ? 'fade-in' : ''}`}
                 onClick={handleLogoClick} // Добавлен обработчик клика на логотип
             />
-            <button onClick={handleButtonClick} className="shop-button">
-                В магазин
-            </button>
             <span className="information">
                 Нажмите на логотип для переключения темы
             </span>
+            <button onClick={handleButtonClick} className="shop-button">
+                В магазин
+            </button>
         </div>
     );
 };
