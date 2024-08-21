@@ -3,6 +3,7 @@ import { useFormContext } from '../FormProvider/FormContext';
 import { useCart } from '../CartProvider/CartContext';
 import { useNavigate } from "react-router-dom";
 import { useTelegram } from '../../hooks/useTelegram';
+import './Confirm.css'
 
 const Confirm = () => {
     const getTotalPrice = (items) => {
