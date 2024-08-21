@@ -106,7 +106,7 @@ const Confirm = () => {
             {typeof formData !== 'object' || Array.isArray(formData) ? (
                 <p>Данные не заполнены</p>
             ) : (
-                <div>
+                <div className="confirm-form">
                     {/*<p>Страна: {formData.country}</p>*/}
                     <p>Город: {formData.city}</p>
                     <p>Улица: {formData.street}</p>
