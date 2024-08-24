@@ -1,0 +1,51 @@
+.footer {
+    display: flex;
+    width: 91vw;
+    height: 300px;
+    padding: 0 20px;
+    margin-left: -20px;
+    margin-bottom: -20px;
+}
+.footer.light {
+    background-color: #071E57; /* Цвет фона */
+    color: #F2EDEA; /* Цвет текста */
+}
+.footer.dark {
+    background-color: #F2EDEA;
+    color: #071E57;
+}
+
+.for-contact {
+    width: 35vw;
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+    position: relative;
+    left: 45vw;
+    top: -15vw;
+}
+
+.kbn_mg {
+    margin-top: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+
+.info, .tg, .ig {
+    display: flex;
+    margin-bottom: 20px;
+    width: 22vw;
+    justify-content: start;
+}
+
+.minitg, .miniemail, .miniig {
+    display: flex;
+    position: relative;
+    width: 12px;
+    height: 12px;
+    justify-content: end;
+    top: 5px;
+    margin-right: 20px;
+}

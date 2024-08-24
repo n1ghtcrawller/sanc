@@ -12,6 +12,7 @@ import Form from "./components/Form/Form";
 import Confirm from "./components/Confirm/Confirm";
 import { FormProvider } from "./components/FormProvider/FormContext";
 import {ThemeProvider} from "./components/ThemeProvider/ThemeContext";
+import Footer from "./components/Footer/Footer";
 
 function App() {
     const { tg } = useTelegram();
@@ -22,9 +23,9 @@ function App() {
 
     return (
         <div className="App">
-            <Header />
             <ThemeProvider>
             <CartProvider>
+                <Header />
                 <FormProvider>
                 <Routes>
                     <Route index element={<StartPage />} />
@@ -34,6 +35,7 @@ function App() {
                     <Route path={"form"} element={<Form />} />
                     <Route path={"confirm"} element={<Confirm />} />
                 </Routes>
+                <Footer/>
             </FormProvider>
             </CartProvider>
             </ThemeProvider>

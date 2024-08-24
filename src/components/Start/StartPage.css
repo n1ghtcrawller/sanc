@@ -1,9 +1,24 @@
-/* Основные стили для body */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@font-face {
+    font-family: 'Murs Gothic';
+    src: url('../../fonts/MursGothic.ttf') format('truetype'); /* Убедитесь, что путь к файлу правильный */
+    font-weight: normal;
+    font-style: normal;
+}
+
+.KeyBn {
+    font-family: 'Murs Gothic', sans-serif;
+    font-size: 27px;
+    margin-top: 60px;
+}
+
 .body {
-    transition: background-color 10s, color 10s; /* Плавный переход при смене темы */
+    transition: background-color 10s, color 10s;
+
 }
 .start-page {
-    transition: background-color 0.5s, color 0.5s; /* Плавный переход при смене темы */
+    transition: background-color 0.5s, color 0.5s;
 }
 .logo {
     border-radius: 300px;
@@ -14,19 +29,26 @@
 .logo.fade-out {
     opacity: 0;
 }
+.button-go-to-shop-on-the-start-page {
+    display: flex;
+    width: 100vw;
+    justify-content: start;
+}
 
 .logo.fade-in {
     opacity: 1;
 }
 /* Стили для светлой темы */
 .start-page.light {
-    background-color: #EDE9E3; /* Цвет фона */
+    background-color: #F2EDEA; /* Цвет фона */
     color: #071E57; /* Цвет текста */
+    display: flex;
+
 }
 
 .start-page.light .shop-button {
     background-color: #071E57; /* Цвет кнопки */
-    color: #EDE9E3; /* Цвет текста кнопки */
+    color: #F2EDEA; /* Цвет текста кнопки */
 }
 
 .start-page.light .information {
@@ -36,16 +58,16 @@
 /* Стили для темной темы */
 .start-page.dark {
     background-color: #071E57; /* Цвет фона */
-    color: #EDE9E3; /* Цвет текста */
+    color: #F2EDEA; /* Цвет текста */
 }
 
 .start-page.dark .shop-button {
-    background-color: #EDE9E3; /* Цвет кнопки в темной теме */
+    background-color: #F2EDEA; /* Цвет кнопки в темной теме */
     color: #071E57; /* Цвет текста кнопки в темной теме */
 }
 
 .start-page.dark .information {
-    color: #EDE9E3; /* Цвет текста информации в темной теме */
+    color: #F2EDEA; /* Цвет текста информации в темной теме */
 }
 
 /* Общие стили для компонента */
@@ -54,27 +76,189 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 71vh; /* Заполнение всей высоты экрана */
 }
 
-.logo {
-    width: 300px; /* Ширина логотипа */
-    height: 300px; /* Автоматическая высота */
-    margin-bottom: 20px; /* Отступ снизу */
+.shop-button-light {
+    display: flex;
+    background-color: #F2EDEA;
+    color: #071E57;
+    width: 168px;
+    height: 30px;
+    align-items: center;
+    font-size: 13px;
+    margin-top: 10px;
+    border: 0.5px solid #071E57;
+    font-family: "Montserrat", sans-serif;
 }
 
-.shop-button {
-    cursor: pointer;
+.shop-button-dark {
+    display: flex;
+    background-color: #071E57;
+    color: #F2EDEA;
+    width: 168px;
+    height: 30px;
+    align-items: center;
+    font-size: 13px;
+    margin-top: 40px;
+    margin-left: 0; /* Отступ слева */
     border: none;
-    border-radius: 30px;
-    padding: 2px;
-    height: 50px;
-    width: 200px;
-    font-size: 1.23em;
-    margin-top:10px;
+    font-family: "Montserrat", sans-serif;
 }
-
 .information {
     margin-bottom: 20px;
     text-align: center;
+}
+
+.item-photos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-page-photo {
+    margin-top: 20px;
+    height: 168px;
+    width: 28vw;
+    background: #D9D9D9;
+    margin-inline: 2px;
+}
+
+.philosophy{
+    display: flex;
+    margin-top: 20px;
+    width: 100vw;
+    height: 168px;
+    align-items: center;
+    border: 1px solid #D9D9D9;
+    margin-left: -5vw;
+}
+
+.philosophy-title {
+    font-family: 'Murs Gothic', sans-serif;
+    width: 33%;
+    color: #071E57;
+    font-size: 25px;
+    margin-left: 5vw;
+    height: 168px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #D9D9D9;
+    padding-inline: 10px;
+}
+
+.philosophy-text{
+    font-size: 13px;
+    padding: 10px;
+}
+
+.buy-now {
+    margin-top: 20px;
+    height: 168px;
+    width: 100vw;
+    background: #D9D9D9;
+    margin-left: -5vw;
+
+}
+
+.buy-now-text {
+    margin-top: 20px;
+    font-family: 'Murs Gothic', sans-serif;
+    font-size: 20px;
+    position: relative;
+    left: 44vw;
+    top: 0;
+    width: 168px;
+
+}
+.buy-now-button {
+    position: relative;
+    left: 44vw;
+    width: 168px;
+    top: 0
+}
+
+.qa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    margin-left: -5vw;
+    margin-top: 20px;
+}
+.qa-title {
+    font-family: 'Murs Gothic', sans-serif;
+    font-size: 25px;
+}
+.qa-content {
+    width: 90vw;
+    margin-top: 20px;
+    max-height: 600px;
+    background: #071E57;
+    color: #F2EDEA;
+    list-style-type: none;
+    padding-right: 20px;
+    margin-left: -1vw;
+}
+.answer {
+    font-size: 12px;
+    margin-left: 10px;
+    padding-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+.list-item {
+    margin-bottom: 10px;
+    list-style-type: none;
+    margin-left: -15px;
+    font-family: 'Montserrat', sans-serif;
+}
+.question-button {
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid #D9D9D9;
+}
+.button-go-to-shop-on-the-start-page {
+    width: 66vw;
+}
+
+.subtitle {
+    width: 66vw;
+}
+
+.contacts-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+    width: 66vw;
+    padding: 30px;
+    border: 0.5px solid #D9D9D9;
+}
+
+.contacts-msg {
+    margin-top: 10px;
+    color: #3D3D3D;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.join-us {
+    margin-top: 20px;
+}
+
+.society {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.telegram {
+    margin-bottom: 20px;
+    width: 22vw;
+}
+
+.instagram {
+    margin-bottom: 30px;
+    width: 22vw;
+
 }
