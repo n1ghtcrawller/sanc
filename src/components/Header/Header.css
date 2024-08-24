@@ -70,7 +70,7 @@
     justify-content: start;
     flex-direction: column;
     margin-left: 10vw;
-    margin-top: -50vw;
+    /*margin-top: -50vw;*/
 }
 
 .menu li {
