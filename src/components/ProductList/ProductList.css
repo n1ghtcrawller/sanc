@@ -95,3 +95,13 @@
     border: 0.5px solid #071E57;
     font-family: "Montserrat", sans-serif;
 }
+
+.subtitle-ctcs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}

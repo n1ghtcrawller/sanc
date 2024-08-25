@@ -16,6 +16,7 @@
 }
 
 .for-contact {
+    margin-top: 40px;
     width: 35vw;
     display: flex;
     justify-content: end;
@@ -31,6 +32,7 @@
     font-weight: bold;
     margin-bottom: 20px;
 }
+
 
 
 .info, .tg, .ig {

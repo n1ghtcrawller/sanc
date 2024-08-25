@@ -64,8 +64,6 @@
 /*    margin: 15px;*/
 /*    box-shadow: 4px 1px 2px gray;*/
 /*    font-family: 'Montserrat', sans-serif;*/
-
-
 /*}*/
 
 .shopping-info-body {
@@ -160,4 +158,68 @@
     max-height: 600px; /* Максимальная высота при открытии (можно изменить) */
     opacity: 1; /* Полная видимость */
     color: #071E57;
+}
+
+.product-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    margin-left: -8.5vw;
+    margin-top: 20px;
+}
+.qa-title {
+    font-family: 'Murs Gothic', sans-serif;
+    font-size: 25px;
+}
+.qa-content {
+    width: 90vw;
+    margin-top: 20px;
+    max-height: 600px;
+    background: #071E57;
+    color: #F2EDEA;
+    list-style-type: none;
+    padding-right: 20px;
+    margin-left: -1vw;
+}
+.answer {
+    font-size: 12px;
+    margin-left: 10px;
+    padding-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+.list-item {
+    margin-bottom: 10px;
+    list-style-type: none;
+    margin-left: -15px;
+    font-family: 'Montserrat', sans-serif;
+}
+.question-button {
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid #D9D9D9;
+}
+
+.contacts-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 40px;
+    width: 66vw;
+    padding: 30px;
+    border: 0.5px solid #D9D9D9;
+}
+
+.contacts-link {
+    margin-top: 10px;
+    color: #3D3D3D;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.contacts-subtitle {
+    font-family: 'Murs Gothic', sans-serif;
+    margin-top: 20px;
+    font-size: 18px;
 }
