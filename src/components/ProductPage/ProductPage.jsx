@@ -69,30 +69,26 @@ const ProductPage = () => {
 
     return (
         <div className="product-page">
-            <div className="product-item">
-                <button className="back-button" onClick={goBack}>Назад</button>
-                <img src={product.img} alt={product.title}/>
+            <div className="item-container">
+                <button className="back" onClick={goBack}>&lt; назад </button>
+                <img  className={'photo'} src={product.img} alt={product.title}/>
                 <div className="title">{product.title}</div>
-                <div className="price"><h2>₽<b>{product.price}</b></h2></div>
-
-                <select className="changeSize" onChange={(e) => setSize(e.target.value)} value={size}>
-                    <option value="">Выберите размер</option>
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                    <option value="XL">XL</option>
-                </select>
+                <div className={'product-description'}>B - Basics: Базовые вещи. Слово указывает на то, что одежда предназначена для повседневного использования </div>
+                <div className="price">₽{product.price}</div>
                 <div className="buttons">
+                    <select className="changeSize" onChange={(e) => setSize(e.target.value)} value={size}>
+                        <option value="">Выберите размер</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
                     <button disabled={isButtonDisabled} className="add-to-cart-btn" onClick={handleAddToCartButton}>
                         Добавить в корзину
                     </button>
                 </div>
-
                 <div className="product-container">
-                    <button className="toggle-button" onClick={toggleDescription}>▾ Показать описание</button>
-                    <div className="product-description hidden">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </div>
+
                 </div>
             </div>
         </div>

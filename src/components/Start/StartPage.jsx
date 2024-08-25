@@ -142,7 +142,6 @@ const StartPage = () => {
                             className={'telegram'}
                             src={tg}/>
                     </div>
-
                 </div>
             </div>
         </div>

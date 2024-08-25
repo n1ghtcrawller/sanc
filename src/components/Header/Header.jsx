@@ -26,7 +26,6 @@ const Header = () => {
         document.body.className = theme;
     }, [theme]);
 
-    // Условный выбор изображений в зависимости от темы
     const logoSrc = theme === 'dark' ? dark_logo : logotype;
     const menuIconSrc = theme === 'dark' ? dark_burger : burger;
 

@@ -8,9 +8,22 @@ import {useNavigate} from "react-router-dom";
 
 const Footer = () => {
     const { theme } = useTheme();
-    const navigate = useNavigate();
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText('info@kbn.ru')
+            .then(() => {
+                alert('Почта скопирована в буфер обмена!');
+            })
+            .catch(err => {
+                console.error('Ошибка при копировании текста: ', err);
+            });
+    };
+
     const redirectToTg = () => {
         window.location.href = 'https://t.me/kbnwear'}
+
+    const redirectToIg = () => {
+        window.location.href = "https://www.instagram.com/kbnwear"
+    }
 
     useEffect(() => {
         document.body.className = theme;
@@ -28,11 +41,10 @@ const Footer = () => {
                 <div className={'kbn_mg'}>
                     @kbn_mg
                 </div>
-                <div className={'info'} onClick={redirectToTg}><img src={miniemail} className={'miniemail'}/> info@kbn.ru</div>
+                <div className={'info'} onClick={copyToClipboard}><img src={miniemail} className={'miniemail'}/> info@kbn.ru</div>
                 <div className={'tg'} onClick={redirectToTg}><img src={minitg} className={'miniemail'}/>  @kbnwear</div>
-                <div className={'ig'} onClick={redirectToTg}><img src={miniig} className={'miniemail'}/>  @kbnwear</div>
+                <div className={'ig'} onClick={redirectToIg}><img src={miniig} className={'miniemail'}/>  @kbnwear</div>
             </div>
-
         </div>
     );
 };

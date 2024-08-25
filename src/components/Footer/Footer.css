@@ -22,7 +22,7 @@
     flex-direction: column;
     position: relative;
     left: 45vw;
-    top: -15vw;
+    height: 45vw;
 }
 
 .kbn_mg {

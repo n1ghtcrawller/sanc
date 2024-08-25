@@ -3,27 +3,37 @@
     padding: 20px;
 }
 
-.product-item {
+.item-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: start;
 }
 
-.product-item img {
-    height: 300px;
-    border-radius: 10px;
+.back {
+    color: #071E57;
+    border: none;
+    width: 50px;;
+    display: contents;
+}
+
+.photo {
+    height: 400px;
     width: 100%;
+    margin-top: 20px;
+    background: #D9D9D9;
 }
 
 .title {
-    font-size: 24px;
+    font-family: 'Murs Gothic', sans-serif;
+    font-size: 18px;
     color: #071E57;
     margin: 10px 0;
 }
 
-.price h2 {
-    font-size: 28px;
+.price {
+    font-size: 16px;
     color: #071E57;
+    margin: 0;
 }
 
 
@@ -33,6 +43,10 @@
 
 .buttons {
     margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 /*.add-btn, .minus-btn  {*/
@@ -65,14 +79,12 @@
     display: flex;
     height: 37px;
     text-align: center;
-    border-radius: 15px;
-    border: 2px solid #071E57;
+    border: 0.5px solid #071E57;
     font-family: 'Montserrat', sans-serif;
 }
 
 .back-button {
-    background-color: #071E57;
-    color: #EDE9E3;
+    color: #071E57;
     cursor: pointer;
     border: none;
     border-radius: 15px;
@@ -86,8 +98,6 @@
     align-content: space-around;
     justify-content: center;
     margin-right: 70%;
-
-
 }
 
 .text-on-back-button{
@@ -100,11 +110,9 @@
     color: #EDE9E3;
     cursor: pointer;
     border: none;
-    border-radius: 15px;
     height: 37px;
     width: 60.5vw;
     margin: 5px;
-    box-shadow: 4px 1px 2px gray;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -112,11 +120,9 @@
     background-color: gray;
     color: lightgray;
     border: none;
-    border-radius: 15px;
     height: 37px;
     width: 60.5vw;
     margin: 5px;
-    box-shadow: 4px 1px 2px gray;
     font-family: 'Montserrat', sans-serif;
     cursor: default;
 }
@@ -145,14 +151,9 @@
 
 .product-description {
     margin-top: 10px;
-    padding: 10px;
-    border: 1px solid #071E57;
-    border-radius: 10px;
-    text-align: center;
-    overflow: hidden; /* Скрываем содержимое при сворачивании */
-    max-height: 0; /* Начальная высота (скрыто) */
-    opacity: 0; /* Начальная прозрачность (скрыто) */
-    transition: max-height 0.5s ease, opacity 0.5s ease; /* Анимация */
+    margin-bottom: 10px;
+    font-size: 13px;
+
 }
 
 .product-description.visible {

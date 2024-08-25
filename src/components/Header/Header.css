@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 91vw;
+    width: 90vw;
     height: 100px;
     background-color: #071E57;
     padding: 0 20px;
@@ -50,17 +50,17 @@
     right: -110vw; /* Скрываем меню за пределами экрана */
     width: 101vw; /* Ширина меню */
     height: 100%;
-    background-color: #071E57; /* Наследуем цвет фона от родителя */
+    background-color: #071E57;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: start;
-    z-index: 1000; /* Чтобы меню было поверх остальных элементов */
-    transition: right 0.3s ease; /* Плавный переход */
+    z-index: 1000;
+    transition: right 0.3s ease; /* Плавный переход для свойства right */
 }
 
 .menu.open {
-    right: 0; /* Меню будет видно, когда класс 'open' добавлен */
+    right: 0; /* Меню возвращается на экран */
 }
 
 .menu ul {
