@@ -12,15 +12,28 @@ const Header = () => {
     const { theme, toggleTheme } = useTheme();
     const [menuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();
+    const scrollToBottom = () => {
+        navigate('/');
+        setTimeout(() => {
+            window.scrollTo(0, document.body.scrollHeight);
+        }, 0);
+        setMenuOpen(false);
+    };
+
+
 
     const redirectToProductList = () => {
         navigate('/products');
-        toggleMenu();
+        setMenuOpen(false)
     };
-
+    const redirectToStartPage = () => {
+        navigate('/');
+        setMenuOpen(false)
+    };
     const toggleMenu = () => {
         setMenuOpen(prev => !prev);
     };
+
 
     useEffect(() => {
         document.body.className = theme;
@@ -31,7 +44,7 @@ const Header = () => {
 
     return (
         <div className={`header ${theme}`}>
-            <img src={logoSrc} alt="Logo" className="logotype" />
+            <img src={logoSrc} alt="Logo" className="logotype" onClick={redirectToStartPage} />
             <img
                 src={menuOpen ? close : menuIconSrc}
                 alt="Menu Toggle"
@@ -40,13 +53,13 @@ const Header = () => {
             />
             {menuOpen && (
                 <div className={`menu ${menuOpen ? 'open' : ''}`}>
-                    <img src={logoSrc} alt="Logo" className="logotype-in-menu" />
+                    <img src={logoSrc} alt="Logo" className="logotype-in-menu" onClick={redirectToStartPage} />
                     <ul>
                         <li>Футболки</li>
                         <li>Худи</li>
-                        <li>Часто задаваемые вопросы</li>
-                        <li>Контакты</li>
-                        <li>Соц сети</li>
+                        <li onClick={scrollToBottom}>Часто задаваемые вопросы</li>
+                        <li onClick={scrollToBottom}>Контакты</li>
+                        <li onClick={scrollToBottom}>Соц сети</li>
                         <li>
                             <button className={'shop-button-light'} onClick={redirectToProductList}>Перейти в магазин</button>
                         </li>

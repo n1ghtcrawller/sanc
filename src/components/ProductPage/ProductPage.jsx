@@ -69,6 +69,9 @@ const ProductPage = () => {
     if (!product) {
         return <div>Товар не найден</div>;
     }
+    // const goToCart = () => {
+    //     navigate('/order');
+    // }
 
     const isButtonDisabled = !size;
     const goBack = () => {

@@ -9,8 +9,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    width: 95vw;
-    margin-left: -30px;
+    width: 100%;
+    margin-left: -20px;
     padding: 20px;
 
 
@@ -23,7 +23,7 @@
     display: flex;
     align-content: flex-end;
     flex-wrap: wrap;
-    width: 45vw;
+    width: 43vw;
     justify-content: start;
 }
 
@@ -78,7 +78,7 @@
 }
 
 .category-buttons {
-    width: 95vw;
+    width: 88vw;
     margin-top: 20px;
     display: flex;
     justify-content: space-around;
@@ -105,3 +105,4 @@
     text-align: center;
     margin-top: 20px;
 }
+

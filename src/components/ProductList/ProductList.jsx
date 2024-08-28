@@ -17,7 +17,9 @@ const ProductList = () => {
     const { tg } = useTelegram();
     const navigate = useNavigate();
     const { cartItems } = useContext(CartContext);
-
+    const goBack = () => {
+        navigate('/');
+    }
     const [selectedCategory, setSelectedCategory] = useState('Все');
 
     useEffect(() => {
@@ -54,6 +56,7 @@ const ProductList = () => {
 
     return (
         <div className="product-list">
+            <button className="back" onClick={goBack}>&lt; назад</button>
             <div className="category-buttons">
                 <button
                     className={'category-button'}
@@ -81,7 +84,7 @@ const ProductList = () => {
             <div className="list">
                 {filteredProducts.map(item => (
                     <Link to={`/ProductPage/${item.id}`} key={item.id} className="item">
-                        <img className={'image'} src={item.img} alt={item.title} />
+                        <img className={'image'} src={item.img} alt={item.title}/>
                         <h2>{item.title}</h2>
                         <div className={'size-prise'}>
                             <span className={'size'}>s/m/l/xl</span>

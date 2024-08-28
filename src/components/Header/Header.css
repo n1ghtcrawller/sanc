@@ -2,12 +2,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90vw;
+    width: 89vw;
     height: 100px;
     background-color: #071E57;
     padding: 0 20px;
     margin-left: -20px;
     margin-top: -20px;
+    margin-bottom: 20px;
     /*border-bottom: 1px solid #F2EDEA;*/
 }
 .header.light {
@@ -31,6 +32,7 @@
     cursor: pointer;
     width: 25px;
     height: 25px;
+    margin-right: 20px;
 
 }
 
@@ -48,7 +50,7 @@
     position: fixed;
     top: 0;
     right: -110vw; /* Скрываем меню за пределами экрана */
-    width: 101vw; /* Ширина меню */
+    width: 102vw; /* Ширина меню */
     height: 100%;
     background-color: #071E57;
     display: flex;

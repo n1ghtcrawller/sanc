@@ -1,5 +1,4 @@
 .product-page {
-    margin: auto;
     padding: 20px;
 }
 
@@ -173,14 +172,14 @@
     font-size: 25px;
 }
 .qa-content {
-    width: 90vw;
+    width: 80vw;
     margin-top: 20px;
     max-height: 600px;
     background: #071E57;
     color: #F2EDEA;
     list-style-type: none;
     padding-right: 20px;
-    margin-left: -1vw;
+    margin-left: -5vw;
 }
 .answer {
     font-size: 12px;
