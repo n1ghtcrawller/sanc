@@ -61,7 +61,7 @@ const Form = () => {
     const onSendData = useCallback(() => {
         try {
             const data = { name, city, street, house, phone, email, subject };
-            if (!city || !name || !street || !house || !phone || !email || subject || !comment || !flat === 'Выберите способ доставки') {
+            if (!city || !name || !street || !house || !phone || !email || !subject || !comment || !flat) {
                 alert('Пожалуйста, заполните все поля!');
                 return;
             }
@@ -112,7 +112,7 @@ const Form = () => {
                 placeholder={"телефон"}
                 value={phone}
                 onChange={onChangePhone}
-                onKeyPress={onKeyPressPhone} // Добавляем обработчик нажатия клавиш
+                onKeyPress={onKeyPressPhone}
             />
             <input className={"input-info"} type={"email"} placeholder={"Эл. почта"} value={email}
                    onChange={(e) => setEmail(e.target.value)}/>
@@ -152,6 +152,7 @@ const Form = () => {
                    onChange={(e) => setFlat(e.target.value)}/>
             <input className={"input-info"} type={"text"} placeholder={"комментарий"} value={comment}
                    onChange={(e) => setComment(e.target.value)}/>
+            {/*<button className={"back-button"} onClick={onSendData}> Отправить данные </button>*/}
         </div>
     );
 };
