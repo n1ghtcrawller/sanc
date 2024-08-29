@@ -87,18 +87,27 @@ const Confirm = () => {
 
     return (
         <div className="confirm-container">
-            <button className="back-button" onClick={goBack}>
-                Назад
-            </button>
+            <button className="back" onClick={goBack}>&lt; вернуться к выбору</button>
             <h3>Подтверждение заказа</h3>
             {cartItems.length === 0 ? (
                 <p>Корзина пуста</p>
             ) : (
                 cartItems.map((item, index) => (
                     <div key={index} className="product-item">
-                        <h2>{item.product.title}</h2>
-                        <p>Размер: <b>{item.size}</b>, кол-во: {item.count}, Цена:
-                            ₽<b>{item.product.price * item.count}</b></p>
+                        <div className="item-product-content">
+                            <div className="item-product-img">
+                                <img src={item.img}/>
+                            </div>
+                            <div className="item-product-description">
+                                <p className="item-product-title">{item.product.title}</p>
+                                <p>Размер: {item.size}</p>
+                                <p>Количество: </p>
+                                <div className="counter">
+                                    <span>{item.count}</span>
+                                </div>
+                                <span className="item-product-price">{item.product.price * item.count}₽</span>
+                            </div>
+                        </div>
                     </div>
                 ))
             )}
