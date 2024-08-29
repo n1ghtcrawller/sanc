@@ -61,7 +61,7 @@ const Form = () => {
     const onSendData = useCallback(() => {
         try {
             const data = { name, city, street, house, phone, email, subject };
-            if (!city || !name || !street || !house || !phone || !email || !subject || !comment || !flat) {
+            if (!city || !name || !street || !house || !phone || !email || !subject || !flat) {
                 alert('Пожалуйста, заполните все поля!');
                 return;
             }
