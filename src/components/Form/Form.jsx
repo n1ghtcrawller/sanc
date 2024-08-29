@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import { useFormContext } from "../FormProvider/FormContext";
 import { useTelegram } from "../../hooks/useTelegram";
 import { useNavigate } from "react-router-dom";
@@ -6,12 +6,15 @@ import "./Form.css";
 
 const Form = () => {
     const { setFormData } = useFormContext();
+    const [name, setName] = useState('');
     const [city, setCity] = React.useState('');
     const [street, setStreet] = React.useState('');
     const [house, setHouse] = React.useState('');
     const [phone, setPhone] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [subject, setSubject] = React.useState('Выберите способ доставки');
+    const [comment, setComment] = React.useState('');
+    const [flat, setFlat] = React.useState('');
     const { tg } = useTelegram();
     const navigate = useNavigate();
 
@@ -57,8 +60,8 @@ const Form = () => {
 
     const onSendData = useCallback(() => {
         try {
-            const data = { city, street, house, phone, email, subject };
-            if (!city || !street || !house || !phone || !email || subject === 'Выберите способ доставки') {
+            const data = { name, city, street, house, phone, email, subject };
+            if (!city || !name || !street || !house || !phone || !email || subject || !comment || !flat === 'Выберите способ доставки') {
                 alert('Пожалуйста, заполните все поля!');
                 return;
             }
@@ -67,7 +70,7 @@ const Form = () => {
         } catch (error) {
             console.error("Ошибка при отправке данных:", error);
         }
-    }, [city, street, house, email, phone, subject, setFormData, navigate]);
+    }, [name, city, street, house, email, phone, subject, comment, setFormData, flat, navigate]);
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
@@ -77,16 +80,16 @@ const Form = () => {
     }, [onSendData, tg]);
 
     useEffect(() => {
-        tg.MainButton.setParams({ text: 'Подтвердить данные' });
+        tg.MainButton.setParams({ text: ' Оформить заказ' });
     }, [tg]);
 
     useEffect(() => {
-        if (!city || !street || !house || !phone || !email) {
+        if ( !name || !city || !street || !house || !phone || !email || !comment || !flat) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
         }
-    }, [city, street, house, phone, email, tg]);
+    }, [name, city, street, house, phone, email,comment, flat, tg]);
 
     const goBack = () => {
         navigate('/order');
@@ -94,26 +97,61 @@ const Form = () => {
 
     return (
         <div className={"form"}>
-            <button className="back-button" onClick={goBack}>Назад</button>
-            <h3>Введите ваши данные</h3>
-            <input className={"input-info"} type={"text"} placeholder={"Город"} value={city} onChange={(e) => setCity(e.target.value)} />
-            <input className={"input-info"} type={"text"} placeholder={"Улица"} value={street} onChange={(e) => setStreet(e.target.value)} />
-            <input className={"input-info"} type={"text"} placeholder={"Дом"} value={house} onChange={(e) => setHouse(e.target.value)} />
-            <input className={"input-info"} type={"email"} placeholder={"Эл. почта"} value={email} onChange={(e) => setEmail(e.target.value)} />
+            <div className="back-container">
+                <button className="back" onClick={goBack}>&lt; вернуться к заказу</button>
+            </div>
+
+            <div className={"title-div-order"}>
+                <div className={"title"}>Оформление<br/> заказа</div>
+            </div>
+            <input className={"input-info"} type={"text"} placeholder={"ваше имя"} value={name}
+                   onChange={(e) => setName(e.target.value)}/>
             <input
                 className={"input-info"}
                 type={"text"}
-                placeholder={"+7(___)__-__-__"}
+                placeholder={"телефон"}
                 value={phone}
                 onChange={onChangePhone}
                 onKeyPress={onKeyPressPhone} // Добавляем обработчик нажатия клавиш
             />
-            <select className={"select-delivery"} value={subject} onChange={(e) => setSubject(e.target.value)}>
-                <option value={"Выберите способ доставки"}>Выберите способ доставки</option>
-                <option value={"СДЭК"}>СДЭК</option>
-                <option value={"BoxBerry"}>BoxBerry</option>
-                <option value={"Yandex"}>Яндекс</option>
-            </select>
+            <input className={"input-info"} type={"email"} placeholder={"Эл. почта"} value={email}
+                   onChange={(e) => setEmail(e.target.value)}/>
+            <input className={"input-info"} type={"text"} placeholder={"населенный пункт"} value={city}
+                   onChange={(e) => setCity(e.target.value)}/>
+            <div className={"delivery"}>
+                <div className={"delivery-title"}>
+                    <span>способ доставки</span>
+                </div>
+                <div className="delivery-options">
+                    <label>
+                        <input
+                            type="radio"
+                            value="Курьером"
+                            checked={subject === 'Курьером'}
+                            onChange={(e) => setSubject(e.target.value)}
+                        />
+                        Курьером
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            value="Самовывоз"
+                            checked={subject === 'Самовывоз'}
+                            onChange={(e) => setSubject(e.target.value)}
+                        />
+                        Самовывоз
+                    </label>
+                </div>
+            </div>
+
+            <input className={"input-info"} type={"text"} placeholder={"улица"} value={street}
+                   onChange={(e) => setStreet(e.target.value)}/>
+            <input className={"input-info"} type={"text"} placeholder={"дом"} value={house}
+                   onChange={(e) => setHouse(e.target.value)}/>
+            <input className={"input-info"} type={"text"} placeholder={"квартира/офис"} value={flat}
+                   onChange={(e) => setFlat(e.target.value)}/>
+            <input className={"input-info"} type={"text"} placeholder={"комментарий"} value={comment}
+                   onChange={(e) => setComment(e.target.value)}/>
         </div>
     );
 };

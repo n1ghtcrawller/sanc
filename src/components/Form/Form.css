@@ -1,24 +1,24 @@
 .form {
     display: flex;
     flex-direction: column;
-    width: 85vw;
+    width:90vw;
     padding: 10px;
     justify-content: center;
     align-items: center;
     color: #071E57;
-    background-color: #ffffff;
+    margin-left: -20px;
     border-radius: 10px;
 
 }
 
 .input-info {
-    width: 65vw;
+    width: 88vw;
     padding: 10px;
     margin-top: 15px;
-    background: #EDE9E3;
+    background: #F2EDEA;
     color:  #071E57;
-    border: 1px solid #071E57;
-    border-radius: 10px;
+    border: none;
+    border-bottom: 0.5px solid #071E57;
 }
 
 .select-delivery {
@@ -31,4 +31,50 @@
     margin-top: 15px;
     background: #EDE9E3;
 
+}
+
+.back-container {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+}
+.title {
+    font-size: 30px;
+}
+.title-div-order {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+}
+
+.delivery-options {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+}
+label {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.delivery {
+    display: flex;
+    justify-content: start;
+    color: #000000;
+}
+.delivery-title {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+    font-size: 16px;
+    color: #000000;
+}
+
+span {
+    margin-bottom: 33px;
+    margin-right: 20px;
 }
