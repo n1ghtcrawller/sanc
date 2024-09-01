@@ -14,7 +14,7 @@ const Form = () => {
     const [email, setEmail] = React.useState('');
     const [subject, setSubject] = React.useState('Выберите способ доставки');
     const [comment, setComment] = React.useState('');
-    const [flat, setFlat] = React.useState('');
+    const [office, setOffice] = React.useState('');
     const { tg } = useTelegram();
     const navigate = useNavigate();
 
@@ -61,7 +61,7 @@ const Form = () => {
     const onSendData = useCallback(() => {
         try {
             const data = { name, city, street, house, phone, email, subject };
-            if (!city || !name || !street || !house || !phone || !email || !subject || !flat) {
+            if (!city || !name || !street || !house || !phone || !email || !subject || !office) {
                 alert('Пожалуйста, заполните все поля!');
                 return;
             }
@@ -70,7 +70,7 @@ const Form = () => {
         } catch (error) {
             console.error("Ошибка при отправке данных:", error);
         }
-    }, [name, city, street, house, email, phone, subject, comment, setFormData, flat, navigate]);
+    }, [name, city, street, house, email, phone, subject, comment, setFormData, office, navigate]);
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData);
@@ -84,12 +84,12 @@ const Form = () => {
     }, [tg]);
 
     useEffect(() => {
-        if ( !name || !city || !street || !house || !phone || !email || !flat) {
+        if ( !name || !city || !street || !house || !phone || !email || !office) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
         }
-    }, [name, city, street, house, phone, email,comment, flat, tg]);
+    }, [name, city, street, house, phone, email,comment, office, tg]);
 
     const goBack = () => {
         navigate('/order');
@@ -148,8 +148,8 @@ const Form = () => {
                    onChange={(e) => setStreet(e.target.value)}/>
             <input className={"input-info"} type={"text"} placeholder={"дом"} value={house}
                    onChange={(e) => setHouse(e.target.value)}/>
-            <input className={"input-info"} type={"text"} placeholder={"квартира/офис"} value={flat}
-                   onChange={(e) => setFlat(e.target.value)}/>
+            <input className={"input-info"} type={"text"} placeholder={"квартира/офис"} value={office}
+                   onChange={(e) => setOffice(e.target.value)}/>
             <input className={"input-info"} type={"text"} placeholder={"комментарий"} value={comment}
                    onChange={(e) => setComment(e.target.value)}/>
             {/*<button className={"back-button"} onClick={onSendData}> Отправить данные </button>*/}
