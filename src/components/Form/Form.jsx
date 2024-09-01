@@ -84,7 +84,7 @@ const Form = () => {
     }, [tg]);
 
     useEffect(() => {
-        if ( !name || !city || !street || !house || !phone || !email || !comment || !flat) {
+        if ( !name || !city || !street || !house || !phone || !email || !flat) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();

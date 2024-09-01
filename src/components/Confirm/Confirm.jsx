@@ -35,7 +35,7 @@ const Confirm = () => {
                 city: formData.city,
                 street: formData.street,
                 house: formData.house,
-                // flat: formData.flat,
+                flat: formData.flat,
                 phone: formData.phone,
                 email: formData.email,
                 subject: formData.subject
@@ -117,15 +117,14 @@ const Confirm = () => {
             ) : (
                 <div className="confirm-form">
                     {/*<p>Страна: {formData.country}</p>*/}
-                    <p>Тип: {formData.name}</p>
+                    <p>имя: {formData.name}</p>
                     <p>Телефон: {formData.phone}</p>
-                    <p>Телефон: {formData.email}</p>
-                    <p>Тип: {formData.subject}</p>
+                    <p>почта: {formData.email}</p>
+                    <p>дата: {formData.subject}</p>
                     <p>Город: {formData.city}</p>
                     <p>Улица: {formData.street}</p>
                     <p>Дом: {formData.house}</p>
                     <p>Квартира: {formData.flat}</p>
-
                 </div>
             )}
         </div>

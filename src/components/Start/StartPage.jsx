@@ -19,6 +19,12 @@ const StartPage = () => {
     const handleButtonClick = () => {
         navigate('/products');
     };
+    const redirectToTg = () => {
+        window.location.href = 'https://t.me/kbnwear'}
+
+    const redirectToIg = () => {
+        window.location.href = "https://www.instagram.com/kbnwear"
+    }
 
     const handleLogoClick = () => {
         setFadeOut(true);
@@ -136,9 +142,11 @@ const StartPage = () => {
                 </div>
                 <div className={'buttons-join-us'}>
                     <div className={'society'}>
-                        <img className={'instagram'}
+                        <img onClick={redirectToIg}
+                             className={'instagram'}
                              src={ig}/>
                         <img
+                            onClick={redirectToTg}
                             className={'telegram'}
                             src={tg}/>
                     </div>

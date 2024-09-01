@@ -19,6 +19,13 @@ const Header = () => {
         }, 0);
         setMenuOpen(false);
     };
+    const scrollToQA= () => {
+        navigate('/');
+        setTimeout(() => {
+            window.scrollTo(0,1000, document.body.scrollHeight);
+        }, 0);
+        setMenuOpen(false);
+    };
 
 
 
@@ -55,9 +62,9 @@ const Header = () => {
                 <div className={`menu ${menuOpen ? 'open' : ''}`}>
                     <img src={logoSrc} alt="Logo" className="logotype-in-menu" onClick={redirectToStartPage} />
                     <ul>
-                        <li>Футболки</li>
-                        <li>Худи</li>
-                        <li onClick={scrollToBottom}>Часто задаваемые вопросы</li>
+                        {/*<li>Футболки</li>*/}
+                        {/*<li>Худи</li>*/}
+                        <li onClick={scrollToQA}>Часто задаваемые вопросы</li>
                         <li onClick={scrollToBottom}>Контакты</li>
                         <li onClick={scrollToBottom}>Соц сети</li>
                         <li>
