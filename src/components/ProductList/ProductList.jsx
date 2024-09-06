@@ -8,9 +8,9 @@ export const products = [
     { id: 1, title: 'Худи Deep', price: 3500, description: 'Плотное оверсайз худи', img: "", category: "Худи" },
     { id: 2, title: 'Худи Space', price: 3500, description: 'Плотное оверсайз худи', img: "", category: "Худи" },
     { id: 6, title: 'Худи Stone', price: 2500, description: 'Плотное оверсайз худи', img: "", category: "Худи" },
-    { id: 3, title: 'Футболка milk', price: 1500, description: 'Плотная оверсайз футболка', img: "", category: "Футболки" },
-    { id: 4, title: 'Футболка Space', price: 1500, description: 'Плотная оверсайз футболка', img: "", category: "Футболки" },
-    { id: 5, title: 'Футболка KBN', price: 1500, description: 'Плотная оверсайз футболка', img: "", category: "Футболки" }
+    { id: 3, title: 'Футболка milk', price: 500, description: 'Плотная оверсайз футболка', img: "", category: "Футболки" },
+    { id: 4, title: 'Футболка Space', price: 500, description: 'Плотная оверсайз футболка', img: "", category: "Футболки" },
+    { id: 5, title: 'Футболка KBN', price: 500, description: 'Плотная оверсайз футболка', img: "", category: "Футболки" }
 ];
 
 const ProductList = () => {
