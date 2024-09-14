@@ -12,7 +12,7 @@ const Form = () => {
     const [house, setHouse] = React.useState('');
     const [phone, setPhone] = React.useState('');
     const [email, setEmail] = React.useState('');
-    const [subject, setSubject] = React.useState('Выберите способ доставки');
+    const [subject, setSubject] = React.useState('Самовывоз');
     const [comment, setComment] = React.useState('');
     const [office, setOffice] = React.useState('');
     const { tg } = useTelegram();
@@ -152,7 +152,7 @@ const Form = () => {
                    onChange={(e) => setOffice(e.target.value)}/>
             <input className={"input-info"} type={"text"} placeholder={"комментарий"} value={comment}
                    onChange={(e) => setComment(e.target.value)}/>
-            {/*<button className={"back-button"} onClick={onSendData}> Отправить данные </button>*/}
+            {/* <button className={"back-button"} onClick={onSendData}> Отправить данные </button> */}
         </div>
     );
 };
