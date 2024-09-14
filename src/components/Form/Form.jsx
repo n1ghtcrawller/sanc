@@ -72,18 +72,16 @@ const Form = () => {
     }, [tg]);
 
     useEffect(() => {
-        if (
-            // Проверка для способа доставки "Курьером"
-            (subject === 'Курьером' &&
-                (!name || !city || !phone || !email || !street || !house || !office)) ||
-    
-            // Проверка для способа доставки "Самовывоз"
-            (subject === 'Самовывоз' &&
-                (!name || !city || !phone || !email))
-        ) {
-            tg.MainButton.hide();
-        } else {
+        const isCourierValid = subject === 'Курьером' &&
+            name && city && phone && email && street && house && office;
+        
+        const isPickupValid = subject === 'Самовывоз' &&
+            name && city && phone && email;
+        
+        if (isCourierValid || isPickupValid) {
             tg.MainButton.show();
+        } else {
+            tg.MainButton.hide();
         }
     }, [name, city, street, house, phone, email, office, subject, tg]);
     
