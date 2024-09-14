@@ -38,7 +38,8 @@ const Confirm = () => {
                 office: formData.office,
                 phone: formData.phone,
                 email: formData.email,
-                subject: formData.subject
+                subject: formData.subject,
+                comment: formData.comment
             }
         };
 
@@ -125,7 +126,7 @@ const Confirm = () => {
                     <p>Улица: {formData.street}</p>
                     <p>Дом: {formData.house}</p>
                     <p>Квартира: {formData.office}</p>
-                    <p>комментарий {formData.comment}</p>
+                    <p>комментарий: {formData.comment}</p>
                 </div>
             )}
         </div>
