@@ -117,14 +117,15 @@ const Confirm = () => {
             ) : (
                 <div className="confirm-form">
                     {/*<p>Страна: {formData.country}</p>*/}
-                    <p>имя: {formData.name}</p>
-                    <p>Телефон: {formData.phone}</p>
-                    <p>почта: {formData.email}</p>
-                    <p>cпособ получения: {formData.subject}</p>
-                    <p>Город: {formData.city}</p>
-                    <p>Улица: {formData.street}</p>
-                    <p>Дом: {formData.house}</p>
-                    <p>Квартира: {formData.office}</p>
+                    <p>имя: {data.deliveryInfo.name}</p>
+                    <p>Телефон: {data.deliveryInfo.phone}</p>
+                    <p>почта: {data.deliveryInfo.email}</p>
+                    <p>cпособ получения: {data.deliveryInfo.subject}</p>
+                    <p>Город: {data.deliveryInfo.city}</p>
+                    <p>Улица: {data.deliveryInfo.street}</p>
+                    <p>Дом: {data.deliveryInfo.house}</p>
+                    <p>Квартира: {data.deliveryInfo.office}</p>
+                    <p>комментарий {data.deliveryInfo.comment}</p>
                 </div>
             )}
         </div>
