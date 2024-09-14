@@ -1,56 +1,9 @@
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 90.5vw;
-    height: 100px;
-    background-color: #071E57;
-    padding: 0 20px;
-    margin-left: -20px;
-    margin-top: -20px;
-    margin-bottom: 20px;
-    /*border-bottom: 1px solid #F2EDEA;*/
-}
-.header.light {
-    background-color: #F2EDEA; /* Цвет фона */
-    color: #071E57; /* Цвет текста */
-}
-.header.dark {
-    background-color: #071E57;
-    color: #F2EDEA;
-}
-
-.logotype {
-    margin-top: 30px;
-    width: 80px;
-    height: 80px;
-
-}
-
-.menu-icon {
-    margin-top: 30px;
-    cursor: pointer;
-    width: 25px;
-    height: 25px;
-    margin-right: 20px;
-
-}
-
-.header.light {
-    background-color: #071E57; /* Темная тема */
-    color: #F2EDEA;
-}
-
-.header.dark {
-    background-color: #F2EDEA; /* Светлая тема */
-    color: #071E57;
-}
-
+/* Основные стили для меню */
 .menu {
     position: fixed;
     top: 0;
-    right: -110vw; /* Скрываем меню за пределами экрана */
-    width: 102vw; /* Ширина меню */
+    right: -100%; /* Скрываем меню за пределами экрана */
+    width: 100vw; /* Ширина меню равна ширине экрана */
     height: 100%;
     background-color: #071E57;
     display: flex;
@@ -58,26 +11,29 @@
     justify-content: center;
     align-items: start;
     z-index: 1000;
-    transition: right 0.3s ease; /* Плавный переход для свойства right */
+    transition: right 0.3s ease, opacity 0.3s ease, transform 0.3s ease; /* Плавные переходы для right, opacity и transform */
+    opacity: 0; /* Меню изначально скрыто */
+    transform: translateX(10%); /* Немного сдвигаем меню, чтобы создать эффект выдвижения */
 }
 
+/* Меню в открытом состоянии */
 .menu.open {
-    right: 0; /* Меню возвращается на экран */
+    right: 0; /* Меню находится в пределах экрана */
+    opacity: 1; /* Меню полностью видимо */
+    transform: translateX(0); /* Меню находится на своем месте */
 }
 
+/* Прочие стили остаются без изменений */
 .menu ul {
     list-style-type: none;
     padding: 0;
     display: flex;
-    justify-content: start;
     flex-direction: column;
     margin-left: 10vw;
-    /*margin-top: -50vw;*/
 }
 
 .menu li {
     margin: 20px 0;
-
 }
 
 .close-icon {
@@ -88,7 +44,6 @@
     cursor: pointer;
     width: 25px;
     height: 25px;
-
 }
 
 .logotype-in-menu {
@@ -99,5 +54,4 @@
     cursor: pointer;
     width: 80px;
     height: 80px;
-
 }
