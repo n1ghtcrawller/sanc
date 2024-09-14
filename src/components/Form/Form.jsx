@@ -72,13 +72,21 @@ const Form = () => {
     }, [tg]);
 
     useEffect(() => {
-        if (!name || !city || !phone || !email || (subject === 'Самовывоз' && !office) || (subject === 'Курьером' && (!street || !house || !office))) {
+        if (
+            // Проверка для способа доставки "Курьером"
+            (subject === 'Курьером' &&
+                (!name || !city || !phone || !email || !street || !house || !office)) ||
+    
+            // Проверка для способа доставки "Самовывоз"
+            (subject === 'Самовывоз' &&
+                (!name || !city || !phone || !email))
+        ) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
         }
-    }, [name, city, street, house, phone, email, comment, office, subject, tg]);
-
+    }, [name, city, street, house, phone, email, office, subject, tg]);
+    
     const goBack = () => {
         navigate('/order');
     };
