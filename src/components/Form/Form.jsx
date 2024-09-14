@@ -72,7 +72,7 @@ const Form = () => {
     }, [tg]);
 
     useEffect(() => {
-        if (!name || !city || !phone || !email || !office || (subject === 'Доставка' && (!street || !house))) {
+        if (!name || !city || !phone || !email || (subject === 'Самовывоз' && !office) || (subject === 'Курьером' && (!street || !house || !office))) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
@@ -140,11 +140,16 @@ const Form = () => {
                         onChange={(e) => setHouse(e.target.value)} />
                 </>
             )}
-            <input className={"input-info"} type={"text"} placeholder={"квартира/офис"} value={office}
-                onChange={(e) => setOffice(e.target.value)} />
+            {subject === 'Курьером' && (
+                <input className={"input-info"} type={"text"} placeholder={"квартира/офис"} value={office}
+                    onChange={(e) => setOffice(e.target.value)} />
+            )}
+            {subject === 'Самовывоз' && (
+                <input className={"input-info"} type={"text"} placeholder={"квартира/офис"} value={office}
+                    onChange={(e) => setOffice(e.target.value)} />
+            )}
             <input className={"input-info"} type={"text"} placeholder={"комментарий"} value={comment}
-                onChange={(e) => setComment(e.target.value)} />
-            {/* <button className={"back-button"} onClick={onSendData}> Отправить данные </button> */}
+                   onChange={(e) => setComment(e.target.value)} />
         </div>
     );
 };
