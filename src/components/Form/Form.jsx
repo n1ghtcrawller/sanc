@@ -138,16 +138,16 @@ const Form = () => {
                         onChange={(e) => setStreet(e.target.value)} />
                     <input className={"input-info"} type={"text"} placeholder={"дом"} value={house}
                         onChange={(e) => setHouse(e.target.value)} />
+                    <input className={"input-info"} type={"text"} placeholder={"квартира/офис"} value={office}
+                        onChange={(e) => setOffice(e.target.value)} />
                 </>
             )}
-            {subject === 'Курьером' && (
-                <input className={"input-info"} type={"text"} placeholder={"квартира/офис"} value={office}
-                    onChange={(e) => setOffice(e.target.value)} />
-            )}
+
             {subject === 'Самовывоз' && (
                 <input className={"input-info"} type={"text"} placeholder={"квартира/офис"} value={office}
                     onChange={(e) => setOffice(e.target.value)} />
             )}
+
             <input className={"input-info"} type={"text"} placeholder={"комментарий"} value={comment}
                    onChange={(e) => setComment(e.target.value)} />
         </div>
