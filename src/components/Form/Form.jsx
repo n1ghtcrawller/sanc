@@ -49,10 +49,10 @@ const Form = () => {
         try {
             const data = { name, city, street, house, phone, email, subject, comment, office };
             console.log('Sending data:', data);
-            if (!city || !name || !phone || !email || !subject || (subject === 'Самовывоз' || !name || !phone || !email || !city)) {
-                alert('Пожалуйста, заполните все поля!');
-                return;
-            }
+            // if (!city || !name || !phone || !email || !subject || (subject === 'Самовывоз' || !name || !phone || !email || !city)) {
+            //     alert('Пожалуйста, заполните все поля!');
+            //     return;
+            // }
             setFormData(data);
             navigate('/Confirm');
         } catch (error) {
