@@ -143,10 +143,7 @@ const Form = () => {
                 </>
             )}
 
-            {subject === 'Самовывоз' && (
-                <input className={"input-info"} type={"text"} placeholder={"квартира/офис"} value={office}
-                    onChange={(e) => setOffice(e.target.value)} />
-            )}
+            {subject === 'Самовывоз' }
 
             <input className={"input-info"} type={"text"} placeholder={"комментарий"} value={comment}
                    onChange={(e) => setComment(e.target.value)} />
