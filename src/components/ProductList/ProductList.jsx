@@ -10,7 +10,7 @@ export const products = [
     { id: 6, title: 'Худи Stone', price: 2500, description: 'Плотное оверсайз худи', img: "", category: "Худи" },
     { id: 3, title: 'Футболка milk', price: 500, description: 'Плотная оверсайз футболка', img: "", category: "Футболки" },
     { id: 4, title: 'Футболка Space', price: 500, description: 'Плотная оверсайз футболка', img: "", category: "Футболки" },
-    { id: 5, title: 'Футболка KBN', price: 500, description: 'Плотная оверсайз футболка', img: "", category: "Футболки" }
+    { id: 5, title: 'Футболка KBN', price: 1, description: 'Плотная оверсайз футболка', img: "", category: "Футболки" }
 ];
 
 const ProductList = () => {
