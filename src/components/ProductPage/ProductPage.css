@@ -163,8 +163,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    margin-left: -8.5vw;
+    width: 90vw;
+    /*margin-left: -8.5vw;*/
     margin-top: 20px;
 }
 .qa-title {
