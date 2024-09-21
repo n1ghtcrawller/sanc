@@ -93,7 +93,7 @@ const ProductPage = () => {
     const settings = {
         dots: true, // Точки навигации
         infinite: true, // Бесконечная прокрутка
-        speed: 2000, // Скорость анимации
+        speed: 200, // Скорость анимации
         slidesToShow: 1, // Количество слайдов, отображаемых одновременно
         slidesToScroll: 1 // Количество слайдов для прокрутки
     };

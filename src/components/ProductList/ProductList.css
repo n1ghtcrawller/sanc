@@ -19,12 +19,13 @@
 
 .item {
     text-decoration: none;
-    height: 75vw;
+    height: 85vw;
     display: flex;
     align-content: flex-end;
     flex-wrap: wrap;
     width: 43vw;
     justify-content: start;
+    margin-bottom: 10px;
 }
 
 .add-to-cart-button {
@@ -42,8 +43,10 @@
 /*    transform: scale(1.05); !* Увеличение при наведении *!*/
 /*}*/
 
-.item image {
+.image {
     background: #D9D9D9;
+    width: 43vw;
+    height: 60vw;
 }
 
 .item h2 {
