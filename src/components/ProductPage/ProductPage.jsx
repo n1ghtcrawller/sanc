@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import Slider from "react-slick"; // Импортируем Slider
 import { products } from '../ProductList/ProductList';
 import { useTelegram } from '../../hooks/useTelegram';
 import { useCart } from '../CartProvider/CartContext';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css"; // Подключаем стили для карусели
 import './ProductPage.css';
 
 const ProductPage = () => {
@@ -29,7 +32,7 @@ const ProductPage = () => {
     ];
 
     const toggleQuestion = (index) => {
-        setOpenQuestion(openQuestion === index ? null : index); // Переключаем состояние
+        setOpenQuestion(openQuestion === index ? null : index);
     };
 
     function toggleDescription() {
@@ -38,7 +41,6 @@ const ProductPage = () => {
 
         description.classList.toggle('visible');
 
-        // Изменение текста кнопки в зависимости от состояния
         if (description.classList.contains('visible')) {
             button.textContent = '▴ Скрыть описание';
         } else {
@@ -69,20 +71,17 @@ const ProductPage = () => {
     if (!product) {
         return <div>Товар не найден</div>;
     }
-    // const goToCart = () => {
-    //     navigate('/order');
-    // }
 
     const isButtonDisabled = !size;
     const goBack = () => {
         navigate('/products');
-    }
+    };
 
     const handleAddToCartButton = () => {
         if (size) {
-            const newCount = count + 1; // Увеличиваем количество
-            setCount(newCount); // Обновляем локальное состояние
-            addToCart(product, newCount, size, product.price); // Передаем актуальное количество и цену
+            const newCount = count + 1;
+            setCount(newCount);
+            addToCart(product, newCount, size, product.price);
             alert('Товар добавлен в корзину!');
             navigate('/products');
         } else {
@@ -90,11 +89,29 @@ const ProductPage = () => {
         }
     };
 
+    // Настройки для карусели react-slick
+    const settings = {
+        dots: true, // Точки навигации
+        infinite: true, // Бесконечная прокрутка
+        speed: 500, // Скорость анимации
+        slidesToShow: 1, // Количество слайдов, отображаемых одновременно
+        slidesToScroll: 1 // Количество слайдов для прокрутки
+    };
+
     return (
         <div className="product-page">
             <div className="item-container">
                 <button className="back" onClick={goBack}>&lt; назад</button>
-                <img className={'photo'} src={product.img} alt={product.title}/>
+
+                {/* Карусель фотографий */}
+                <Slider {...settings}>
+                    {product.images.map((image, index) => (
+                        <div key={index}>
+                            <img className="photo" src={image} alt={`Product image ${index + 1}`} />
+                        </div>
+                    ))}
+                </Slider>
+
                 <div className="title">{product.title}</div>
                 <div className={'product-description'}>B - Basics: Базовые вещи. Слово указывает на то, что одежда
                     предназначена для повседневного использования
