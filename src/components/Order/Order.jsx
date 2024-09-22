@@ -63,7 +63,7 @@ const Order = () => {
                 cartItems.map((item, index) => (
                     <div key={index} className="product-item">
                         <div className="item-product-content">
-                            <div className="item-product-img">
+                            <div className="item-product-img-div">
                                 <img className="item-product-img-cart" src={item.product.img}/>
                             </div>
                             <div className="item-product-description">

@@ -58,6 +58,7 @@
     justify-content: center;
     align-items: start;
     z-index: 1000;
+    opacity: 1;
     transition: right 0.3s ease; /* Плавный переход для свойства right */
 }
 
