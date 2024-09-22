@@ -24,15 +24,14 @@
     font-family: 'Murs Gothic', sans-serif;
 }
 
-.item-product-content{
+.item-product-content-confirm{
     display: flex;
     justify-content: start;
 }
 
-.item-product-img {
-    width: 33vw;
+.item-product-img-confirm {
+    width: 30vw;
     height: 168px;
-    background: #D9D9D9;
 }
 .item-product-description {
     margin-left: 20px;

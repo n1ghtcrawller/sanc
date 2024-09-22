@@ -95,9 +95,9 @@ const Confirm = () => {
             ) : (
                 cartItems.map((item, index) => (
                     <div key={index} className="product-item">
-                        <div className="item-product-content">
-                            <div className="item-product-img">
-                                <img src={item.img}/>
+                        <div className="item-product-content-confirm">
+                            <div className="item-product-img-confirm">
+                                <img src={item.product.img}/>
                             </div>
                             <div className="item-product-description">
                                 <p className="item-product-title">{item.product.title}</p>
