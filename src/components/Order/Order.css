@@ -101,8 +101,9 @@ body {
     justify-content: start;
 }
 
-.item-product-img {
-    width: 28vw;
+.item-product-img-cart {
+    width: 30vw;
+    height: 168px;
 }
 .item-product-description {
     margin-left: 20px;

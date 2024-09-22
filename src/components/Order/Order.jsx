@@ -64,7 +64,7 @@ const Order = () => {
                     <div key={index} className="product-item">
                         <div className="item-product-content">
                             <div className="item-product-img">
-                                <img className="item-product-img" src={item.product.img}/>
+                                <img className="item-product-img-cart" src={item.product.img}/>
                             </div>
                             <div className="item-product-description">
                                 <p className="item-product-title">{item.product.title}</p>
