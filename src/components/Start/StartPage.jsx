@@ -41,19 +41,21 @@ const StartPage = () => {
         }, 500);
     };
 
+    const getRandomImages = () => {
+        const shuffledProducts = [...products].sort(() => 0.5 - Math.random()); // Перемешиваем массив продуктов
+        return shuffledProducts.slice(0, 3); // Возвращаем первые три
+    };
+
     useEffect(() => {
         document.body.className = theme;
 
-        // Select 3 random images from the products
-        const getRandomImages = () => {
-            const shuffledProducts = [...products].sort(() => 0.5 - Math.random());
-            const selectedProducts = shuffledProducts.slice(0, 3);
-            const images = selectedProducts.map(product => product.images[0]);
-            setRandomImages(images);
-        };
-
-        getRandomImages();
+        const randomImages = getRandomImages();
+        setRandomImages(randomImages);
     }, [theme]);
+
+    const handleImageClick = (productId) => {
+        navigate(`/ProductPage/${productId}`);
+    };
 
     const questions = [
         {
@@ -88,13 +90,13 @@ const StartPage = () => {
                 </button>
             </div>
             <div className="item-photos">
-                {randomImages.map((img, index) => (
+                {randomImages.map((product, index) => (
                     <img
                         key={index}
-                        className="main-page-photo"
-                        onClick={() => navigate(`/ProductPage/${index}`)}
-                        src={img}
-                        alt={`Product ${index + 1}`}
+                        src={product.img} // Предполагается, что у продукта есть поле image
+                        alt={product.name}  // Предполагается, что у продукта есть поле name
+                        onClick={() => handleImageClick(product.id)} // Переход на страницу продукта по его id
+                        className={"main-page-photo"}
                     />
                 ))}
             </div>
