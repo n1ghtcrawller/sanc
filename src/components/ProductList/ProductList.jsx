@@ -3,6 +3,7 @@ import './ProductList.css';
 import { Link, useNavigate } from "react-router-dom";
 import { useTelegram } from "../../hooks/useTelegram";
 import { CartContext } from "../CartProvider/CartContext";
+import { fetchProducts } from '../api/api'; // Импортируем fetchProducts
 
 export const products = []; // Глобальная переменная для хранения продуктов
 
@@ -39,22 +40,13 @@ const ProductList = () => {
 
     // Получение продуктов с API
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await fetch('https://keybasicsneutral.ru/products');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                products.push(...data); // Сохраняем загруженные продукты в глобальную переменную
-            } catch (error) {
-                console.error('Ошибка при получении данных:', error);
-            } finally {
-                setLoading(false); // Устанавливаем состояние загрузки в false
-            }
+        const loadProducts = async () => {
+            const data = await fetchProducts();
+            products.push(...data); // Сохраняем загруженные продукты в глобальную переменную
+            setLoading(false); // Устанавливаем состояние загрузки в false
         };
 
-        fetchProducts();
+        loadProducts();
     }, []);
 
     // Фильтруем товары по выбранной категории

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../ThemeProvider/ThemeContext';
+import { fetchProducts } from '../api/api'; // Импорт функции из api.js
 import './StartPage.css';
-import { products } from '../ProductList/ProductList';
 import logo from './KBN.jpg';
 import logo2 from './туту.png';
 import tg from '../../assets/tg.svg';
@@ -14,7 +14,7 @@ const StartPage = () => {
     const [currentLogo, setCurrentLogo] = useState(logo);
     const [fadeOut, setFadeOut] = useState(false);
     const [fadeIn, setFadeIn] = useState(true);
-    const [openQuestion, setOpenQuestion] = useState(null); // For tracking opened question
+    const [openQuestion, setOpenQuestion] = useState(null);
     const [randomImages, setRandomImages] = useState([]);
 
     const handleButtonClick = () => {
@@ -41,16 +41,22 @@ const StartPage = () => {
         }, 500);
     };
 
-    const getRandomImages = () => {
-        const shuffledProducts = [...products].sort(() => 0.5 - Math.random()); // Перемешиваем массив продуктов
-        return shuffledProducts.slice(0, 3); // Возвращаем первые три
+    // Получение случайных продуктов из API
+    const getRandomImages = (products) => {
+        const shuffledProducts = [...products].sort(() => 0.5 - Math.random());
+        return shuffledProducts.slice(0, 3); // Берем первые 3 продукта после перемешивания
     };
 
+    // Загрузка продуктов при загрузке компонента
     useEffect(() => {
         document.body.className = theme;
 
-        const randomImages = getRandomImages();
-        setRandomImages(randomImages);
+        const loadProducts = async () => {
+            const fetchedProducts = await fetchProducts();
+            setRandomImages(getRandomImages(fetchedProducts)); // Установка случайных изображений
+        };
+
+        loadProducts();
     }, [theme]);
 
     const handleImageClick = (productId) => {
@@ -73,7 +79,7 @@ const StartPage = () => {
     ];
 
     const toggleQuestion = (index) => {
-        setOpenQuestion(openQuestion === index ? null : index); // Toggle question
+        setOpenQuestion(openQuestion === index ? null : index);
     };
 
     return (
@@ -93,7 +99,7 @@ const StartPage = () => {
                 {randomImages.map((product, index) => (
                     <img
                         key={index}
-                        src={product.img} // Предполагается, что у продукта есть поле image
+                        src={product.img} // Предполагается, что у продукта есть поле img
                         alt={product.name}  // Предполагается, что у продукта есть поле name
                         onClick={() => handleImageClick(product.id)} // Переход на страницу продукта по его id
                         className={"main-page-photo"}
