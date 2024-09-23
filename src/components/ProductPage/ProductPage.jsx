@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Slider from "react-slick"; // Импортируем Slider
-import { products } from '../ProductList/ProductList';
+import Slider from "react-slick";
+import { fetchProducts } from '../api/api'; // Импортируем функцию для получения продуктов
 import { useTelegram } from '../../hooks/useTelegram';
 import { useCart } from '../CartProvider/CartContext';
 import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css"; // Подключаем стили для карусели
+import "slick-carousel/slick/slick-theme.css";
 import './ProductPage.css';
 
 const ProductPage = () => {
     const { tg } = useTelegram();
     const { id } = useParams();
     const navigate = useNavigate();
+    const [product, setProduct] = useState(null); // Состояние для текущего продукта
     const [count, setCount] = useState(0);
     const [size, setSize] = useState('');
     const { addToCart, cartItems } = useCart();
     const [openQuestion, setOpenQuestion] = useState(null);
+    const [loading, setLoading] = useState(true); // Состояние для загрузки
     const questions = [
         {
             question: "Состав",
@@ -31,26 +33,19 @@ const ProductPage = () => {
         }
     ];
 
-    const toggleQuestion = (index) => {
-        setOpenQuestion(openQuestion === index ? null : index);
-    };
-
-    function toggleDescription() {
-        const description = document.querySelector('.product-description');
-        const button = document.querySelector('.toggle-button');
-
-        description.classList.toggle('visible');
-
-        if (description.classList.contains('visible')) {
-            button.textContent = '▴ Скрыть описание';
-        } else {
-            button.textContent = '▾ Показать описание';
-        }
-    }
+    useEffect(() => {
+        const loadProduct = async () => {
+            setLoading(true); // Начало загрузки
+            const products = await fetchProducts();
+            const foundProduct = products.find(p => p.id === parseInt(id));
+            setProduct(foundProduct);
+            setLoading(false); // Конец загрузки
+        };
+        loadProduct();
+    }, [id]);
 
     useEffect(() => {
         tg.MainButton.show();
-
         const totalCount = cartItems.reduce((acc, item) => acc + item.count, 0);
 
         tg.MainButton.setParams({
@@ -67,10 +62,9 @@ const ProductPage = () => {
         };
     }, [tg, cartItems]);
 
-    const product = products.find(p => p.id === parseInt(id));
-    if (!product) {
-        return <div>Товар не найден</div>;
-    }
+    const toggleQuestion = (index) => {
+        setOpenQuestion(openQuestion === index ? null : index);
+    };
 
     const isButtonDisabled = !size;
     const goBack = () => {
@@ -89,21 +83,27 @@ const ProductPage = () => {
         }
     };
 
-    // Настройки для карусели react-slick
     const settings = {
-        dots: true, // Точки навигации
-        infinite: true, // Бесконечная прокрутка
-        speed: 200, // Скорость анимации
-        slidesToShow: 1, // Количество слайдов, отображаемых одновременно
-        slidesToScroll: 1 // Количество слайдов для прокрутки
+        dots: true,
+        infinite: true,
+        speed: 200,
+        slidesToShow: 1,
+        slidesToScroll: 1
     };
+
+    if (loading) {
+        return <div>Загрузка...</div>; // Пока идет загрузка
+    }
+
+    if (!product) {
+        return <div>Товар не найден</div>; // Если товар не найден
+    }
 
     return (
         <div className="product-page">
             <div className="item-container">
                 <button className="back" onClick={goBack}>&lt; назад</button>
 
-                {/* Карусель фотографий */}
                 <Slider {...settings}>
                     {product.images.map((image, index) => (
                         <div key={index}>
@@ -113,8 +113,8 @@ const ProductPage = () => {
                 </Slider>
 
                 <div className="title">{product.title}</div>
-                <div className={'product-description'}>B - Basics: Базовые вещи. Слово указывает на то, что одежда
-                    предназначена для повседневного использования
+                <div className={'product-description'}>
+                    B - Basics: Базовые вещи. Слово указывает на то, что одежда предназначена для повседневного использования
                 </div>
                 <div className="price">₽{product.price}</div>
                 <div className="buttons">
@@ -148,9 +148,7 @@ const ProductPage = () => {
                     </div>
                 </div>
                 <div className={'subtitle-ctcs'}>
-                    <div className="contacts-subtitle">
-                        КОНТАКТЫ
-                    </div>
+                    <div className="contacts-subtitle">КОНТАКТЫ</div>
                 </div>
                 <div className={'contacts-div'}>
                     <div className={'contacts-message'}>
