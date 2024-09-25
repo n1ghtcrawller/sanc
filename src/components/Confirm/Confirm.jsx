@@ -32,6 +32,7 @@ const Confirm = () => {
             chatId: user.id,
             deliveryInfo: {
                 // country: formData.country,
+                name: formData.name,
                 city: formData.city,
                 street: formData.street,
                 house: formData.house,
@@ -119,13 +120,13 @@ const Confirm = () => {
                 <div className="confirm-form">
                     {/*<p>Страна: {formData.country}</p>*/}
                     <p>имя: {formData.name}</p>
-                    <p>Телефон: {formData.phone}</p>
+                    <p>телефон: {formData.phone}</p>
                     <p>почта: {formData.email}</p>
                     <p>cпособ получения: {formData.subject}</p>
-                    <p>Город: {formData.city}</p>
+                    <p>город: {formData.city}</p>
                     <p>Улица: {formData.street}</p>
-                    <p>Дом: {formData.house}</p>
-                    <p>Квартира: {formData.office}</p>
+                    <p>дом: {formData.house}</p>
+                    <p>квартира: {formData.office}</p>
                     <p>комментарий: {formData.comment}</p>
                 </div>
             )}
