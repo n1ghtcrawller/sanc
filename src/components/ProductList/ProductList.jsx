@@ -5,7 +5,7 @@ import { useTelegram } from "../../hooks/useTelegram";
 import { CartContext } from "../CartProvider/CartContext";
 import { fetchProducts } from '../api/api'; // Импортируем fetchProducts
 
-export const products = []; // Глобальная переменная для хранения продуктов
+export let products = []; // Глобальная переменная для хранения продуктов
 
 const ProductList = () => {
     const { tg } = useTelegram();
