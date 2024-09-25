@@ -3,15 +3,14 @@ import './ProductList.css';
 import { Link, useNavigate } from "react-router-dom";
 import { useTelegram } from "../../hooks/useTelegram";
 import { CartContext } from "../CartProvider/CartContext";
-import { fetchProducts } from '../api/api'; // Импортируем fetchProducts
-
-export let products = []; // Глобальная переменная для хранения продуктов
+import { fetchProducts } from '../api/api';
 
 const ProductList = () => {
     const { tg } = useTelegram();
     const navigate = useNavigate();
     const { cartItems } = useContext(CartContext);
     const [loading, setLoading] = useState(true); // Состояние загрузки
+    const [products, setProducts] = useState([]); // Локальное состояние для хранения продуктов
     const [selectedCategory, setSelectedCategory] = useState('Все');
 
     const goBack = () => {
@@ -38,16 +37,20 @@ const ProductList = () => {
         };
     }, [tg, cartItems]);
 
-    // Получение продуктов с API
+    // Получение продуктов с API только если они еще не загружены
     useEffect(() => {
         const loadProducts = async () => {
-            const data = await fetchProducts();
-            products.push(...data); // Сохраняем загруженные продукты в глобальную переменную
-            setLoading(false); // Устанавливаем состояние загрузки в false
+            if (products.length === 0) { // Проверяем, есть ли уже загруженные продукты
+                const data = await fetchProducts();
+                setProducts(data); // Сохраняем загруженные продукты в локальное состояние
+                setLoading(false); // Устанавливаем состояние загрузки в false
+            } else {
+                setLoading(false); // Если продукты уже есть, просто отключаем загрузку
+            }
         };
 
         loadProducts();
-    }, []);
+    }, [products]);
 
     // Фильтруем товары по выбранной категории
     const filteredProducts = selectedCategory === 'Все'
