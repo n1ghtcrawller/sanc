@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Slider from "react-slick";
-import { fetchProducts } from '../api/api'; // Импортируем функцию для получения продуктов
+import { fetchProducts } from '../api/api'; // Import the function to fetch products
 import { useTelegram } from '../../hooks/useTelegram';
 import { useCart } from '../CartProvider/CartContext';
 import "slick-carousel/slick/slick.css";
@@ -12,12 +12,12 @@ const ProductPage = () => {
     const { tg } = useTelegram();
     const { id } = useParams();
     const navigate = useNavigate();
-    const [product, setProduct] = useState(null); // Состояние для текущего продукта
+    const [product, setProduct] = useState(null); // State for the current product
     const [count, setCount] = useState(0);
     const [size, setSize] = useState('');
     const { addToCart, cartItems } = useCart();
     const [openQuestion, setOpenQuestion] = useState(null);
-    const [loading, setLoading] = useState(true); // Состояние для загрузки
+    const [loading, setLoading] = useState(true); // Loading state
     const questions = [
         {
             question: "Состав",
@@ -35,11 +35,11 @@ const ProductPage = () => {
 
     useEffect(() => {
         const loadProduct = async () => {
-            setLoading(true); // Начало загрузки
+            setLoading(true); // Start loading
             const products = await fetchProducts();
             const foundProduct = products.find(p => p.id === parseInt(id));
             setProduct(foundProduct);
-            setLoading(false); // Конец загрузки
+            setLoading(false); // End loading
         };
         loadProduct();
     }, [id]);
@@ -92,11 +92,11 @@ const ProductPage = () => {
     };
 
     if (loading) {
-        return <div>Загрузка...</div>; // Пока идет загрузка
+        return <div>Загрузка...</div>; // While loading
     }
 
     if (!product) {
-        return <div>Товар не найден</div>; // Если товар не найден
+        return <div>Товар не найден</div>; // If product not found
     }
 
     return (
@@ -117,6 +117,9 @@ const ProductPage = () => {
                     B - Basics: Базовые вещи. Слово указывает на то, что одежда предназначена для повседневного использования
                 </div>
                 <div className="price">₽{product.price}</div>
+                {/* Display product quantity */}
+                <div className="quantity">Осталось: {product.count}</div> {/* Assuming product.quantity exists */}
+
                 <div className="buttons">
                     <select className="changeSize" onChange={(e) => setSize(e.target.value)} value={size}>
                         <option value="">Выберите размер</option>
