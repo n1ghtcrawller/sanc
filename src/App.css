@@ -4,7 +4,6 @@
 body {
   transition: background-color 0.5s, color 0.5s;
   font-family: "Montserrat", sans-serif;
-  width: 89.5vw;
 }
 
 .light {
