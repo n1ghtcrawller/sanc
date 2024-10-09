@@ -3,7 +3,7 @@ import { useFormContext } from '../FormProvider/FormContext';
 import { useCart } from '../CartProvider/CartContext';
 import { useNavigate } from "react-router-dom";
 import { useTelegram } from '../../hooks/useTelegram';
-import './Confirm.css';
+import './Confirm.css'
 
 const Confirm = () => {
     const getTotalPrice = (items) => {
@@ -31,6 +31,7 @@ const Confirm = () => {
             queryId: queryId,
             chatId: user.id,
             deliveryInfo: {
+                // country: formData.country,
                 name: formData.name,
                 city: formData.city,
                 street: formData.street,
@@ -78,18 +79,6 @@ const Confirm = () => {
         };
     }, [onSendData, tg]);
 
-    useEffect(() => {
-        // Динамическое подключение скрипта для Tinkoff
-        const script = document.createElement('script');
-        script.src = "https://securepay.tinkoff.ru/html/payForm/js/tinkoff_v2.js";
-        script.async = true;
-        document.body.appendChild(script);
-
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
-
     if (!formData) {
         return null; // или можно вернуть какое-то сообщение
     }
@@ -109,7 +98,7 @@ const Confirm = () => {
                     <div key={index} className="product-item">
                         <div className="item-product-content-confirm">
                             <div className="item-product-img-confirm">
-                                <img src={item.product.img} className="item-product-img-confirm" alt={item.product.title}/>
+                                <img src={item.product.img} className="item-product-img-confirm"/>
                             </div>
                             <div className="item-product-description">
                                 <p className="item-product-title">{item.product.title}</p>
@@ -124,11 +113,12 @@ const Confirm = () => {
                     </div>
                 ))
             )}
-
+            {/* Проверка на тип formData */}
             {typeof formData !== 'object' || Array.isArray(formData) ? (
                 <p>Данные не заполнены</p>
             ) : (
                 <div className="confirm-form">
+                    {/*<p>Страна: {formData.country}</p>*/}
                     <p>имя: {formData.name}</p>
                     <p>телефон: {formData.phone}</p>
                     <p>почта: {formData.email}</p>
@@ -140,16 +130,6 @@ const Confirm = () => {
                     <p>комментарий: {formData.comment}</p>
                 </div>
             )}
-
-            <form className="payform-tbank" name="payform-tbank" id="payform-tbank">
-                <input className="payform-tbank-row" type="hidden" name="terminalkey" value="25471612"/>
-                <input className="payform-tbank-row" type="hidden" name="frame" value="true"/>
-                <input className="payform-tbank-row" type="hidden" name="language" value="ru"/>
-                <input className="payform-tbank-row" type="hidden" name="receipt" value=""/>
-                <input className="payform-tbank-row" type="text"  name="amount" />
-                <input className="payform-tbank-row" type="hidden" name="order"/>
-                <input className="payform-tbank-row payform-tbank-btn" type="submit" value="Оплатить"/>
-            </form>
         </div>
     );
 };
