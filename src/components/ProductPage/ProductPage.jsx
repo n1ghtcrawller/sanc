@@ -118,7 +118,7 @@ const ProductPage = () => {
                 </div>
                 <div className="price">₽{product.price}</div>
                 {/* Display product quantity */}
-                <div className="quantity">Осталось: {product.count}</div> {/* Assuming product.quantity exists */}
+                {/*<div className="quantity">Осталось: {product.count}</div> /!* Assuming product.quantity exists *!/*/}
 
                 <div className="buttons">
                     <select className="changeSize" onChange={(e) => setSize(e.target.value)} value={size}>
