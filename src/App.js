@@ -5,7 +5,7 @@ import Header from "./components/Header/Header";
 import { Route, Routes } from "react-router-dom";
 import ProductList from "./components/ProductList/ProductList";
 import Order from "./components/Order/Order";
-import StartPage from "./components/Start/StartPage";
+// import StartPage from "./components/Start/StartPage";
 import ProductPage from "./components/ProductPage/ProductPage";
 import { CartProvider } from "./components/CartProvider/CartContext";
 import Form from "./components/Form/Form";
@@ -28,8 +28,8 @@ function App() {
                 <Header />
                 <FormProvider>
                 <Routes>
-                    <Route index element={<StartPage />} />
-                    <Route path={"products"} element={<ProductList />} />
+                    {/*<Route index element={<StartPage />} />*/}
+                    <Route index element={<ProductList />} />
                     <Route path={"order"} element={<Order />} />
                     <Route path={"ProductPage/:id"} element={<ProductPage />} />
                     <Route path={"form"} element={<Form />} />

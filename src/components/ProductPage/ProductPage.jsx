@@ -68,7 +68,7 @@ const ProductPage = () => {
 
     const isButtonDisabled = !size;
     const goBack = () => {
-        navigate('/products');
+        navigate('/');
     };
 
     const handleAddToCartButton = () => {
@@ -77,7 +77,7 @@ const ProductPage = () => {
             setCount(newCount);
             addToCart(product, newCount, size, product.price);
             alert('Товар добавлен в корзину!');
-            navigate('/products');
+            navigate('/');
         } else {
             alert('Пожалуйста, выберите размер!');
         }
@@ -102,7 +102,6 @@ const ProductPage = () => {
     return (
         <div className="product-page">
             <div className="item-container">
-                <button className="back" onClick={goBack}>&lt; назад</button>
 
                 <Slider {...settings}>
                     {product.images.map((image, index) => (
