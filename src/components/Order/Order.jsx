@@ -48,7 +48,7 @@ const Order = () => {
         updateItemCount(item.product.id, item.count + 1);
     };
     const goBack = () => {
-        navigate('/products')
+        navigate('/')
     }
 
     return (
