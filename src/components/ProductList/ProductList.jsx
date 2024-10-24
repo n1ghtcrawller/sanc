@@ -102,7 +102,12 @@ const ProductList = () => {
                         <h2>{item.title}</h2>
                         <div className={'size-prise'}>
                             <span className={'size'}>s/m/l/xl</span>
-                            <span className={"item-price"}>Цена: ₽{item.price}</span>
+                            <div className="price-container">
+                                {item.old_price && (
+                                    <div className="old-price">₽{item.old_price}</div>
+                                )}
+                                <div className="price">₽{item.price}</div>
+                            </div>
                         </div>
                         <button className={'add-to-cart-button'}>Добавить в корзину</button>
                     </Link>

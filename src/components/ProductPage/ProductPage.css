@@ -222,3 +222,15 @@
     margin-top: 20px;
     font-size: 18px;
 }
+.price-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.old-price {
+    text-decoration: line-through; /* Зачеркнутая цена */
+    color: grey; /* Серый цвет для старой цены */
+    font-size: 0.9em; /* Немного меньший размер шрифта */
+    margin-bottom: 5px; /* Отступ между старой и новой ценой */
+}

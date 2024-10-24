@@ -115,7 +115,12 @@ const ProductPage = () => {
                 <div className={'product-description'}>
                     B - Basics: Базовые вещи. Слово указывает на то, что одежда предназначена для повседневного использования
                 </div>
-                <div className="price">₽{product.price}</div>
+                <div className="price-container">
+                    {product.old_price && (
+                        <div className="old-price">₽{product.old_price}</div>
+                    )}
+                    <div className="price">₽{product.price}</div>
+                </div>
                 {/* Display product quantity */}
                 {/*<div className="quantity">Осталось: {product.count}</div> /!* Assuming product.quantity exists *!/*/}
 
