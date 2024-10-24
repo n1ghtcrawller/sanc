@@ -64,11 +64,12 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
+    height: 42px;
 }
 
 .size {
     color: #071E57;
-    font-size: 13px;
+    font-size: 18px;
     margin: 0;
 }
 .item-price {
