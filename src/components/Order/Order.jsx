@@ -87,6 +87,7 @@ const Order = () => {
             <div className="display-total-price">
                 <span className="total-price">Итого: {totalPrice}₽</span>
             </div>
+            <button onClick={redirectToForm}>ТЕСТ</button>
         </div>
     );
 };

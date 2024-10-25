@@ -67,9 +67,7 @@ const ProductPage = () => {
     };
 
     const isButtonDisabled = !size;
-    const goBack = () => {
-        navigate('/');
-    };
+
 
     const handleAddToCartButton = () => {
         if (size) {
@@ -77,7 +75,7 @@ const ProductPage = () => {
             setCount(newCount);
             addToCart(product, newCount, size, product.price);
             alert('Товар добавлен в корзину!');
-            navigate('/');
+            navigate('/order');
         } else {
             alert('Пожалуйста, выберите размер!');
         }
