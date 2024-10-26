@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useTheme } from '../ThemeProvider/ThemeContext';
 import dark_logo from '../../assets/header_logo_dark.svg';
 import dark_burger from '../../assets/dark_burger.svg';
+import '../Start/StartPage.css'
 
 const Header = () => {
     const { theme, toggleTheme } = useTheme();
@@ -30,7 +31,7 @@ const Header = () => {
 
 
     const redirectToProductList = () => {
-        navigate('/products');
+        navigate('/');
         setMenuOpen(false)
     };
     const redirectToStartPage = () => {

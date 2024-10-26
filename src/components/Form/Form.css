@@ -78,3 +78,38 @@ span {
     margin-bottom: 33px;
     margin-right: 20px;
 }
+.addresses {
+    margin-left: 5px;
+}
+.suggestions-list {
+    position: absolute; /* Позиционирование для правильного отображения */
+    background-color: #fff; /* Белый фон для списка */
+    border: 1px solid #ccc; /* Граница для списка */
+    border-radius: 4px; /* Закругленные углы */
+    max-height: 200px; /* Максимальная высота */
+    overflow-y: auto; /* Прокрутка для длинных списков */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для создания эффекта выпадающего списка */
+    z-index: 1000; /* Убедитесь, что список находится сверху других элементов */
+    width: 91vw;
+    margin-top: 0;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.suggestion-item {
+    padding: 10px; /* Внутренние отступы для элементов списка */
+    cursor: pointer; /* Указатель при наведении */
+    transition: background-color 0.3s; /* Плавный переход фона */
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0; /* Цвет фона при наведении */
+}
+
+.suggestion-item:not(:last-child) {
+    border-bottom: 1px solid #e0e0e0; /* Разделение между элементами списка */
+}
+.disabled {
+    background-color: #cccccc;
+}
+

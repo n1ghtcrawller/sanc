@@ -70,7 +70,7 @@ const ProductList = () => {
 
     return (
         <div className="product-list">
-            <button className="back" onClick={goBack}>&lt; назад</button>
+            {/*<button className="back" onClick={goBack}>&lt; назад</button>*/}
             <div className="category-buttons">
                 <button
                     className={'category-button'}

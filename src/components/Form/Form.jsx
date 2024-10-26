@@ -2,9 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useFormContext } from "../FormProvider/FormContext";
 import { useTelegram } from "../../hooks/useTelegram";
 import { useNavigate } from "react-router-dom";
+import CustomDropDownInput from "../CustomDropDownInput/CustomDropDownInput";
 import "./Form.css";
 
-const API_KEY = 'YOUR_API_KEY'; // Укажите ваш API-ключ Яндекс Карт
+const API_KEY = 'c325d89c-7fb1-44a9-af43-2d3bb7bd7411';
 
 const Form = () => {
     const { setFormData } = useFormContext();
@@ -16,9 +17,11 @@ const Form = () => {
     const [subject, setSubject] = useState('Самовывоз');
     const [comment, setComment] = useState('');
     const [office, setOffice] = useState('');
-    const [suggestions, setSuggestions] = useState([]); // Состояние для хранения предложений
+    const [suggestions, setSuggestions] = useState([]);
     const { tg } = useTelegram();
     const navigate = useNavigate();
+    const [isSuggestionsVisible, setSuggestionsVisible] = useState(true);
+
 
     const formatPhoneNumber = (value) => {
         const cleaned = ('' + value).replace(/\D/g, '');
@@ -82,30 +85,38 @@ const Form = () => {
         }
     }, [name, city, address, phone, email, office, subject, tg]);
 
-    // Функция для получения предложений по адресу
     const fetchSuggestions = async (query) => {
-        if (query.length < 3) return; // Ограничение на минимальное количество символов
+        if (query.length < 3) {
+            setSuggestions([]); // Очистка подсказок, если введено меньше 3 символов
+            return;
+        }
         try {
             const response = await fetch(
-                `https://suggest-maps.yandex.ru/v1/suggest?apikey=${API_KEY}&text=${query}&print_address=1&attrs=uri`
+                `https://suggest-maps.yandex.ru/v1/suggest?text=${query}&apikey=${API_KEY}`
             );
             const data = await response.json();
-            setSuggestions(data.results || []);
+
+            // Извлекаем только текстовые значения
+            const formattedSuggestions = data.results.map(result => ({
+                title: result.title.text, // Получаем текст заголовка
+                subtitle: result.subtitle.text // Получаем текст подзаголовка
+            }));
+
+            setSuggestions(formattedSuggestions); // Устанавливаем полученные адреса
         } catch (error) {
             console.error('Ошибка при получении данных от Яндекс Карт:', error);
         }
     };
 
-    const handleAddressChange = (e) => {
-        const value = e.target.value;
+    const handleAddressChange = (value) => {
         setAddress(value);
-        fetchSuggestions(value); // Вызов функции получения предложений
-    };
+        fetchSuggestions(value);
 
-    const selectSuggestion = (suggestion) => {
-        setAddress(suggestion.title.text); // Устанавливаем выбранный адрес
-        setSuggestions([]); // Очищаем предложения после выбора
     };
+    const handleSuggestionClick = (title) => {
+        setAddress(title); // Устанавливаем выбранный адрес
+        setSuggestionsVisible(false); // Скрыть список предложений
+        }
 
     const goBack = () => {
         navigate('/order');
@@ -171,6 +182,8 @@ const Form = () => {
                             value="Самовывоз"
                             checked={subject === 'Самовывоз'}
                             onChange={(e) => setSubject(e.target.value)}
+                            disabled // Здесь добавлено свойство disabled
+                            className={'disabled'}
                         />
                         Самовывоз
                     </label>
@@ -178,24 +191,29 @@ const Form = () => {
             </div>
 
             {subject === 'Курьером' && (
-                <div>
+                <div className={'addresses'}>
                     <input
                         className="input-info"
                         type="text"
                         placeholder="адрес"
                         value={address}
-                        onChange={handleAddressChange}
+                        onChange={(e) => handleAddressChange(e.target.value)}
+                        onFocus={() => address.length >= 3 && setSuggestionsVisible(true)} // Показать предложения при фокусе
                     />
-                    <ul className="suggestions-list">
-                        {suggestions.map((suggestion, index) => (
-                            <li
-                                key={index}
-                                onClick={() => selectSuggestion(suggestion)}
-                            >
-                                {suggestion.title.text} - {suggestion.subtitle.text}
-                            </li>
-                        ))}
-                    </ul>
+                    {isSuggestionsVisible && suggestions.length > 0 && (
+                        <ul className="suggestions-list">
+                            {suggestions.map((option, index) => (
+                                <li
+                                    key={index}
+                                    onClick={() => handleSuggestionClick(option.title)}
+                                    className="suggestion-item"
+                                >
+                                    {option.title} {/* Отображаем только текст заголовка */}
+                                    {option.subtitle}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                     <input
                         className="input-info"
                         type="text"

@@ -24,6 +24,9 @@ const Footer = () => {
     const redirectToIg = () => {
         window.location.href = "https://www.instagram.com/kbnwear"
     }
+    const redirectToMg = () => {
+        window.location.href = 'https://t.me/kbn_mg';
+    };
 
     useEffect(() => {
         document.body.className = theme;
@@ -38,7 +41,7 @@ const Footer = () => {
                 <div className={'for-contact-text'}>
                     для связи
                 </div>
-                <div className={'kbn_mg'}>
+                <div onClick={redirectToMg} className={'kbn_mg'}>
                     @kbn_mg
                 </div>
                 <div className={'info'} onClick={copyToClipboard}><img src={miniemail} className={'miniemail'}/> info@kbn.ru</div>
