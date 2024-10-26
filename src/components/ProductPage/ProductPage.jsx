@@ -29,7 +29,7 @@ const ProductPage = () => {
         },
         {
             question: "Как ухаживать",
-            answer: "Стирать на 30 градусах без сушки и без отжима, сушить на горизонтальной поверхности"
+            answer: "Стирать при 30 градусах без сушки и без отжима, сушить на горизонтальной поверхности"
         }
     ];
     const redirectToMg = () => {
@@ -113,9 +113,9 @@ const ProductPage = () => {
                 </Slider>
 
                 <div className="title">{product.title}</div>
-                <div className={'product-description'}>
-                    B - Basics: Базовые вещи. Слово указывает на то, что одежда предназначена для повседневного использования
-                </div>
+                {/*<div className={'product-description'}>*/}
+                {/*    B - Basics: Базовые вещи. Слово указывает на то, что одежда предназначена для повседневного использования*/}
+                {/*</div>*/}
                 <div className="price-container">
                     {product.old_price && (
                         <div className="old-price">₽{product.old_price}</div>

@@ -150,7 +150,7 @@ const Form = () => {
             <input
                 className="input-info"
                 type="email"
-                placeholder="Эл. почта"
+                placeholder="эл. почта"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             />
