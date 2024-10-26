@@ -128,6 +128,7 @@ const ProductPage = () => {
                 <div className="buttons">
                     <select className="changeSize" onChange={(e) => setSize(e.target.value)} value={size}>
                         <option value="">Выберите размер</option>
+                        <option value="XS">XS</option>
                         <option value="S">S</option>
                         <option value="M">M</option>
                         <option value="L">L</option>

@@ -79,7 +79,7 @@ const Confirm = () => {
     }, [onSendData, tg]);
 
     if (!formData) {
-        return null; // или можно вернуть какое-то сообщение
+        return null;
     }
 
     const goBack = () => {
