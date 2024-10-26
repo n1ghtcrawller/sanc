@@ -78,7 +78,7 @@ const ProductPage = () => {
             setCount(newCount);
             addToCart(product, newCount, size, product.price);
             alert('Товар добавлен в корзину!');
-            navigate('/order');
+            navigate('/');
         } else {
             alert('Пожалуйста, выберите размер!');
         }

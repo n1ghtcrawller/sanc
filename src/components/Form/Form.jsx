@@ -14,7 +14,7 @@ const Form = () => {
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
-    const [subject, setSubject] = useState('Самовывоз');
+    const [subject, setSubject] = useState('Курьером');
     const [comment, setComment] = useState('');
     const [office, setOffice] = useState('');
     const [suggestions, setSuggestions] = useState([]);
