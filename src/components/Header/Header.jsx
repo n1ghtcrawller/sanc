@@ -65,7 +65,7 @@ const Header = () => {
                     <ul>
                         {/*<li>Футболки</li>*/}
                         {/*<li>Худи</li>*/}
-                        <li onClick={scrollToQA}>Часто задаваемые вопросы</li>
+                        {/*<li onClick={scrollToQA}>Часто задаваемые вопросы</li>*/}
                         <li onClick={scrollToBottom}>Контакты</li>
                         <li onClick={scrollToBottom}>Соц сети</li>
                         <li>

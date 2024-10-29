@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Slider from "react-slick";
-import { fetchProducts } from '../api/api'; // Import the function to fetch products
+import { fetchProducts } from '../api/api';
 import { useTelegram } from '../../hooks/useTelegram';
 import { useCart } from '../CartProvider/CartContext';
 import "slick-carousel/slick/slick.css";
@@ -12,37 +12,37 @@ const ProductPage = () => {
     const { tg } = useTelegram();
     const { id } = useParams();
     const navigate = useNavigate();
-    const [product, setProduct] = useState(null); // State for the current product
+    const [product, setProduct] = useState(null);
     const [count, setCount] = useState(0);
     const [size, setSize] = useState('');
     const { addToCart, cartItems } = useCart();
     const [openQuestion, setOpenQuestion] = useState(null);
-    const [loading, setLoading] = useState(true); // Loading state
+    const [loading, setLoading] = useState(true);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
     const questions = [
-        {
-            question: "Состав",
-            answer: "100% Хлопок"
-        },
-        {
-            question: "Политика возврата",
-            answer: "Если вы получили товар ненадлежащего качества, вы можете вернуть его в течение 14 дней с момента получения. Пожалуйста, свяжитесь с нашей службой поддержки для получения инструкций. Мы обработаем ваш возврат и вернем средства тем же способом, которым была осуществлена оплата, в течение 7-10 рабочих дней. Товары, поврежденные или использованные не по назначению, не подлежат возврату."
-        },
-        {
-            question: "Как ухаживать",
-            answer: "Стирать при 30 градусах без сушки и без отжима, сушить на горизонтальной поверхности"
-        }
+        { question: "Состав", answer: "100% Хлопок" },
+        { question: "Политика возврата", answer: "Описание политики возврата..." },
+        { question: "Как ухаживать", answer: "Описание ухода за изделием..." }
     ];
     const redirectToMg = () => {
         window.location.href = 'https://t.me/kbn_mg';
     };
 
+    const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+    const handleSizeSelect = (selectedSize) => {
+        setSize(selectedSize);
+        setIsDropdownOpen(false);
+    };
+    const isButtonDisabled = !size;
+
     useEffect(() => {
         const loadProduct = async () => {
-            setLoading(true); // Start loading
+            setLoading(true);
             const products = await fetchProducts();
             const foundProduct = products.find(p => p.id === parseInt(id));
             setProduct(foundProduct);
-            setLoading(false); // End loading
+            setLoading(false);
         };
         loadProduct();
     }, [id]);
@@ -50,10 +50,7 @@ const ProductPage = () => {
     useEffect(() => {
         tg.MainButton.show();
         const totalCount = cartItems.reduce((acc, item) => acc + item.count, 0);
-
-        tg.MainButton.setParams({
-            text: `Перейти в корзину (${totalCount})`
-        });
+        tg.MainButton.setParams({ text: `Перейти в корзину (${totalCount})` });
 
         const onMainButtonClick = () => {
             navigate('/order');
@@ -68,9 +65,6 @@ const ProductPage = () => {
     const toggleQuestion = (index) => {
         setOpenQuestion(openQuestion === index ? null : index);
     };
-
-    const isButtonDisabled = !size;
-
 
     const handleAddToCartButton = () => {
         if (size) {
@@ -92,18 +86,24 @@ const ProductPage = () => {
         slidesToScroll: 1
     };
 
+    // Определяем доступные размеры на основе категории продукта
+    const availableSizes = product?.category === "Худи"
+        ? ["S", "M", "L", "XL", "XXL"]
+        : product?.category === "Футболки"
+            ? ["XS", "S", "M", "L", "XL"]
+            : [];
+
     if (loading) {
-        return <div>Загрузка...</div>; // While loading
+        return <div>Загрузка...</div>;
     }
 
     if (!product) {
-        return <div>Товар не найден</div>; // If product not found
+        return <div>Товар не найден</div>;
     }
 
     return (
         <div className="product-page">
             <div className="item-container">
-
                 <Slider {...settings}>
                     {product.images.map((image, index) => (
                         <div key={index}>
@@ -113,31 +113,35 @@ const ProductPage = () => {
                 </Slider>
 
                 <div className="title">{product.title}</div>
-                {/*<div className={'product-description'}>*/}
-                {/*    B - Basics: Базовые вещи. Слово указывает на то, что одежда предназначена для повседневного использования*/}
-                {/*</div>*/}
                 <div className="price-container">
-                    {product.old_price && (
-                        <div className="old-price">₽{product.old_price}</div>
-                    )}
+                    {product.old_price && <div className="old-price">₽{product.old_price}</div>}
                     <div className="price">₽{product.price}</div>
                 </div>
-                {/* Display product quantity */}
-                {/*<div className="quantity">Осталось: {product.count}</div> /!* Assuming product.quantity exists *!/*/}
 
                 <div className="buttons">
-                    <select className="changeSize" onChange={(e) => setSize(e.target.value)} value={size}>
-                        <option value="">Выберите размер</option>
-                        <option value="XS">XS</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                    </select>
+                    <div className="dropdown">
+                        <div className="dropdown-toggle" onClick={toggleDropdown}>
+                            {size || "Выберите размер"}
+                        </div>
+                        {isDropdownOpen && (
+                            <ul className="dropdown-menu">
+                                {availableSizes.map((sizeOption) => (
+                                    <li
+                                        key={sizeOption}
+                                        className="dropdown-item"
+                                        onClick={() => handleSizeSelect(sizeOption)}
+                                    >
+                                        {sizeOption}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
                     <button disabled={isButtonDisabled} className="add-to-cart-btn" onClick={handleAddToCartButton}>
                         Добавить в корзину
                     </button>
                 </div>
+
                 <div className="product-container">
                     <div className={'qa-content'}>
                         <ul>
@@ -146,16 +150,13 @@ const ProductPage = () => {
                                     <div onClick={() => toggleQuestion(index)} className="question-button">
                                         {item.question}
                                     </div>
-                                    {openQuestion === index && (
-                                        <div className="answer">
-                                            {item.answer}
-                                        </div>
-                                    )}
+                                    {openQuestion === index && <div className="answer">{item.answer}</div>}
                                 </li>
                             ))}
                         </ul>
                     </div>
                 </div>
+
                 <div className={'subtitle-ctcs'}>
                     <div className="contacts-subtitle">КОНТАКТЫ</div>
                 </div>

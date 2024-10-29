@@ -101,7 +101,9 @@ const ProductList = () => {
                         <img className={'image'} src={item.img} alt={item.title}/>
                         <h2>{item.title}</h2>
                         <div className={'size-prise'}>
-                            <span className={'size'}>s/m/l/xl</span>
+                            <span className={'size'}>
+                                {item.category === "Футболки" ? "xs/s/m/l/xl" : "s/m/l/xl/xxl"}
+                            </span>
                             <div className="price-container">
                                 {item.old_price && (
                                     <div className="old-price">₽{item.old_price}</div>
