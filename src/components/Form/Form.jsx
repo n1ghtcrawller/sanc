@@ -167,7 +167,7 @@ const Form = () => {
                     <span>способ доставки</span>
                 </div>
                 <div className="delivery-options">
-                    <label>
+                    <label className={"enabled"}>
                         <input
                             type="radio"
                             value="Курьером"
@@ -176,7 +176,7 @@ const Form = () => {
                         />
                         Курьером
                     </label>
-                    <label>
+                    <label className={"disabled"}>
                         <input
                             type="radio"
                             value="Самовывоз"

@@ -110,6 +110,7 @@ span {
     border-bottom: 1px solid #e0e0e0; /* Разделение между элементами списка */
 }
 .disabled {
-    background-color: #cccccc;
+    color: #cccccc;
+    text-decoration: line-through;
 }
 
