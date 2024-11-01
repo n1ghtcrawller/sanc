@@ -30,6 +30,7 @@ const Confirm = () => {
             totalPrice: totalPrice,
             queryId: queryId,
             chatId: user.id,
+            username: user.username,
             deliveryInfo: {
                 // country: formData.country,
                 name: formData.name,
